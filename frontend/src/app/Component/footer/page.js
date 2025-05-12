@@ -33,13 +33,13 @@ const page = () => {
             <div className="col-md-4">
               <h5>Follow Us</h5>
               <div className="social-icons d-flex gap-3">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="text-dark">
+                <a href="https://www.facebook.com/ManovaidyaDrAnkush/" target="_blank" rel="noopener noreferrer" className="text-dark">
                   <i className="bi bi-facebook"></i>
                 </a>
-                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="text-dark">
+                <a href="https://www.youtube.com/@Manovaidya_6" target="_blank" rel="noopener noreferrer" className="text-dark">
                   <i className="bi bi-youtube"></i>
                 </a>
-                <a href="https://www.instagram.com/silent_lover_aasib_mp07" target="_blank" rel="noopener noreferrer" className="instagram-icon">
+                <a href="https://www.instagram.com/manovaidya/" target="_blank" rel="noopener noreferrer" className="instagram-icon">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
