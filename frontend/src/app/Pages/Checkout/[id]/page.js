@@ -209,7 +209,7 @@ const Page = ({ params }) => {
 
   const calculateTax = () => {
     const totalPrice = calculateTotal();
-    return (totalPrice * 0.18).toFixed(2); // 18% tax
+    return (totalPrice * 0).toFixed(2); // 18% tax
   };
 
   const totalWithTax = () => {
@@ -219,7 +219,7 @@ const Page = ({ params }) => {
 
     const totalAfterDiscount = totalPrice - discountAmount;
 
-    const tax = totalAfterDiscount * 0.18;
+    const tax = totalAfterDiscount * 0;
 
     const finalTotal = totalAfterDiscount + tax + (formData?.paymentMethod === 'COD' ? 75 : 0);
 
@@ -432,7 +432,9 @@ const Page = ({ params }) => {
                         </p>
 
                         <p style={{ margin: '4px 0', fontSize: '14px', color: '#555' }}>
-                          <strong>Tax:</strong> {parsedItem.tex}% | <strong>Quantity:</strong> {item?.quantity}
+                          {/* <strong>Tax:</strong> {parsedItem.tex}%  */}
+                          
+                          <strong>Quantity:</strong> {item?.quantity}
                         </p>
 
                         {tag && (

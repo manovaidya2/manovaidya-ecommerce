@@ -529,7 +529,7 @@ const sendOrderEmails = async (data) => {
             <p>${addressBlock(address)}</p>
   
             ${isCustomer
-            ? `<a href="https://manovaidya.com/Pages/User_Profile" class="btn">View My Order</a>`
+            ? `<a href="https://herbs.manovaidya.in/Pages/trackOrder/6814bb057261865c5600390d" class="btn">View My Order</a>`
             : ''
         }
           </div>

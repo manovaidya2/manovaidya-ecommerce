@@ -18,6 +18,15 @@ const styles = StyleSheet.create({
     footer: { marginTop: 20, textAlign: "center", },
 });
 
+const calculateTotalWithoutGST = (order) => {
+  if (!order?.orderItems) return 0;
+  
+  let total = 0;
+  order.orderItems.forEach(item => {
+    total += (item.price * item.quantity);
+  });
+  return total + (order.shippingAmount || 0);
+};
 
 const InvoicePDF = ({ order }) => {
     const [taxDetails, setTaxDetails] = useState([]);
@@ -44,6 +53,14 @@ const InvoicePDF = ({ order }) => {
     }, [order]);
 
     const shipping = order.shippingAddress;
+
+    // Calculate subtotal of all items (including tax)
+    const subtotal = taxDetails.reduce((sum, item) => {
+        return sum + (item.price * item.quantity);
+    }, 0);
+
+    const shippingCost = order.shippingAmount || 0;
+    const totalAmount = subtotal + shippingCost;
 
     return (
         <Document>
@@ -84,8 +101,8 @@ const InvoicePDF = ({ order }) => {
                     })}
                 </View>
 
-                <Text style={styles.section}>Shipping Cost: ₹{order.shippingAmount || 0}</Text>
-                <Text style={styles.section}>Total Amount: ₹{order.totalAmount}</Text>
+                <Text style={styles.section}>Shipping Cost: ₹{shippingCost.toFixed(2)}</Text>
+                <Text style={styles.section}>Total Amount: ₹{totalAmount.toFixed(2)}</Text>
                 <Text style={styles.footer}>Thank you for your order!</Text>
             </Page>
         </Document>
@@ -255,9 +272,9 @@ const EditOrder = () => {
                                                     <td>{new Date(orderData?.createdAt).toLocaleString()}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Final Price</th>
-                                                    <td>₹{orderData?.totalAmount}</td>
-                                                </tr>
+    <th scope="row">Final Price</th>
+    <td>₹{calculateTotalWithoutGST(orderData).toFixed(2)}</td>
+</tr>
                                                 <tr>
                                                     <th scope="row">Order Status</th>
                                                     <td>
