@@ -117,3 +117,23 @@
     padding-left: 10px;
   }
 }
+@media (max-width: 576px) {
+  .product-slider-card {
+    padding: 6px !important;
+  }
+
+  .product-slider-card img {
+    height: 160px !important; /* Smaller image height for mobile */
+  }
+
+  .product-name {
+    font-size: 14px !important;
+  }
+
+  .product-desc,
+  .del-mrp,
+  .final-price,
+  .off-price {
+    font-size: 12px !important;
+  }
+}

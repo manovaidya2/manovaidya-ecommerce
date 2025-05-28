@@ -187,7 +187,7 @@ const Page = ({ title }) => {
 >
   <Link href="/Pages/consultationCustomizedSolution">
     <img
-      src="/clinic.png"
+      src="/Clinic Consulation (2).png"
       alt="Clinic Consultation"
       className="img-fluid"
       style={{
@@ -220,7 +220,7 @@ const Page = ({ title }) => {
 >
   <Link href="/Pages/category_customer_review">
     <img
-      src="/clinic.png"
+      src="/Patient Review.png"
       alt=" Patient Stories & Reviews"
       className="img-fluid"
       style={{

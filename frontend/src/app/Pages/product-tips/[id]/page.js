@@ -92,7 +92,8 @@ const page = ({ params }) => {
                     </div>
                 </div>
             </section>
-            <section className="tips-product-page">
+
+          <section className="tips-product-page">
   <div className="container">
     <div className="row justify-content-center">
       {categories?.productId?.slice(0, 3)?.map((item) => (
@@ -107,31 +108,39 @@ const page = ({ params }) => {
                 border: '1px solid #ddd',
                 borderRadius: '8px',
                 overflow: 'hidden',
-                padding: '10px',
-                margin: '0 auto', // Center within column if needed
+                padding: '8px',
+                margin: '0 auto',
               }}
             >
               <img
                 src={`${serverURL}/uploads/products/${item?.productImages[0]}`}
                 alt={item?.productName}
                 className="product-image"
-                style={{ width: '100%', height: '60%', objectFit: 'cover' }}
+                style={{
+                  width: '100%',
+                //   height: isMobile ? '160px' : '270px',
+                  height: '300px', // Reduced height
+                  objectFit: 'cover',
+
+                }}
               />
               <div className="product-details mt-2">
-                <div className="title">{item.title}</div>
-                <h5 className="product-name">{item?.productName}</h5>
-                <div className="product-desc">{Parser().parse(item?.productSubDescription)}</div>
+                <div className="title" style={{ fontSize: '14px' }}>{item.title}</div>
+                <h5 className="product-name" style={{ fontSize: '16px' }}>{item?.productName}</h5>
+                <div className="product-desc" style={{ fontSize: '13px' }}>
+                  {Parser().parse(item?.productSubDescription)}
+                </div>
                 <div className="product-footer d-flex justify-content-between align-items-end mt-2">
                   <div className="product-price m-0">
-                    <div className="del-mrp">
+                    <div className="del-mrp" style={{ fontSize: '13px' }}>
                       MRP: <del>₹ {item?.variant[0]?.price}</del>
                     </div>
-                    <span className="final-price">
+                    <span className="final-price" style={{ fontSize: '15px' }}>
                       <strong>₹ {item?.variant[0]?.finalPrice}</strong>
                     </span>
                   </div>
                   <div className="off-price m-0">
-                    <b style={{ fontSize: '14px' }}>{item?.variant[0]?.discountPrice}% off</b>
+                    <b style={{ fontSize: '13px' }}>{item?.variant[0]?.discountPrice}% off</b>
                   </div>
                 </div>
               </div>
