@@ -167,7 +167,7 @@ const Page = ({ title }) => {
       fontWeight: '700',
       color: 'var(--purple)',
       marginBottom: '1rem',
-      marginTop: '1rem',
+      marginTop: '1.5rem',
     }}
   >
     {/* Explore Our Treatments by Health Condition */}
