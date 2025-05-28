@@ -9,7 +9,7 @@ const bannerSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['home', 'category', 'product', 'offer', 'promotion', 'Desktop', 'Mobile','Both']
+    enum: ['home', 'category', 'product', 'offer', 'promotion', 'Desktop', 'Mobile', 'Both']
   },
   images: [{
     type: String,
@@ -19,19 +19,11 @@ const bannerSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  // link: {
-  //   type: String
-  // },
-  // startDate: {
-  //   type: Date
-  // },
-  // endDate: {
-  //   type: Date
-  // },
-  // position: {
-  //   type: Number,
-  //   default: 0
-  // }
+  href: {                       // ✅ Add this field
+    type: String,
+    trim: true,
+    default: ""
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -40,7 +32,6 @@ const bannerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-  
 }, { timestamps: true });
 
 const Banner = mongoose.model('Banner', bannerSchema);

@@ -52,7 +52,7 @@
 }
 
 .navbar {
-  border-bottom: 10px solid var(--yellow);
+  border-bottom: 10px solid var(--white);
   display: flex;
   justify-content: center !important;
 }

@@ -9,6 +9,7 @@ const AddBanner = () => {
     bannerName: "",
     bannerType: "",
     bannerStatus: false,
+     bannerHref: "",
   });
 
   const [banners, setBanners] = useState([]); // Store multiple banners
@@ -27,10 +28,18 @@ const AddBanner = () => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     // Create new banners objects based on files and formData
-    const newBanners = files.map((file) => ({
-      ...formData,
-      bannerImage: file,
-    }));
+    // const newBanners = files.map((file) => ({
+    //   ...formData,
+    //   bannerImage: file,
+    // }));
+const newBanners = files.map((file) => ({
+  bannerName: formData.bannerName,
+  bannerType: formData.bannerType,
+  bannerStatus: formData.bannerStatus,
+  bannerHref: formData.bannerHref, // <-- Ensure it's captured per file
+  bannerImage: file,
+  
+}));
 
     // Update the banners array
     setBanners((prevBanners) => [...prevBanners, ...newBanners]);
@@ -58,6 +67,7 @@ const AddBanner = () => {
         submitData.append("name", banner?.bannerName);
         submitData.append("images", banner?.bannerImage); // Append each banner's image
         submitData.append("type", banner?.bannerType);
+        submitData.append("href", banner?.bannerHref);
         submitData.append("isActive", banner?.bannerStatus);
       });
 
@@ -141,6 +151,23 @@ const AddBanner = () => {
               required
             />
           </div>
+
+
+          <div className="col-md-6">
+  <label htmlFor="bannerHref" className="form-label">
+    Banner Link (Href)
+  </label>
+  <input
+    type="text"
+    name="bannerHref"
+    value={formData?.bannerHref}
+    onChange={handleChange}
+    className="form-control"
+    id="bannerHref"
+    placeholder="https://example.com"
+  />
+</div>
+
           <div className="col-12">
             <div className="form-check">
               <input
@@ -168,6 +195,7 @@ const AddBanner = () => {
         </form>
       </div>
 
+
       {/* Preview Section */}
       <div className="preview-section mt-4">
         <h5>Preview</h5>
@@ -177,6 +205,7 @@ const AddBanner = () => {
               <th>#</th>
               <th>Banner Name</th>
               <th>Banner Type</th>
+              <th>Link</th>
               <th>Status</th>
               <th>Image</th>
               <th>Edit</th>
@@ -189,7 +218,22 @@ const AddBanner = () => {
                 <td>{index + 1}</td>
                 <td>{banner?.bannerName || "N/A"}</td>
                 <td>{banner?.bannerType || "N/A"}</td>
+                 <td>
+    {banner?.bannerHref ? (
+      <a
+        href={banner.bannerHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "blue", textDecoration: "underline" }}
+      >
+        {banner.bannerHref}
+      </a>
+    ) : (
+      "N/A"
+    )}
+  </td>
                 <td>{banner?.bannerStatus ? "Active" : "Inactive"}</td>
+               
                 <td>
                   {previewImages[index] && (
                     <img

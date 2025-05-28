@@ -7,6 +7,9 @@ import { Parser } from "html-to-react";
 import Slider from "react-slick";
 import { toast } from 'react-toastify';
 
+
+
+
 // ⚠️ Fix: Declare the HTML parser once (otherwise it may cause errors in render loop)
 const htmlParser = new Parser();
 
@@ -87,7 +90,7 @@ const Page = ({ title }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
@@ -115,20 +118,20 @@ const Page = ({ title }) => {
           <i className="bi bi-whatsapp"></i>
         </a>
       </section>
-
+{/* 
       <section className="sidecall">
         <a href="tel:+917823838638">
           <i className="bi bi-telephone"></i>
         </a>
-      </section>
-
+      </section> */}
+{/* 
       <section className="sideInstagram">
         <a href="https://www.instagram.com/manovaidya/?next=%2F" target="_blank" rel="noopener noreferrer">
           <i className="bi bi-instagram"></i>
         </a>
-      </section>
+      </section> */}
 
-      {/* Category Slider */}
+      {/* Category Slider
       <section className="top-cards-slider">
         <h2 className="text-center" style={{ fontWeight: '700', color: 'var(--purple)', marginBottom: '1rem', marginTop: '1rem' }}>
           Explore Our Treatments by Health Condition
@@ -155,66 +158,194 @@ const Page = ({ title }) => {
           }
 
         </div>
-      </section>
+      </section> */}
+
+<section className="top-cards-section">
+  <h2
+    className="text-center"
+    style={{
+      fontWeight: '700',
+      color: 'var(--purple)',
+      marginBottom: '1rem',
+      marginTop: '1rem',
+    }}
+  >
+    {/* Explore Our Treatments by Health Condition */}
+  </h2>
+
+  <div className="container">
+    <div className="row justify-content-center">
+
+      {/* Static Card (e.g., Calm & Sleep Aid) */}
+      <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap">
+      <div
+  style={{
+    borderRadius: '24px',
+    overflow: 'hidden',
+    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+  }}
+>
+  <Link href="/Pages/consultationCustomizedSolution">
+    <img
+      src="/clinic.png"
+      alt="Clinic Consultation"
+      className="img-fluid"
+      style={{
+        borderRadius: '24px',
+        width: '100%',
+        height: 'auto',
+        cursor: 'pointer',
+      }}
+    />
+  </Link>
+</div>
+        <p
+          style={{
+            marginTop: '0.75rem',
+            fontWeight: '600',
+            color: '#000',
+          }}
+        >
+         CLINIC CONSULTATION
+        </p>
+      </div>
+
+        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap">
+      <div
+  style={{
+    borderRadius: '24px',
+    overflow: 'hidden',
+    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+  }}
+>
+  <Link href="/Pages/category_customer_review">
+    <img
+      src="/clinic.png"
+      alt=" Patient Stories & Reviews"
+      className="img-fluid"
+      style={{
+        borderRadius: '24px',
+        width: '100%',
+        height: 'auto',
+        cursor: 'pointer',
+      }}
+    />
+  </Link>
+</div>
+
+
+
+          
+      
+        <p
+          style={{
+            marginTop: '0.75rem',
+            fontWeight: '600',
+            color: '#000',
+          }}
+        >
+PATIENT STORIES & REVIEWS        </p>
+      </div>
+
+
+      {/* Dynamic Cards */}
+      {categories?.map((card, index) => (
+        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap" key={index}>
+          <Link className="text-decoration-none" href={`/Pages/product-tips/${card?._id}`}>
+            <div
+              style={{
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+              }}
+            >
+              <img
+                src={`${serverURL}/uploads/categorys/${card?.image}`}
+                alt={card?.categoryName}
+                className="img-fluid"
+                style={{
+                  borderRadius: '24px',
+                  width: '100%',
+                  height: 'auto',
+                }}
+              />
+            </div>
+            <p
+              style={{
+                marginTop: '0.75rem',
+                fontWeight: '600',
+                color: '#000',
+              }}
+            >
+              {card?.categoryName}
+            </p>
+          </Link>
+        </div>
+      ))}
+      
+    </div>
+  </div>
+</section>
+
 
       {/* Products Section */}
-      <section className="ayurved-product">
-        <div className="container">
-          <h2 className="text-center text-purple">Ayurvedic Wellness Kits</h2>
-          {products?.length > 0 && <div className="row">
-            {products?.map((kit, index) => (
-              <div className="col-md-6 col-6 col-lg-4" key={index}>
-                <Link className="pruduct-link-all" href={`/Pages/products/${kit?._id}`}>
-                  <div className="product-card">
-                    <div className="row align-items-center">
-                      <div className="col-md-4">
-                        <img
-                          src={`${serverURL}/uploads/products/${kit?.productImages?.[0]}`}
-                          alt={kit?.title}
-                          className="card-img-top"
-                          width={200}
-                          height={200}
-                          style={{ cursor: "pointer", borderRadius: '14px 14px 0px 0px' }}
-                        />
-                      </div>
-                      <div className="col-md-8">
-                        <div className="product-card-details">
-                          <h5>{kit?.productName}</h5>
-                          <span className="descrip">
-                            {kit?.productDescription ? htmlParser.parse(kit?.productDescription) : ""}
-                          </span>
-                          <div className="detail-sec">
-                            <p className="off-price m-0">
-                              <b style={{ fontSize: "14px" }}>
-                                {kit?.variant?.[0]?.discountPrice} % off
-                              </b>
-                            </p>
-                            <span className="final-price">
-                              ₹ {kit?.variant?.[0]?.finalPrice}
-                            </span>
-                            <p className="del-mrp">
-                              MRP: <del>₹ {kit?.variant?.[0]?.price}</del>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+     <section className="ayurved-product">
+  <div className="container">
+    <h2 className="text-center text-purple">Ayurvedic Wellness Kits</h2>
+    {products?.length > 0 && <div className="row custom-grid">
+      {products?.map((kit, index) => (
+        <div className="col-md-6 col-6 col-lg-4" key={index}>
+          <Link className="pruduct-link-all" href={`/Pages/products/${kit?._id}`}>
+            <div className="product-card">
+              <div className="row align-items-center">
+                <div className="col-md-4">
+                  <img
+                    src={`${serverURL}/uploads/products/${kit?.productImages?.[0]}`}
+                    alt={kit?.title}
+                    className="card-img-top"
+                    width={200}
+                    height={200}
+                    style={{ cursor: "pointer", borderRadius: '14px 14px 0px 0px' }}
+                  />
+                </div>
+                <div className="col-md-8">
+                  <div className="product-card-details">
+                    <h5>{kit?.productName}</h5>
+                    <span className="descrip">
+                      {kit?.productDescription ? htmlParser.parse(kit?.productDescription) : ""}
+                    </span>
+                    <div className="detail-sec">
+                      <p className="off-price m-0">
+                        {/* <b style={{ fontSize: "14px" }}>
+                          {kit?.variant?.[0]?.discountPrice} % off
+                        </b> */}
+                      </p>
+                      <span className="final-price">
+                        ₹ {kit?.variant?.[0]?.finalPrice}
+                      </span>
+                      <p className="del-mrp">
+                        MRP: <del>₹ {kit?.variant?.[0]?.price}</del>
+                      </p>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
-            ))}
-          </div>}
-
+            </div>
+          </Link>
         </div>
-      </section>
+      ))}
+    </div>}
+  </div>
+</section>
 
-      <section className="product-overview-bg">
-        <Link href="/Pages/products">
-          <button className="buy-now">Buy It Now</button>
-        </Link>
-      </section>
 
-      {/* Diseases Section */}
+      <Link href="/Pages/consultationCustomizedSolution" style={{ textDecoration: 'none' }}>
+  <section className="product-overview-bg" style={{ cursor: 'pointer' }}>
+    {/* You can add your background image through CSS using .product-overview-bg */}
+  </section>
+</Link>
+
+      {/* Diseases Section
       <section className="MentalHealthCards">
         <div className="container">
           <div className="row justify-content-center">
@@ -238,7 +369,7 @@ const Page = ({ title }) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

@@ -39,11 +39,11 @@
 }
 
 .custom-swiper-button-prev {
-  left: 110px;
+  left: 10px;
 }
 
 .custom-swiper-button-next {
-  right: 110px;
+  right: 10px;
 }
 
 
@@ -92,8 +92,9 @@
 
 
 
-.manovedya-hero-about {
+.manovedya-hero-about { 
   padding: 1rem 1rem;
+ 
   background-color: #fff;
 }
 
@@ -120,38 +121,35 @@
   margin-bottom: 2rem;
 }
 
-.feature-row {
-  margin-bottom: 2rem;
-}
 
 .feature-title {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
   margin-top: 1rem;
 }
 
 .feature-description {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: #666;
-  margin: 0;
+  margin: 10;
 }
 
 .feature-highlight {
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: bold;
   color: #f57c00;
   margin-top: 0.5rem;
 }
 
 .manovedya-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.1rem;
 }
 
 .pro-sli{
-  font-size: 14px;
+  font-size: 12px;
   text-align: start;
   align-items: baseline;
 }
@@ -201,12 +199,14 @@
   .manovedya-description {
     text-align: justify;
     font-size: .9rem;
+   
   }
   .manovedya-hero-about {
     padding: 2rem 0rem;
   }
   .manovedya-title {
     font-size: 1.5rem;
+   
   }
   .feature-description {
     font-size: 12px;

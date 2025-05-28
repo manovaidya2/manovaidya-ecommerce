@@ -13,10 +13,10 @@ import Link from "next/link";
 import { toast } from 'react-toastify';
 
 // Import images
-import icon1 from "../../Images/pure-ingredents.png";
-import icon2 from "../../Images/eco-friendly.png";
-import icon3 from "../../Images/expert-crafted.png";
-import icon4 from "../../Images/health.png";
+import icon1 from "../../Images/Pure Ingredients-Photoroom.png";
+import icon2 from "../../Images/Eco-Friendly (1)-Photoroom.png";
+import icon3 from "../../Images/Expert Crafted-Photoroom.png";
+import icon4 from "../../Images/Health Solutions.png";
 import icon5 from "../../Images/delivery.png";
 import icon6 from "../../Images/pan-india.png";
 import icon7 from "../../Images/costomer-support.png";
@@ -144,8 +144,8 @@ const Page = () => {
 
       <section className="manovedya-hero-about">
         <div className="container">
-          <h2 className="manovedya-title">Manovaidya</h2>
-          <p className="manovedya-description">
+          {/* <h2 className="manovedya-title">Manovaidya</h2> */}
+          {/* <p className="manovedya-description">
             Manovaidya - where ancient Ayurveda meets modern mental wellness.
             We’re here to help you find balance with natural, herbal solutions
             crafted to support your mental health, whether you’re dealing with
@@ -153,10 +153,10 @@ const Page = () => {
             inspired by age-old traditions and perfected with science to fit
             seamlessly into your life helping you find balance, calm, and
             clarity—naturally.
-          </p>
-          <h3 className="manovedya-subtitle">
+          </p> */}
+          {/* <h3 className="manovedya-subtitle">
             Premium Ayurvedic wellness, embracing nature with zero compromise.
-          </h3>
+          </h3> */}
 
           <div className="row feature-row">
             <div className="col-md-3 col-6 text-center">
@@ -182,18 +182,18 @@ const Page = () => {
           </div>
 
           <div className="row feature-row m-0">
-            <div className="col-md-4 col-6 text-center">
+            {/* <div className="col-md-4 col-6 text-center">
               <Image src={icon5} alt="Free Delivery" className="manovedya-icon" />
               <p className="feature-highlight">Free Delivery Above ₹ 350</p>
-            </div>
-            <div className="col-md-4 col-6 text-center">
+            </div> */}
+            {/* <div className="col-md-4 col-6 text-center">
               <Image src={icon6} alt="Shipping PAN India" className="manovedya-icon" />
               <p className="feature-highlight">Shipping PAN India</p>
-            </div>
-            <div className="col-md-4 col-6 text-center">
+            </div> */}
+            {/* <div className="col-md-4 col-6 text-center">
               <Image src={icon7} alt="Quick Customer Support" className="manovedya-icon" />
               <p className="feature-highlight">Quick Customer Support</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

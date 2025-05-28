@@ -65,7 +65,7 @@ const Page = () => {
     { name: "Home", link: "/" },
     { name: "About Us", link: "/Pages/aboutUs" },
     { name: "Products", link: "/Pages/products" },
-    { name: "explore-By-Diseases", link: "#explore-by-diseases" },
+    { name: "explore-By-concern", link: "#explore-by-diseases" },
     { name: "Blog", link: "/Pages/blog" },
     { name: "Mind Health Self-Test", link: "/Pages/mind-health" },
     { name: "Consultation & Customized Solution", link: "/Pages/consultationCustomizedSolution" },
@@ -290,7 +290,7 @@ const Page = () => {
 
   <ul>
     {navItems.map((item, index) => {
-      if (item.name === "explore-By-Diseases") {
+      if (item.name === "explore-By-concern") {
         return (
           <li key={index} className="mt-2">
             <div
@@ -337,7 +337,7 @@ const Page = () => {
     <div className="d-flex align-items-center">
       <ul className="nav">
         {navItems.map((item, index) => {
-          if (item.name === "explore-By-Diseases") {
+          if (item.name === "explore-By-concern") {
             return (
               <li key={index} className="nav-item dropdown">
                 <Link

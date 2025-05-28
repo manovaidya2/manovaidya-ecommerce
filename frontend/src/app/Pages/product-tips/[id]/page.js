@@ -93,51 +93,56 @@ const page = ({ params }) => {
                 </div>
             </section>
             <section className="tips-product-page">
-                <div className="container">
-                    <div className="row">
-                        {categories?.productId?.map((item) => (
-                            <div key={item._id} className="col-md-3 col-sm-6 col-6 mb-4">
-                                <Link
-                                    className="text-black text-decoration-none"
-                                    href={`/Pages/products/${item?._id}`}
-                                >
-                                    <div className="product-slider-card" style={{ border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-                                        <img
-                                            src={`${serverURL}/uploads/products/${item?.productImages[0]}`}
-                                            alt={item?.productName}
-                                            className="product-image"
-                                        />
-                                        <div className="product-details">
-                                            <div className="title">{item.title}</div>
-                                            <h5 className="product-name">{item?.productName}</h5>
-                                            <div className="product-desc">{Parser().parse(item?.productSubDescription)}</div>
-                                            <div className="product-footer" style={{ alignItems: 'center', justifyContent: 'space-between', alignItems: 'end' }}>
-                                                <div className="product-price m-0">
-                                                    <div>
-                                                        <div className="del-mrp">
-                                                            MRP: <del>
-                                                                ₹ {item?.variant[0]?.price}
-                                                            </del>
-                                                        </div>
-                                                        <span className="final-price">
-                                                            <strong>₹ {item?.variant[0]?.finalPrice}</strong>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div className="off-price m-0">
-                                                    <b style={{ fontSize: "14px" }}>
-                                                        {item?.variant[0]?.discountPrice}% off
-                                                    </b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
+  <div className="container">
+    <div className="row justify-content-center">
+      {categories?.productId?.slice(0, 3)?.map((item) => (
+        <div key={item._id} className="col-md-4 col-sm-6 col-6 mb-4">
+          <Link
+            className="text-black text-decoration-none"
+            href={`/Pages/products/${item?._id}`}
+          >
+            <div
+              className="product-slider-card"
+              style={{
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                padding: '10px',
+                margin: '0 auto', // Center within column if needed
+              }}
+            >
+              <img
+                src={`${serverURL}/uploads/products/${item?.productImages[0]}`}
+                alt={item?.productName}
+                className="product-image"
+                style={{ width: '100%', height: '60%', objectFit: 'cover' }}
+              />
+              <div className="product-details mt-2">
+                <div className="title">{item.title}</div>
+                <h5 className="product-name">{item?.productName}</h5>
+                <div className="product-desc">{Parser().parse(item?.productSubDescription)}</div>
+                <div className="product-footer d-flex justify-content-between align-items-end mt-2">
+                  <div className="product-price m-0">
+                    <div className="del-mrp">
+                      MRP: <del>₹ {item?.variant[0]?.price}</del>
                     </div>
+                    <span className="final-price">
+                      <strong>₹ {item?.variant[0]?.finalPrice}</strong>
+                    </span>
+                  </div>
+                  <div className="off-price m-0">
+                    <b style={{ fontSize: '14px' }}>{item?.variant[0]?.discountPrice}% off</b>
+                  </div>
                 </div>
-            </section>
+              </div>
+            </div>
+          </Link>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
             <section className="howDecide">
                 <div className="container">
                     <h2>How To Decide</h2>
@@ -200,9 +205,9 @@ const page = ({ params }) => {
                                             </div>
                                             <div className="detail-sec">
                                                 <div className="off-price m-0">
-                                                    <b style={{ fontSize: "14px" }}>
+                                                    {/* <b style={{ fontSize: "14px" }}>
                                                         {kit?.variant[0]?.discountPrice} % off
-                                                    </b>
+                                                    </b> */}
                                                 </div>
                                                 <span className="final-price">
                                                     <strong>₹ {kit?.variant[0]?.finalPrice}</strong>

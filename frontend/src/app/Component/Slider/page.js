@@ -94,22 +94,32 @@ const Page = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
+// Inside your component, before return
+const normalizeUrl = (url) => {
+  if (!url) return null;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return `https://${url}`;
+};
 
-  return (
-    <div id="carouselExampleIndicators" style={{ zIndex: 6 }}>
-      <div className="carousel-inner">
-        <Slider {...settings} ref={sliderRef}>
-          {banners
-            ?.filter((banner) =>
-              isMobile ? banner?.type === "Mobile" : banner?.type === "Desktop"
-            )
-            ?.map((banner, index) => (
-              <div
-                key={index}
-                className={`carousel-item ${
-                  index === activeIndex ? "active" : ""
-                }`}
-              >
+return (
+  <div id="carouselExampleIndicators" style={{ zIndex: 6 }}>
+    <div className="carousel-inner">
+      <Slider {...settings} ref={sliderRef}>
+        {banners
+          ?.filter((banner) =>
+            isMobile ? banner?.type === "Mobile" : banner?.type === "Desktop"
+          )
+          ?.map((banner, index) => (
+            <div
+              key={index}
+              className={`carousel-item ${index === activeIndex ? "active" : ""}`}
+            >
+             < a
+  href={banner.href || "#"}
+  target={banner.href ? "_blank" : undefined}
+  rel={banner.href ? "noopener noreferrer" : undefined}
+  style={{ display: "block" }}
+>
                 {banner?.type === "Desktop" && (
                   <img
                     src={`${serverURL}/uploads/banners/${banner?.images[0]}`}
@@ -117,6 +127,7 @@ const Page = () => {
                     height={500}
                     width={1200}
                     alt={`slide-${index}`}
+                    style={{ cursor: "pointer" }}
                   />
                 )}
                 {banner?.type === "Mobile" && (
@@ -126,14 +137,17 @@ const Page = () => {
                     height={500}
                     width={1200}
                     alt={`slide-mobile-${index}`}
+                    style={{ cursor: "pointer" }}
                   />
                 )}
-              </div>
-            ))}
-        </Slider>
-      </div>
+              </a>
+            </div>
+          ))}
+      </Slider>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Page;

@@ -72,7 +72,7 @@ router.get('/get-single-banner/:id', async (req, res) => {
 router.post('/create-banners', upload.any('images'), async (req, res) => {
   try {
     // Destructure the data from the body
-    const { name, type, link, startDate, endDate, position, isActive } = req.body;
+    const { name, type,  href, startDate, endDate, position, isActive } = req.body;
 
     // Log request data for debugging
     console.log('Body', req.body);
@@ -102,7 +102,7 @@ router.post('/create-banners', upload.any('images'), async (req, res) => {
           name: name[i],
           type: type[i],
           images: [req.files[i].filename],
-          link: link || '',
+           href: href || '',
           startDate: startDate || null,
           endDate: endDate || null,
           position: position || 0,
@@ -115,7 +115,7 @@ router.post('/create-banners', upload.any('images'), async (req, res) => {
         name,
         type,
         images: [req.files[0].filename],
-        link: link || '',
+         href: href || '',
         startDate: startDate || null,
         endDate: endDate || null,
         position: position || 0,
@@ -146,7 +146,7 @@ router.post('/create-banners', upload.any('images'), async (req, res) => {
 
 router.post('/update-banner/:id', upload.any('images'), async (req, res) => {
   try {
-    const { name, type, link, oldImages, startDate, endDate, position, isActive } = req.body;
+    const { name, type, href, oldImages, startDate, endDate, position, isActive } = req.body;
 
     console.log("BODYS", req.body);
 
@@ -169,7 +169,7 @@ router.post('/update-banner/:id', upload.any('images'), async (req, res) => {
     const updatedBannerData = {
       name: name || banner.name,
       type: type || banner.type,
-      link: link || banner.link,
+      href: href || banner.href,
       images: images.length > 0 ? images : oldImages,
       startDate: startDate ? new Date(startDate) : banner.startDate,
       endDate: endDate ? new Date(endDate) : banner.endDate,
