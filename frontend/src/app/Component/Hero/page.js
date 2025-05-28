@@ -291,7 +291,7 @@ PATIENT STORIES & REVIEWS        </p>
       {/* Products Section */}
      <section className="ayurved-product">
   <div className="container">
-    <h2 className="text-center text-purple">Ayurvedic Wellness Kits</h2>
+    <h2 className="text-center text-purple">Ayurvedic Wellness Tablet</h2>
     {products?.length > 0 && <div className="row custom-grid">
       {products?.map((kit, index) => (
         <div className="col-md-6 col-6 col-lg-4" key={index}>
