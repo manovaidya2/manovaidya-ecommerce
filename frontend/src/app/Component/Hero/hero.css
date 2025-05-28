@@ -112,7 +112,7 @@
 
 
 .top-cards {
-  padding: 2rem;
+  padding: rem;
   text-align: center;
   row-gap: 20px;
     column-gap: 20px;
@@ -148,7 +148,7 @@
 .cards-container {
   display: flex;
   justify-content: space-evenly;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .card-main {
