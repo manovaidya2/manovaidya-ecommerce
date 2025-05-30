@@ -123,6 +123,9 @@
   object-fit: cover;
 }
 
+
+
+
 /* Default (mobile & tablet): no extra gap */
 /* .custom-gap {
   row-gap: 8rem; /* fallback Bootstrap spacing */
@@ -264,6 +267,7 @@
     max-width: calc(38% - 16px);
   }
 }
+
 
 
 
@@ -572,6 +576,18 @@
     object-fit: cover;
   }
 
+
+  .product-overview-bg {
+  background-image: url('../../Images/Consultation\ mobile\ banner.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%; /* Adjust width */
+  height: 300px; /* Adjust height as needed */
+  margin: 0 auto; /* Center the section */
+  /* border-radius: 10px; Optional styling */
+}
+
+
 }
 
 
@@ -631,8 +647,8 @@
 @media (max-width: 576px) {
   .product-overview-bg {
     min-height: 70vw;
-    background-image: url("../../Images/Doctor\ Consultation\ \(9\).png"); /* 👈 new image */
-    background-size: 100vw 70vw; /* Full width and controlled height */
+    /* background-image: url("../../Images/Doctor\ Consultation\ \(9\).png"); 👈 new image */
+    background-size: 100vw 100vw; /* Full width and controlled height */
     background-position: center top;
     background-repeat: no-repeat;
     padding: 2rem 1rem;

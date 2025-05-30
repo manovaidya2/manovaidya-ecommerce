@@ -28,7 +28,7 @@
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.17.2",
-    "swiper": "^11.2.6"
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

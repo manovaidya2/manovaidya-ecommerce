@@ -6,7 +6,9 @@ import { getData, serverURL } from "@/app/services/FetchNodeServices";
 import { Parser } from "html-to-react";
 import Slider from "react-slick";
 import { toast } from 'react-toastify';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
 
 
@@ -170,120 +172,125 @@ const Page = ({ title }) => {
       marginTop: '1.5rem',
     }}
   >
-    {/* Explore Our Treatments by Health Condition */}
+    {/* Explore Our Categories */}
   </h2>
 
-  <div className="container">
+  {/* Desktop View */}
+  <div className="container d-none d-md-block">
     <div className="row justify-content-center">
-
-      {/* Static Card (e.g., Calm & Sleep Aid) */}
-      <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap">
-      <div
-  style={{
-    borderRadius: '24px',
-    overflow: 'hidden',
-    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-  }}
->
-  <Link href="/Pages/consultationCustomizedSolution">
-    <img
-      src="/Clinic Consulation (2).png"
-      alt="Clinic Consultation"
-      className="img-fluid"
-      style={{
-        borderRadius: '24px',
-        width: '100%',
-        height: 'auto',
-        cursor: 'pointer',
-      }}
-    />
-  </Link>
-</div>
-        <p
-          style={{
-            marginTop: '0.75rem',
-            fontWeight: '600',
-            color: '#000',
-          }}
-        >
-         CLINIC CONSULTATION
-        </p>
-      </div>
-
-        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap">
-      <div
-  style={{
-    borderRadius: '24px',
-    overflow: 'hidden',
-    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-  }}
->
-  <Link href="/Pages/category_customer_review">
-    <img
-      src="/Patient Review.png"
-      alt=" Patient Stories & Reviews"
-      className="img-fluid"
-      style={{
-        borderRadius: '24px',
-        width: '100%',
-        height: 'auto',
-        cursor: 'pointer',
-      }}
-    />
-  </Link>
-</div>
-
-
-
-          
-      
-        <p
-          style={{
-            marginTop: '0.75rem',
-            fontWeight: '600',
-            color: '#000',
-          }}
-        >
-PATIENT STORIES & REVIEWS        </p>
-      </div>
-
+      {/* Static Cards */}
+      {[
+        {
+          href: "/Pages/consultationCustomizedSolution",
+          img: "/Clinic Consulation (2).png",
+          label: "CLINIC CONSULTATION",
+        },
+        {
+          href: "/Pages/category_customer_review",
+          img: "/Patient Review.png",
+          label: "PATIENT STORIES & REVIEWS",
+        },
+      ].map((card, i) => (
+        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap" key={i}>
+          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 8px rgba(0,0,0,0.1)' }}>
+            <Link href={card.href} style={{ textDecoration: 'none' }}>
+              <img
+                src={card.img}
+                alt={card.label}
+                className="img-fluid"
+                style={{ borderRadius: '24px', width: '100%', height: 'auto', cursor: 'pointer' }}
+              />
+            </Link>
+          </div>
+          <p style={{ marginTop: '0.75rem', fontWeight: '600', color: '#000' }}>
+            {card.label}
+          </p>
+        </div>
+      ))}
 
       {/* Dynamic Cards */}
       {categories?.map((card, index) => (
         <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap" key={index}>
-          <Link className="text-decoration-none" href={`/Pages/product-tips/${card?._id}`}>
-            <div
-              style={{
-                borderRadius: '24px',
-                overflow: 'hidden',
-                boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-              }}
-            >
+          <Link href={`/Pages/product-tips/${card._id}`} style={{ textDecoration: 'none' }}>
+            <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 8px rgba(0,0,0,0.1)' }}>
               <img
-                src={`${serverURL}/uploads/categorys/${card?.image}`}
-                alt={card?.categoryName}
+                src={`${serverURL}/uploads/categorys/${card.image}`}
+                alt={card.categoryName}
                 className="img-fluid"
-                style={{
-                  borderRadius: '24px',
-                  width: '100%',
-                  height: 'auto',
-                }}
+                style={{ borderRadius: '24px', width: '100%', height: 'auto', cursor: 'pointer' }}
               />
             </div>
-            <p
-              style={{
-                marginTop: '0.75rem',
-                fontWeight: '600',
-                color: '#000',
-              }}
-            >
-              {card?.categoryName}
+            <p style={{ marginTop: '0.75rem', fontWeight: '600', color: '#000' }}>
+              {card.categoryName}
             </p>
           </Link>
         </div>
       ))}
-      
     </div>
+  </div>
+
+  {/* Mobile View */}
+  <div className="d-block d-md-none" style={{ margin: '0 1rem' }}>
+    <Swiper
+      modules={[Autoplay]}
+      spaceBetween={10}
+      slidesPerView={3}
+      loop={true}
+      grabCursor={true}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+    >
+      {/* Static Cards */}
+      {[
+        {
+          href: "/Pages/consultationCustomizedSolution",
+          img: "/Clinic Consulation (2).png",
+          label: "CLINIC CONSULTATION",
+        },
+        {
+          href: "/Pages/category_customer_review",
+          img: "/Patient Review.png",
+          label: "PATIENT STORIES & REVIEWS",
+        },
+      ].map((card, i) => (
+        <SwiperSlide key={i}>
+          <div className="text-center">
+            <Link href={card.href} style={{ textDecoration: 'none' }}>
+              <img
+                src={card.img}
+                className="img-fluid"
+                style={{ borderRadius: '24px', cursor: 'pointer' }}
+                alt={card.label}
+              />
+              <p style={{ marginTop: '0.75rem', fontWeight: '500', color: '#000' }}>
+                {card.label}
+              </p>
+            </Link>
+          </div>
+        </SwiperSlide>
+      ))}
+
+      {/* Dynamic Cards */}
+      {categories?.map((card, index) => (
+        <SwiperSlide key={index}>
+          <div className="text-center">
+            <Link href={`/Pages/product-tips/${card._id}`} style={{ textDecoration: 'none' }}>
+              <img
+                src={`${serverURL}/uploads/categorys/${card.image}`}
+                alt={card.categoryName}
+                className="img-fluid"
+                style={{ borderRadius: '24px', cursor: 'pointer' }}
+              />
+              <p style={{ marginTop: '0.75rem', fontWeight: '500', color: '#000' }}>
+                {card.categoryName}
+              </p>
+            </Link>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   </div>
 </section>
 
