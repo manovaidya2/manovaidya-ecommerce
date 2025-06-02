@@ -84,34 +84,40 @@
 
 .consultation-header {
   background-image: url("../../Images/costomized-banner.png");
-  height: 450px;
+  height: 440px;
   background-repeat: no-repeat;
-  background-size: cover; /* cover the full space */
-  background-position: center center; /* center horizontally + vertically */
+  background-size: contain;          /* Change here */
+  background-position: left center;
+  background-color: #fff;            /* optional, fills empty space */
   width: 100%;
-}
-
-.consultation-header{
   position: relative;
 }
-.consultation-header button{
+
+.consultation-header button {
   position: absolute;
   top: 45%;
   left: 5%;
 }
 
+
 @media only screen and (max-width: 768px) {
   .consultation-header {
-    background-image: url("../../Images/costomized-banner-mobile.png");
+    background-image: url("../../Images/Consultation%20Mobile%20banner1.png"); /* URL-encoded spaces */
     height: 400px;
     background-repeat: no-repeat;
+    background-size: cover;          
+    background-position: center center;
+    background-color: #fff;            
     width: 100%;
-    object-fit: contain;
   }
+
   .consultation-main {
     padding: 0.5rem;
   }
+
   .online-consultant .card {
     padding: 1rem;
   }
 }
+
+
