@@ -88,3 +88,21 @@
   border-radius: 8px;
   margin-bottom: 10px;
 }
+
+
+
+.video-review {
+  margin-top: 20px;
+}
+
+.video-review video {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.video-review p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 10px;
+}
