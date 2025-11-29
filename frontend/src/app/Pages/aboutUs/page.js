@@ -7,7 +7,7 @@ const page = () => {
   return (
     <>
     <Head>
-        <title>About Us - Manovaidya</title>
+        <title>About Us - Manovaidya new live</title>
         <meta
           name="description"
           content="Discover how Manovaidya integrates Ayurveda and mental health practices to offer holistic well-being solutions."
@@ -17,7 +17,7 @@ const page = () => {
       </Head>
       <section className="about-us">
         <div className="container">
-          <h2 className="heading">About Us</h2>
+          <h2 className="heading">About Us Manovaidya</h2>
           <div className="row align-items-center">
             <div className="col-md-4">
               <div className="about-card-1">
