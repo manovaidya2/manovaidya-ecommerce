@@ -17,7 +17,7 @@ const page = () => {
       </Head>
       <section className="about-us">
         <div className="container">
-          <h2 className="heading">About Us Manovaidya</h2>
+          <h2 className="heading">About Us </h2>
           <div className="row align-items-center">
             <div className="col-md-4">
               <div className="about-card-1">
