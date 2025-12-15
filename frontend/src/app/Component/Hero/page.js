@@ -4,16 +4,29 @@ import "./hero.css";
 import Link from "next/link";
 import { getData, serverURL } from "@/app/services/FetchNodeServices";
 import { Parser } from "html-to-react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { toast } from 'react-toastify';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import dynamic from "next/dynamic";
 import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
+// import 'swiper/css';
 
 
 
 // ⚠️ Fix: Declare the HTML parser once (otherwise it may cause errors in render loop)
 const htmlParser = new Parser();
+// ✅ Dynamic Import for Swiper (Mobile Slider, SSR safe)
+const Swiper = dynamic(
+  () => import("swiper/react").then(mod => mod.Swiper),
+  { ssr: false }
+);
+const SwiperSlide = dynamic(
+  () => import("swiper/react").then(mod => mod.SwiperSlide),
+  { ssr: false }
+);
+
+// ✅ Optional: Dynamic Import for react-slick Slider (Desktop Slider)
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
+import 'swiper/css';
 
 const Page = ({ title }) => {
   const [categories, setCategories] = useState([]);
