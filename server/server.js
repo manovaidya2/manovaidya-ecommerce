@@ -51,10 +51,10 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "http://manovaidya.com",
-  "https://manovaidya.com",
   "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
-  "https://api.manovaidya.com"
+  "https://api.manovaidya.com",
+  "https://manovaidya.com"
 ];
 
 app.use(
@@ -80,6 +80,7 @@ app.use(
 
 // app.use(cors());
 app.options("*", cors());
+app.options("*", cors(corsOptions)); 
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ limit: "50mb" }));
