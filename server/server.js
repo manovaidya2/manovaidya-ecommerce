@@ -46,10 +46,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
-
+// ------------------- CORS Middleware -------------------
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
+  "http://manovaidya.com",
   "https://manovaidya.com",
   "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
@@ -59,14 +60,23 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
+      console.log("Request origin:", origin); // for debugging
+      if (!origin) return callback(null, true); // allow server-to-server requests (curl, Postman)
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        console.warn("Blocked by CORS:", origin);
+        return callback(new Error("Not allowed by CORS"));
       }
     },
+    credentials: true, // allow cookies if needed
+    methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+    allowedHeaders: ["Content-Type","Authorization"]
   })
 );
+
+
+
 
 // app.use(cors());
 app.options("*", cors());
