@@ -50,37 +50,26 @@ const __dirname = path.dirname(__filename);
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
-  "http://manovaidya.com",
+  "https://manovaidya.com",
   "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
-  "https://api.manovaidya.com",
-  "https://manovaidya.com"
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      console.log("Request origin:", origin); // for debugging
-      if (!origin) return callback(null, true); // allow server-to-server requests (curl, Postman)
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        console.warn("Blocked by CORS:", origin);
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // allow cookies if needed
-    methods: ["GET","POST","PUT","DELETE","OPTIONS"],
-    allowedHeaders: ["Content-Type","Authorization"]
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("Request origin:", origin);
+    if (!origin) return callback(null, true); // curl/postman
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ✅ IMPORTANT
 
-
-
-// app.use(cors());
-app.options("*", cors());
-app.options("*", cors(corsOptions)); 
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ limit: "50mb" }));
