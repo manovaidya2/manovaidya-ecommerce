@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useEffect, useState } from "react";
 import "./header.css";
 import logo from "../../Images/logo.png";
