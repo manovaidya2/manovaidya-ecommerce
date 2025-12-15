@@ -53,7 +53,7 @@ const allowedOrigins = [
   "https://manovaidya.com",
   "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
-  "https://api.manovaidya.com/"
+  "https://api.manovaidya.com"
 ];
 
 app.use(
