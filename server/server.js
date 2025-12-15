@@ -50,18 +50,10 @@ const __dirname = path.dirname(__filename);
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
-    "https://manovaidya.com/",
-    "https://www.manovaidya.com/",
-  // "https://herbs.manovaidya.in",
-  // "https://herbsadmin.manovaidya.in",
-  // "https://apiherbs.manovaidya.in", 
+  "https://manovaidya.com",
+  "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
-  "https://api.manovaidya.com/"
-
-
-  
-  // "https://admin.manovaidya.com/",
-  
+  "https://api.manovaidya.com"
 ];
 
 app.use(
