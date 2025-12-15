@@ -102,7 +102,7 @@
 
 @media only screen and (max-width: 768px) {
   .consultation-header {
-    background-image: url("../../Images/Consultation%20Mobile%20banner1.png"); /* URL-encoded spaces */
+    background-image: url("../../Images/Consultation\ mobile\ banner.png"); /* URL-encoded spaces */
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;          
