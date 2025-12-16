@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef ,use} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IoInformationCircleOutline } from "react-icons/io5";
@@ -32,8 +32,8 @@ const Page = ({ params }) => {
   // Unwrap the params with React.use()
 
   const dispatch = useDispatch()
-  // const { id } = use(params);
-  const { id } = params;
+  const { id } = use(params);
+  // const { id } = params;
   const router = useRouter();
   const [product, setProduct] = useState(null);
   const [cart, setCart] = useState(null);
