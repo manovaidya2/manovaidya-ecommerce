@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import React, { useEffect, useState, useRef } from "react";
 import "./hero.css";
 import Link from "next/link";
 import { getData, serverURL } from "@/app/services/FetchNodeServices";
@@ -9,6 +10,14 @@ import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { FiUsers, FiSmile, FiMoon, FiTrendingUp } from "react-icons/fi";
+import {
+  RiLeafLine,
+  RiBookOpenLine,
+  RiRouteLine,
+  RiChatSmile2Line,
+} from "react-icons/ri";
+import img from "../../Images/kit.webp";
 
 
 
@@ -108,6 +117,54 @@ const Page = ({ title }) => {
     ],
   };
 
+const StatItem = ({ icon: Icon, value, label, suffix = "" }) => {
+  const ref = useRef(null);
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true);
+          animateCount();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [started]);
+
+  const animateCount = () => {
+    let start = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+
+    const update = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const current = Math.floor(progress * value);
+      setCount(current);
+
+      if (progress < 1) requestAnimationFrame(update);
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  return (
+    <div className="stat-item" ref={ref}>
+      <Icon className="stat-icon" />
+      <h3>
+        {count.toLocaleString()}
+        {suffix}
+      </h3>
+      <p>{label}</p>
+    </div>
+  );
+};
   return (
     <>
       {/* Sidebar Buttons */}
@@ -161,142 +218,105 @@ const Page = ({ title }) => {
 
         </div>
       </section> */}
+<section className="stats-section">
+      <div className="stats-container">
+        <StatItem
+          icon={FiUsers}
+          value={12000}
+          suffix="+"
+          label="Calm Builders"
+        />
 
-<section className="top-cards-section">
-  <h2
-    className="text-center"
-    style={{
-      fontWeight: '700',
-      color: 'var(--purple)',
-      marginBottom: '1rem',
-      marginTop: '1.5rem',
-    }}
-  >
-    {/* Explore Our Categories */}
-  </h2>
+        <StatItem
+          icon={FiSmile}
+          value={95}
+          suffix="%"
+          label="Improved Calm"
+        />
 
-  {/* Desktop View */}
-  <div className="container d-none d-md-block">
-    <div className="row justify-content-center">
-      {/* Static Cards */}
-      {[
-        {
-          href: "/Pages/consultationCustomizedSolution",
-          img: "/Clinic Consulation (2).png",
-          label: "CLINIC CONSULTATION",
-        },
-        {
-          href: "/Pages/category_customer_review",
-          img: "/Patient Review.png",
-          label: "PATIENT STORIES & REVIEWS",
-        },
-      ].map((card, i) => (
-        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap" key={i}>
-          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 8px rgba(0,0,0,0.1)' }}>
-            <Link href={card.href} style={{ textDecoration: 'none' }}>
-              <img
-                src={card.img}
-                alt={card.label}
-                className="img-fluid"
-                style={{ borderRadius: '24px', width: '100%', height: 'auto', cursor: 'pointer' }}
-              />
-            </Link>
-          </div>
-          <p style={{ marginTop: '0.75rem', fontWeight: '600', color: '#000' }}>
-            {card.label}
-          </p>
-        </div>
-      ))}
+        <StatItem
+          icon={FiMoon}
+          value={80}
+          suffix="%"
+          label="Better Sleep in 21 Days"
+        />
 
-      {/* Dynamic Cards */}
-      {categories?.map((card, index) => (
-        <div className="col-6 col-md-3 col-lg-2 text-center desktop-gap" key={index}>
-          <Link href={`/Pages/product-tips/${card._id}`} style={{ textDecoration: 'none' }}>
-            <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 8px rgba(0,0,0,0.1)' }}>
-              <img
-                src={`${serverURL}/uploads/categorys/${card.image}`}
-                alt={card.categoryName}
-                className="img-fluid"
-                style={{ borderRadius: '24px', width: '100%', height: 'auto', cursor: 'pointer' }}
-              />
-            </div>
-            <p style={{ marginTop: '0.75rem', fontWeight: '600', color: '#000' }}>
-              {card.categoryName}
+        <StatItem
+          icon={FiTrendingUp}
+          value={90}
+          suffix="%"
+          label="Emotionally Balanced"
+        />
+      </div>
+    </section>
+    <section className="guided-section">
+      <div className="guided-overlay" />
+
+      <div className="guided-container">
+        {/* Badge */}
+        <span className="guided-badge">The Manovaidya Experience</span>
+
+        {/* Heading */}
+        <h2 className="guided-title">
+          A Guided Path to Lasting Mental Balance
+        </h2>
+
+        {/* Subtitle */}
+        <p className="guided-subtitle">
+          Every kit is more than medicines — it’s a 3-phase healing journey.
+        </p>
+
+        {/* Cards */}
+        <div className="guided-cards">
+          {/* Card 1 */}
+          <div className="guided-card">
+            <div className="step-circle purple">1</div>
+            <h3>Reset</h3>
+            <span className="days">Days 1–21</span>
+            <p className="small">Cleanse, Calm, Observe</p>
+            <p className="desc">
+              Detox the body, calm the mind. Natural herbs work to reset your
+              nervous system.
             </p>
-          </Link>
+          </div>
+
+          {/* Card 2 (Highlighted) */}
+          <div className="guided-card active">
+            <div className="step-circle yellow">2</div>
+            <h3>Rewire</h3>
+            <span className="days">Days 22–45</span>
+            <p className="small">Build Resilience</p>
+            <p className="desc">
+              Reprogram your stress & energy cycles. Adaptogens strengthen your
+              mental foundation.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="guided-card">
+            <div className="step-circle purple">3</div>
+            <h3>Reclaim</h3>
+            <span className="days">Days 46–90</span>
+            <p className="small">Thrive Freely</p>
+            <p className="desc">
+              Feel light, focused & emotionally stable. Experience lasting
+              transformation.
+            </p>
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
 
-  {/* Mobile View */}
-  <div className="d-block d-md-none" style={{ margin: '0 1rem' }}>
-    <Swiper
-      modules={[Autoplay]}
-      spaceBetween={10}
-      slidesPerView={3}
-      loop={true}
-      grabCursor={true}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-      }}
-    >
-      {/* Static Cards */}
-      {[
-        {
-          href: "/Pages/consultationCustomizedSolution",
-          img: "/Clinic Consulation (2).png",
-          label: "CLINIC CONSULTATION",
-        },
-        {
-          href: "/Pages/category_customer_review",
-          img: "/Patient Review.png",
-          label: "PATIENT STORIES & REVIEWS",
-        },
-      ].map((card, i) => (
-        <SwiperSlide key={i}>
-          <div className="text-center">
-            <Link href={card.href} style={{ textDecoration: 'none' }}>
-              <img
-                src={card.img}
-                className="img-fluid"
-                style={{ borderRadius: '24px', cursor: 'pointer' }}
-                alt={card.label}
-              />
-              <p style={{ marginTop: '0.75rem', fontWeight: '500', color: '#000' }}>
-                {card.label}
-              </p>
-            </Link>
-          </div>
-        </SwiperSlide>
-      ))}
+        {/* CTA */}
+        <button className="guided-btn">
+          Start Your 3-Phase Journey <span>→</span>
+        </button>
+      </div>
+    </section>
 
-      {/* Dynamic Cards */}
-      {categories?.map((card, index) => (
-        <SwiperSlide key={index}>
-          <div className="text-center">
-            <Link href={`/Pages/product-tips/${card._id}`} style={{ textDecoration: 'none' }}>
-              <img
-                src={`${serverURL}/uploads/categorys/${card.image}`}
-                alt={card.categoryName}
-                className="img-fluid"
-                style={{ borderRadius: '24px', cursor: 'pointer' }}
-              />
-              <p style={{ marginTop: '0.75rem', fontWeight: '500', color: '#000' }}>
-                {card.categoryName}
-              </p>
-            </Link>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</section>
+
 
 
       {/* Products Section */}
-     <section className="ayurved-product">
+     {/* <section className="ayurved-product">
   <div className="container">
     <h2 className="text-center text-purple">Ayurvedic Wellness Tablet</h2>
     {products?.length > 0 && <div className="row custom-grid">
@@ -326,7 +346,7 @@ const Page = ({ title }) => {
                         {/* <b style={{ fontSize: "14px" }}>
                           {kit?.variant?.[0]?.discountPrice} % off
                         </b> */}
-                      </p>
+                      {/* </p>
                       <span className="final-price">
                         ₹ {kit?.variant?.[0]?.finalPrice}
                       </span>
@@ -343,14 +363,83 @@ const Page = ({ title }) => {
       ))}
     </div>}
   </div>
-</section>
+</section> */} 
 
+ <section className="mindkit-section">
+      <div className="mindkit-container">
 
-      <Link href="/Pages/consultationCustomizedSolution" style={{ textDecoration: 'none' }}>
+        {/* Left */}
+        <div className="mindkit-left">
+          <h2>What’s Inside Your Mind Kit</h2>
+          <p className="subtitle">
+            Because healing your mind needs a system — not a single pill.
+          </p>
+
+          <div className="mindkit-image">
+  <Image
+    src={img}
+    alt="Mind Kit"
+ 
+    priority
+  />
+</div>
+
+        </div>
+
+        {/* Right */}
+        <div className="mindkit-right">
+
+        <div className="kit-card">
+  <RiLeafLine className="kit-icon" />
+  <div>
+    <h4>Ayurvedic Medicines</h4>
+    <p className="small">3-bottle synergy for mind + gut + energy</p>
+    <p className="desc">Nourishes neurons & restores calm naturally</p>
+  </div>
+</div>
+
+<div className="kit-card active">
+  <RiBookOpenLine className="kit-icon" />
+  <div>
+    <h4>Mind Journal</h4>
+    <p className="small">21-day reflection tool (printed + digital)</p>
+    <p className="desc">Builds awareness & emotional regulation</p>
+  </div>
+</div>
+
+<div className="kit-card">
+  <RiRouteLine className="kit-icon" />
+  <div>
+    <h4>Lifestyle Map</h4>
+    <p className="small">Yoga, diet & meditation QR plan</p>
+    <p className="desc">Aligns body rhythm & mental flow</p>
+  </div>
+</div>
+
+<div className="kit-card">
+  <RiChatSmile2Line className="kit-icon" />
+  <div>
+    <h4>Mind Coach Support</h4>
+    <p className="small">Orientation, tracker & coaching calls</p>
+    <p className="desc">
+      Guided sessions with expert Mind Coaches throughout your journey
+    </p>
+  </div>
+</div>
+
+        </div>
+      </div>
+
+    <div className="mindkit-btn-wrapper">
+  <button className="mindkit-btn">See How It Works</button>
+</div>
+
+    </section>
+      {/* <Link href="/Pages/consultationCustomizedSolution" style={{ textDecoration: 'none' }}>
   <section className="product-overview-bg" style={{ cursor: 'pointer' }}>
     {/* You can add your background image through CSS using .product-overview-bg */}
-  </section>
-</Link>
+  {/* </section>
+</Link> */} 
 
       {/* Diseases Section
       <section className="MentalHealthCards">

@@ -25,6 +25,17 @@ import image2 from "../../../Images/paymantIcon/640px-Paytm_logo 1.png";
 import image3 from "../../../Images/paymantIcon/images 1.png";
 import image4 from "../../../Images/paymantIcon/Mastercard-logo.svg 1.png";
 import image5 from "../../../Images/paymantIcon/visa-logo-png-image-4 (1) 1.png";
+import {
+  FaBrain,
+  FaBookOpen,
+  FaPuzzlePiece,
+  FaComments,
+  FaCircle,FaCheckCircle 
+} from "react-icons/fa";
+import {  FaHeart, FaBolt } from "react-icons/fa";
+import wimg from "../../../Images/kit-contents-BHiT-Y8U.webp";
+
+
 
 const paymentImages = [{ name: image1 }, { name: image2 }, { name: image3 }, { name: image4 }, { name: image5 }]
 
@@ -44,6 +55,7 @@ const Page = ({ params }) => {
   const [btn, setBtn] = useState(false)
   const [formData, setFormData] = useState({ profileImage: null });
   const [review, setReview] = useState([])
+  const [activeTab, setActiveTab] = useState("overview");
   // const [ratingDistribution, setRatingDistribution] = useState([]);
 
   useEffect(() => {
@@ -290,6 +302,37 @@ const Page = ({ params }) => {
     router.push('/Pages/Login');
   };
 
+  const Stat = ({ end, suffix, label }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const stepTime = Math.abs(Math.floor(duration / end));
+
+    const timer = setInterval(() => {
+      start += Math.ceil(end / 100);
+      if (start >= end) {
+        start = end;
+        clearInterval(timer);
+      }
+      setCount(start);
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [end]);
+
+  return (
+    <div className="stat-box">
+      <h3>
+        {count.toLocaleString()}
+        {suffix}
+      </h3>
+      <p>{label}</p>
+    </div>
+  );
+};
+
   return (
     <>
       <ToastContainer />
@@ -439,7 +482,166 @@ const Page = ({ params }) => {
         </div>
       </section>
 
-      <section className="ingredients-detail">
+
+
+
+
+
+   <section className="manovaidya-kit-section">
+      <h2 className="manovaidya-kit-title">What You Get in Your Kit</h2>
+
+      {/* Cards */}
+      <div className="manovaidya-kit-cards">
+        <div className="manovaidya-kit-card">
+          <FaBrain className="manovaidya-kit-icon" />
+          <h3>3 Ayurvedic Formulas</h3>
+          <p>
+            Synergistic blend for mind wellness, emotional balance, and gut detoxification
+          </p>
+          <ul>
+            <li><FaCircle /> Mano Shanti Tablet</li>
+            <li><FaCircle /> Stress Shield Tablet</li>
+            <li><FaCircle /> Digestive Detox Tablet</li>
+          </ul>
+        </div>
+
+        <div className="manovaidya-kit-card manovaidya-kit-card-active">
+          <FaBookOpen className="manovaidya-kit-icon" />
+          <h3>Mind Journal</h3>
+          <p>21-day guided reflection workbook (Printed + Digital Access)</p>
+          <ul>
+            <li><FaCircle /> Daily mood tracker</li>
+            <li><FaCircle /> Emotional awareness exercises</li>
+            <li><FaCircle /> Progress milestones</li>
+          </ul>
+        </div>
+
+        <div className="manovaidya-kit-card">
+          <FaPuzzlePiece className="manovaidya-kit-icon" />
+          <h3>Lifestyle Map</h3>
+          <p>Complete guide with QR links to video resources</p>
+          <ul>
+            <li><FaCircle /> Yoga sequences</li>
+            <li><FaCircle /> Meditation practices</li>
+            <li><FaCircle /> Mind-nourishing diet plan</li>
+          </ul>
+        </div>
+
+        <div className="manovaidya-kit-card">
+          <FaComments className="manovaidya-kit-icon" />
+          <h3>Mind Coach Support</h3>
+          <p>Personalized guidance throughout your journey</p>
+          <ul>
+            <li><FaCircle /> Orientation call</li>
+            <li><FaCircle /> Progress tracker calls</li>
+            <li><FaCircle /> Expert coaching sessions</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Journey Section */}
+      <div className="manovaidya-journey-section">
+        <h2>The Manovaidya Bio-Journey</h2>
+        <p>Each bottle supports a different phase of your healing journey</p>
+
+        <div className="manovaidya-journey-steps">
+          <div className="manovaidya-step">
+            <span>1</span>
+            <h4>Reset (21 Days)</h4>
+            <p>Calm + Detox phase prepares your system</p>
+          </div>
+          <div className="manovaidya-step">
+            <span>2</span>
+            <h4>Rewire (Next 21 Days)</h4>
+            <p>Focus + resilience building strengthens you</p>
+          </div>
+          <div className="manovaidya-step">
+            <span>3</span>
+            <h4>Reclaim (Next 45 Days)</h4>
+            <p>Emotional Freedom — lasting transformation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+ <section className="whyworks-section">
+      <h2 className="whyworks-title">Why This Works</h2>
+
+      <div className="whyworks-card">
+        {/* LEFT CONTENT */}
+        <div className="whyworks-left">
+          <h3 className="whyworks-heading">
+            Mind + Gut + Energy = Neurochemical Balance
+          </h3>
+
+          <div className="whyworks-point">
+            <div className="icon purple">
+              <FaBrain />
+            </div>
+            <div>
+              <h4>Neurotransmitter Support</h4>
+              <p>
+                Ancient herbs support serotonin and dopamine pathways
+              </p>
+            </div>
+          </div>
+
+          <div className="whyworks-point">
+            <div className="icon pink">
+              <FaHeart />
+            </div>
+            <div>
+              <h4>Mind-Gut Axis</h4>
+              <p>
+                Gut health directly impacts mood and mental clarity
+              </p>
+            </div>
+          </div>
+
+          <div className="whyworks-point">
+            <div className="icon violet">
+              <FaBolt />
+            </div>
+            <div>
+              <h4>Adaptogenic Power</h4>
+              <p>
+                Build resilience to stress over time
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT IMAGE */}
+        <div className="whyworks-right">
+          <Image
+  src={wimg}
+  alt="Why this works"
+  width={450}
+  height={420}
+  style={{ borderRadius: "12px" }}
+/>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section className="trusted-section">
+      <h2 className="trusted-title">Trusted by Thousands</h2>
+
+      <div className="stats-grid">
+        <Stat end={12000} suffix="+" label="Calm Builders" />
+        <Stat end={95} suffix="%" label="Improved Calm" />
+        <Stat end={80} suffix="%" label="Better Sleep in 21 Days" />
+        <Stat end={48} suffix="★" label="Average Rating" />
+      </div>
+
+      <p className="trusted-note">
+        🧠 You’re joining a community committed to mental wellness
+      </p>
+    </section>
+
+      {/* <section className="ingredients-detail">
         <div className="container">
           <h2>Herbs for Natural</h2>
           <div className="row">
@@ -463,7 +665,7 @@ const Page = ({ params }) => {
                 </div>
 
                 {/* Modal for each item */}
-                <div
+                {/* <div
                   className="modal fade"
                   id={`modal-${index}`} // Unique modal ID
                   aria-hidden="true"
@@ -500,7 +702,95 @@ const Page = ({ params }) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */} 
+
+
+
+<section className="kitdetails-section">
+
+  {/* Tabs */}
+  <div className="kitdetails-tabs">
+    {["overview", "benefits", "ingredients", "how"].map((tab) => (
+      <button
+        key={tab}
+        className={`kitdetails-tab ${activeTab === tab ? "active" : ""}`}
+        onClick={() => setActiveTab(tab)}
+      >
+        {tab === "overview"
+          ? "Overview"
+          : tab === "benefits"
+          ? "Benefits"
+          : tab === "ingredients"
+          ? "Ingredients"
+          : "How It Works"}
+      </button>
+    ))}
+  </div>
+
+  {/* Content */}
+  <div className="kitdetails-card">
+
+    {/* 🔹 OVERVIEW */}
+    {activeTab === "overview" && (
+      <>
+        <h3>About This Kit</h3>
+
+        <p className="desc">
+          {product?.productSubDescription}
+        </p>
+
+        <div>
+          {Parser().parse(product?.productDescription || "")}
+        </div>
+      </>
+    )}
+
+    {/* 🔹 BENEFITS */}
+    {activeTab === "benefits" && (
+  <div className="check-list">
+    {product?.productDescription ? (
+      <div>
+        {Parser().parse(product.productDescription)}
+      </div>
+    ) : (
+      <p>No benefits available</p>
+    )}
+  </div>
+)}
+
+    {/* 🔹 INGREDIENTS */}
+    {activeTab === "ingredients" && (
+      <>
+        <p className="desc">
+          100% Ayurvedic herbs backed by ancient wisdom
+        </p>
+
+        <ul className="ingredient-list">
+          {product?.herbsId?.map((item, index) => (
+            <li key={index}>{item?.name}</li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {/* 🔹 HOW IT WORKS */}
+    {activeTab === "how" && (
+      <ol className="steps-list">
+        {product?.howItWorks?.length > 0 ? (
+          product.howItWorks.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))
+        ) : (
+          <p>No steps available</p>
+        )}
+      </ol>
+    )}
+
+  </div>
+</section>
+
+
+
       <section className="ingredients-accordion">
         <div className="container">
           <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -526,6 +816,9 @@ const Page = ({ params }) => {
           </div>
         </div>
       </section>
+
+
+
 
       <section className="product-blog-section">
         <ProductBlog product={product} title="Single Product" />
@@ -760,7 +1053,59 @@ const Page = ({ params }) => {
         </div>
       </section>
 
-
+ <section
+      className="cta-section"
+      style={{
+        backgroundColor: "#fff8e6", // same light yellow background
+        padding: "40px 0px",
+        textAlign: "center",
+        borderRadius: "12px",
+        margin: "20px 40px"
+      }}
+    >
+      <h2
+        style={{
+          fontSize: "28px",
+          fontWeight: "700",
+          color: "#000",
+          marginBottom: "12px"
+        }}
+      >
+        You've healed others with your patience
+        <br />
+        — now it's time to heal yourself.
+      </h2>
+      <p
+        style={{
+          fontSize: "16px",
+          color: "#555",
+          marginBottom: "30px"
+        }}
+      >
+        Your journey from chaos to calm is just one kit away.
+      </p>
+      <button
+        style={{
+          backgroundColor: "#9b6bff", // purple button same as original
+          color: "#fff",
+          fontSize: "16px",
+          fontWeight: "600",
+          padding: "12px 28px",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          transition: "all 0.3s ease"
+        }}
+        onMouseEnter={(e) =>
+          (e.target.style.backgroundColor = "#8000ff")
+        }
+        onMouseLeave={(e) =>
+          (e.target.style.backgroundColor = "#9b6bff")
+        }
+      >
+        Start Your 3-Month Calm Journey
+      </button>
+    </section>
     </>
 
   );

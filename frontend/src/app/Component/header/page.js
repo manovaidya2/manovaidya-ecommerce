@@ -64,12 +64,13 @@ const Page = () => {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "About Us", link: "/Pages/aboutUs" },
-    // { name: "Products", link: "/Pages/products" },
-    { name: "explore-By-concern", link: "#explore-by-diseases" },
+     { name: "Clinic", link: "/Pages/clinic" },
+    { name: "Products", link: "/Pages/products" },
+    // { name: "explore-By-concern", link: "#explore-by-diseases" },
    
     { name: "Mind Health Self-Test", link: "/Pages/mind-health" },
-    { name: "Consultation & Customized Solution", link: "/Pages/consultationCustomizedSolution" },
-     { name: "Blog", link: "/Pages/blog" },
+    // { name: "Consultation & Customized Solution", link: "/Pages/consultationCustomizedSolution" },
+    //  { name: "Blog", link: "/Pages/blog" },
     // { name: "Track Your Order", link: `/Pages/trackOrder/${userId}` },
   ];
 

@@ -141,3 +141,604 @@
     padding: 1rem 0;
   }
 }
+
+
+
+
+
+
+/* Kit Section */
+
+/* Kit Section */
+.manovaidya-kit-section {
+  padding: 40px 3%;
+}
+
+.manovaidya-kit-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+/* Cards */
+.manovaidya-kit-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.manovaidya-kit-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 28px;
+  transition: 0.3s ease;
+}
+
+.manovaidya-kit-card-active {
+  border: 2px solid #722f7f;
+}
+
+.manovaidya-kit-icon {
+  font-size: 30px;
+  color: #722f7f;
+  margin-bottom: 14px;
+}
+
+.manovaidya-kit-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.manovaidya-kit-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+.manovaidya-kit-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.manovaidya-kit-card ul li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.manovaidya-kit-card ul svg {
+  font-size: 8px;
+  color: #722f7f;
+}
+
+/* Journey */
+.manovaidya-journey-section {
+  margin: 50px auto;
+  padding: 30px;
+  max-width: 1400px;
+  width: 100%;
+  border-radius: 16px;
+  text-align: center;
+
+  background:
+    linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+    url("../../Images/download.jpg") center / cover no-repeat;
+}
+
+.manovaidya-journey-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.manovaidya-journey-section p {
+  color: #555;
+  margin: 10px 0 40px;
+}
+
+.manovaidya-journey-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.manovaidya-step span {
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ede5ff;
+  color: #722f7f;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.manovaidya-step h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.manovaidya-step p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .manovaidya-kit-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manovaidya-journey-steps {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .manovaidya-step {
+    width: 45%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .manovaidya-kit-section {
+    padding: 30px 16px;
+  }
+
+  .manovaidya-kit-title {
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
+
+  .manovaidya-kit-cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .manovaidya-kit-card {
+    padding: 22px;
+  }
+
+  .manovaidya-journey-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 60px auto;
+    padding: 30px 16px;
+    box-sizing: border-box;
+  }
+
+  .manovaidya-journey-section h2 {
+    font-size: 24px;
+  }
+
+  .manovaidya-journey-steps {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .manovaidya-step {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .manovaidya-kit-title {
+    font-size: 22px;
+  }
+
+  .manovaidya-kit-card h3 {
+    font-size: 16px;
+  }
+
+  .manovaidya-kit-card p,
+  .manovaidya-kit-card ul li {
+    font-size: 13px;
+  }
+
+  .manovaidya-step span {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+
+
+
+
+/* Why It Works Section */
+/* =========================
+   WHY THIS WORKS – SECTION
+========================= */
+
+.whyworks-section {
+  padding: 20px 6%;
+  background: #ffffff;
+}
+
+/* TITLE */
+.whyworks-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+/* CARD */
+.whyworks-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  background: #ffffff;
+  border: 1px solid #e6e6f0;
+  border-radius: 14px;
+  padding: 40px;
+  align-items: center;
+}
+
+/* LEFT CONTENT */
+.whyworks-heading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #111;
+}
+
+.whyworks-point {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.whyworks-point h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #111;
+}
+
+.whyworks-point p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ICONS */
+.icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.icon.purple {
+  background: #efe9ff;
+  color: #722f7f;
+}
+
+.icon.pink {
+  background: #ffe9f1;
+  color: #722f7f;
+}
+
+.icon.violet {
+  background: #f0ecff;
+  color: #722f7f;
+}
+
+/* RIGHT IMAGE */
+.whyworks-right {
+  width: 100%;
+}
+
+.whyworks-right img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .whyworks-card {
+    gap: 30px;
+    padding: 30px;
+  }
+
+  .whyworks-heading {
+    font-size: 21px;
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 900px) {
+  .whyworks-card {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .whyworks-right {
+    order: 2;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .whyworks-section {
+    padding: 20px 4%;
+  }
+
+  .whyworks-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .whyworks-card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .whyworks-heading {
+    font-size: 18px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+
+  .whyworks-point {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .whyworks-point h4 {
+    font-size: 14px;
+  }
+
+  .whyworks-point p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 420px) {
+  .whyworks-title {
+    font-size: 22px;
+  }
+
+  .whyworks-heading {
+    font-size: 17px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+
+
+
+/* Trusted Section */
+
+.trusted-section {
+  padding: 20px 6%;
+  background: #ffffff;
+  text-align: center;
+}
+
+.trusted-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.stat-box h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #722f7f;
+  margin-bottom: 6px;
+}
+
+.stat-box p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Bottom note */
+.trusted-note {
+  font-size: 13px;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.kitdetails-section {
+  padding: 30px 6%;
+  background: #fff;
+}
+
+/* Tabs */
+.kitdetails-tabs {
+  display: flex;
+  gap: 12px;
+  background: #f6f6f6;
+  padding: 6px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.kitdetails-tab {
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #555;
+}
+
+.kitdetails-tab.active {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Card */
+.kitdetails-card {
+  border: 1px solid #e6e6f0;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.kitdetails-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.kitdetails-card h4 {
+  font-size: 15px;
+  margin: 18px 0 10px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Lists */
+.check-list {
+  list-style: none;
+  padding: 0;
+}
+
+.check-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.check-list svg {
+  color: #722f7f;
+}
+
+/* Included Boxes */
+.included-box {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.included-box strong {
+  display: block;
+  font-size: 14px;
+}
+
+.included-box span {
+  display: block;
+  font-size: 13px;
+  color: #666;
+}
+
+.included-box small {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Ingredients */
+.ingredient-list {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.ingredient-list li {
+  margin-bottom: 6px;
+}
+
+/* Steps */
+.steps-list {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.steps-list li {
+  margin-bottom: 8px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .kitdetails-section {
+    padding: 20px 4%;
+  }
+
+  .kitdetails-tabs {
+    flex-wrap: wrap;
+  }
+
+  .kitdetails-card {
+    padding: 18px;
+  }
+}

@@ -1,0 +1,97 @@
+.community-section {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.85); /* translucent overlay */
+  padding: 60px 20px;
+
+
+  margin: 0 auto;
+  text-align: center;
+}
+
+.community-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.community-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.community-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.community-card:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.check-icon {
+  font-size: 28px;
+  color: #722f7f;
+  margin-bottom: 12px;
+}
+
+.community-card h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.community-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+.join-btn {
+  background-color: #722f7f;
+  color: #fff;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.join-btn:hover {
+  background-color: #6b21a8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .community-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .community-grid {
+    grid-template-columns: 1fr;
+  }
+  .community-title {
+    font-size: 28px;
+  }
+}

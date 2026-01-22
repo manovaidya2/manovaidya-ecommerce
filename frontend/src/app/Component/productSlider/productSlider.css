@@ -1,4 +1,4 @@
-.product-slider {
+/* .product-slider {
   padding: 3rem 1rem;
   background: #f9f9f9;
 }
@@ -213,4 +213,154 @@
     color: #666;
   }
   
+} 
+
+*/
+
+
+
+
+.mindkit-grid-section {
+  padding: 20px 0;
+  background: #fff;
 }
+
+.mindkit-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.mindkit-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* GRID */
+.mindkit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* CARD */
+.mindkit-card {
+  border: 1px solid #eee;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.mindkit-card:hover {
+  box-shadow: 0 10px 30px rgba(155, 109, 243, 0.15);
+}
+
+/* IMAGE */
+.mindkit-img {
+  width: 100%;
+  height: 300px; /* keep all cards same height */
+  background: #f7f7f7;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mindkit-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the container but may crop slightly */
+}
+
+
+/* BODY */
+.mindkit-body {
+  padding: 20px;
+}
+
+.mindkit-body h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.short-desc {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+/* PRICE */
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.price {
+  color: #722f7f;
+  font-weight: 700;
+}
+
+.off {
+  font-size: 12px;
+  color: #722f7f;
+}
+
+/* BUTTON */
+.view-btn {
+  width: 100%;
+  padding: 10px;
+  background: #722f7f;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #722f7f;
+}
+
+/* ASSESSMENT */
+.assessment {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.assessment-btn {
+  margin-top: 10px;
+  padding: 10px 24px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .mindkit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mindkit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mindkit-title {
+    font-size: 28px;
+  }
+}
+
