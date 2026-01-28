@@ -32,6 +32,7 @@ const Header = () => {
     { to: "/all-reviews", label: "All Reviews", icon: "fa-solid fa-star" },
     { to: "/all-blogs", label: "All Blogs", icon: "fa-solid fa-pen" },
     { to: "/news-letter", label: "News Letter", icon: "fa-solid fa-newspaper" },
+    { to: "/counsultation", label: "Counsultaion", icon: "fa-solid fa-vials" },
   ];
 
   return (

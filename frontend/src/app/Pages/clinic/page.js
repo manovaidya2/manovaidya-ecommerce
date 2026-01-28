@@ -25,19 +25,18 @@ const handleSubmit = async (e) => {
     description: e.target.description.value,
   };
 
-  try {
-    const result = await postData("api/consultations/book", data);
+try {
+  const result = await postData("api/consultations/book", data);
 
-    if (result?.success) {
-      alert("Consultation booked successfully!");
-      setShowModal(false);
-      e.target.reset();
-    } else {
-      alert("Failed to book consultation");
-    }
-  } catch (err) {
-    alert("Server error");
-  } finally {
+  if (result?.success) {
+    alert("Consultation booked successfully!");
+    setShowModal(false);
+    e.target.reset();
+  }
+} catch (err) {
+  alert(err.response?.data?.error || "Booking failed");
+}
+ finally {
     setLoading(false);
   }
 };

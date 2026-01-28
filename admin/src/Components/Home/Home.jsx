@@ -78,6 +78,7 @@ import EditConsultDoctor from '../../Pages/ManagConsult/EditConsultDoctor'
 import AllReviews from '../../Pages/Reviews/AllReviews'
 import AllCart from '../../Pages/Cart/AllCart'
 import EditTest from '../../Pages/MindHealthTest/EditTest'
+import ConsultationList from '../../Pages/Counsultation/ConsultationList'
 
 const Home = () => {
 
@@ -219,6 +220,7 @@ const Home = () => {
 
                 <Route path={'all-reviews'} element={<AllReviews />} />
                 <Route path={'All-carts'} element={<AllCart />} />
+                <Route path="counsultation" element={<ConsultationList />} />
 
               </Routes>
             </div>

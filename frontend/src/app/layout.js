@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Aos from "aos";
 import ReduxProvider from "./Component/reduxProvider/ReduxProvider";
+import ScrollToTop from "./Component/ScrollToTop";
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -103,6 +104,7 @@ export default function RootLayout({ children }) {
         </noscript>
 
         <ReduxProvider>
+           <ScrollToTop />
           <Header />
           {children}
           <Footer />
