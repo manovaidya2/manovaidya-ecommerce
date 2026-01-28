@@ -406,3 +406,168 @@
 }
 
 
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;          /* 👈 top-bottom gap control */
+  z-index: 9999;
+}
+
+.modal-box {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;       /* 👈 popup height limit */
+  overflow-y: auto;       /* 👈 scroll inside popup */
+  padding: 20px 24px;     /* 👈 top-bottom padding reduced */
+  border-radius: 12px;
+  position: relative;
+}
+
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.consultation-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.consultation-form label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.consultation-form input,
+.consultation-form select,
+.consultation-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #722f7f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* Full width fields */
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;               /* 👈 grid gap reduced */
+  }
+
+  .consultation-form .form-group {
+    margin-bottom: 8px;    /* 👈 vertical space reduced */
+  }
+
+  .consultation-form input,
+  .consultation-form select,
+  .consultation-form textarea {
+    padding: 8px;          /* 👈 inputs slightly compact */
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+}
+
+
+
+
+.hero-section {
+  background: linear-gradient(135deg, #722f7f 0%, #a04fb2 100%);
+  color: #fff;
+  padding: 50px 20px 60px;
+  text-align: center;
+}
+
+.hero-container {
+
+  margin: 0 auto;
+}
+
+.hero-title1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 16px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.hero-btn.primary {
+  background: #fff;
+  color: #722f7f;
+}
+
+.hero-btn.primary:hover {
+  background: #f3e6f7;
+}
+
+.hero-btn.secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.hero-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

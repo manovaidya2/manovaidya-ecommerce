@@ -279,7 +279,9 @@ const MindKitPage = () => {
 
         <div className="assessment">
           <p>Not sure which kit is right for you?</p>
-          <button className="assessment-btn">Take Our Free Assessment</button>
+        <Link href="/Pages/mind-health" className="assessment-btn">
+  Take Our Free Assessment
+</Link>
         </div>
 
       </div>

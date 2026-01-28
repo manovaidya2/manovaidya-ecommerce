@@ -57,6 +57,12 @@ const Page = ({ params }) => {
   const [review, setReview] = useState([])
   const [activeTab, setActiveTab] = useState("overview");
   // const [ratingDistribution, setRatingDistribution] = useState([]);
+const experienceLabel = (index) => {
+  if (index === 0) return "Basic Experience";
+  if (index === 1) return "See Visible Transformation";
+  if (index === 2) return "Complete Journey + Bonus";
+  return "";
+};
 
   useEffect(() => {
     const user = localStorage.getItem('User_data')
@@ -404,7 +410,7 @@ const Page = ({ params }) => {
                   </div>
 
                   <p className="m-0">
-                    <span style={{ color: "var(--purple)", fontWeight: '600', }}>{product.reviews}+ reviews</span>
+                    <span style={{ color: "var(--purple)", fontWeight: '600', }}>{product.reviews}10k+ reviews</span>
                   </p>
                 </div>
 
@@ -413,57 +419,91 @@ const Page = ({ params }) => {
                 {Parser().parse(product?.productDescription)}
 
                 {/* Pricing Options */}
-                <hr />
+              
                 <div className="product-detail-smrini">
-                  <h2>{product?.smirini}</h2>
-                  <div className="row">
-                    {product?.variant?.map((item, index) => (
-                      <div className="col-md-4 col-6" key={index}>
-                        <div
-                          className={`product-detail-card ${selectedIndex === index ? "selected" : ""}`}
-                          onClick={() => handleSelect(index, item)}>
-                          <div className="product-detail-card-content">
-                            {selectedIndex === index && <span className="tick-mark">✔</span>}
-                            <p className="smrini-duration">{item?.duration}</p>
-                            <h1 className="smrini-price" style={{ color: '#800080' }}>{item?.day}</h1>
-                            <p className="smrini-bottle">{item?.bottle}</p>
-                            <hr />
-                            <p className="smrini-original-price">₹ <del>{item?.price}</del></p>
-                            <p className="smrini-price">₹ {item?.finalPrice}</p>
-                            <p className="smrini-discount">{item?.discountPrice}% Off</p>
-                            <p className="smrini-taxes" >{item?.tex}% Taxes</p>
-                            <p className="smrini-saving">Save ₹ {(item?.price - item?.finalPrice).toFixed(2)}</p>
-                          </div>
+                
+<hr />
 
-                          <p className="smrini-bestseller" style={{ background: `${item?.tagType?.tagColor}` }}>{item?.tagType?.tagName || "Best Seller"}</p>
+<div className="pricing-image-style">
 
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+  <h3 className="pricing-title">
+    Choose Your Plan
+    <span>
+    90% of users start seeing results by month 1 — full transformation by month 3.
+    </span>
+  </h3>
 
-                  {/* Buy Now Button */}
-                  <div className="bynowbtns" >
-                    {buttonText === "Add To Cart" ? (
-                      <div className="col-md-12" >
-                        <div onClick={btn ? handleCartSubmit : () => toast.error("Select Price")} className="bynowbtn mt-3 " style={{ cursor: "pointer" }}>
-                          {buttonText}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="col-md-12">
-                        <div onClick={goToCart} className="bynowbtn mt-3" style={{ cursor: "pointer" }}>
-                          {buttonText}
-                        </div>
-                      </div>
-                    )}
+{product?.variant?.map((item, index) => (
+  <label
+    key={index}
+    className={`pricing-card ${
+      selectedIndex === index ? "pricing-card-active" : ""
+    }`}
+    onClick={() => handleSelect(index, item)}
+  >
+    {/* LEFT */}
+    <div className="pricing-left">
 
-                    <div className="col-md-12">
-                      <div onClick={btn ? BuyItNow : () => toast.error("Select Price")} className="bynowbtn mt-3" style={{ cursor: "pointer" }}>
-                        BUY IT NOW
-                      </div>
-                    </div>
-                  </div>
+      {/* EXPERIENCE + SAVE */}
+      <div className="pricing-top-row">
+        <p className="pricing-experience">
+          {experienceLabel(index)}
+        </p>
+
+        <p className="pricing-save-inline">
+          Save ₹{item?.price - item?.finalPrice} • {item?.tex}% Taxes
+        </p>
+      </div>
+
+      <p className="pricing-duration">
+        {item?.duration}  {item?.day}
+      </p>
+
+      <p className="pricing-bottle">
+        {item?.bottle}
+      </p>
+
+      <div className="pricing-price-row">
+        <span className="pricing-final">₹{item?.finalPrice}</span>
+        <span className="pricing-original">₹{item?.price}</span>
+        <span className="pricing-off">{item?.discountPrice}% OFF</span>
+      </div>
+
+      {item?.tagType?.tagName && (
+        <span
+          className="pricing-badge"
+          style={{ background: item?.tagType?.tagColor }}
+        >
+          {item?.tagType?.tagName}
+        </span>
+      )}
+    </div>
+
+    {/* RADIO */}
+    <div className="pricing-radio">
+      <span />
+    </div>
+  </label>
+))}
+
+
+  {/* CTA */}
+  <button
+  className="pricing-add-btn"
+  onClick={btn ? handleCartSubmit : () => toast.error("Select Price")}
+>
+  Add To Cart {btn ? btn.finalPrice : 0}
+</button>
+
+  <button
+    className="pricing-buy-btn"
+    onClick={btn ? BuyItNow : () => toast.error("Select Price")}
+  >
+    Buy Now
+  </button>
+
+</div>
+
 
                   {/* Payment Images */}
                   <div className="col-md-12">
@@ -484,7 +524,151 @@ const Page = ({ params }) => {
 
 
 
+      {/* <section className="product-details-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <Slider
+                asNavFor={nav2}
+                ref={(slider) => {
+                  setNav1(slider);
+                  sliderRef1.current = slider;
+                }}
+              >
+                {product?.productImages?.map((image, index) => (
+                  <div key={index}>
+                    <img
+                      src={`${serverURL}/uploads/products/${image}`}
+                      alt={`Slide ${index + 1}`}
+                      className="product-details-image"
+                    />
+                  </div>
+                ))}
+              </Slider>
 
+              <Slider
+                asNavFor={nav1}
+                ref={(slider) => {
+                  setNav2(slider);
+                  sliderRef2.current = slider;
+                }}
+                autoplay={true}
+                autoplaySpeed={3000}
+                infinite={true}
+                pauseOnHover={true}
+                slidesToShow={4}
+                swipeToSlide={true}
+                focusOnSelect={true}
+              >
+                {product?.productImages?.map((image, index) => (
+                  <div className="product-mini-images" key={index}>
+                    <img
+                      src={`${serverURL}/uploads/products/${image}`}
+                      alt={`Thumbnail ${index + 1}`}
+                      style={{ width: "95%", height: "100px", objectFit: 'cover' }}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            <div className="col-md-6">
+              <div className="product-details">
+                <h1>{product.productName}</h1>
+                <p className="product-detail-desc">{product?.productSubDescription}</p>
+
+                {/* Price & Rating */}
+                {/* <div className="product-price-rating">
+                  <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                    <Image
+                      src={googleImage} // Replace with an actual Google logo image path
+                      alt="Google Logo"
+                      width={30}
+                    />
+                    <span style={{ fontWeight: "bold", fontSize: "30px" }}>
+                      {product.rating}
+                    </span>
+                    <span style={{ color: "#FFD700", fontSize: "28px" }}>★★★★★</span>
+                  </div>
+
+                  <p className="m-0">
+                    <span style={{ color: "var(--purple)", fontWeight: '600', }}>{product.reviews}+ reviews</span>
+                  </p>
+                </div>
+
+                {/* Features List */}
+                {/* <p >Helping In</p>
+                {Parser().parse(product?.productDescription)} */}
+
+                {/* Pricing Options */}
+                {/* <hr />
+                <div className="product-detail-smrini">
+                  <h2>{product?.smirini}</h2>
+                  <div className="row">
+                    {product?.variant?.map((item, index) => (
+                      <div className="col-md-4 col-6" key={index}>
+                        <div
+                          className={`product-detail-card ${selectedIndex === index ? "selected" : ""}`}
+                          onClick={() => handleSelect(index, item)}>
+                          <div className="product-detail-card-content">
+                            {selectedIndex === index && <span className="tick-mark">✔</span>}
+                            <p className="smrini-duration">{item?.duration}</p>
+                            <h1 className="smrini-price" style={{ color: '#800080' }}>{item?.day}</h1>
+                            <p className="smrini-bottle">{item?.bottle}</p>
+                            <hr />
+                            <p className="smrini-original-price">₹ <del>{item?.price}</del></p>
+                            <p className="smrini-price">₹ {item?.finalPrice}</p>
+                            <p className="smrini-discount">{item?.discountPrice}% Off</p>
+                            <p className="smrini-taxes" >{item?.tex}% Taxes</p>
+                            <p className="smrini-saving">Save ₹ {(item?.price - item?.finalPrice).toFixed(2)}</p>
+                          </div> */}
+
+                          {/* <p className="smrini-bestseller" style={{ background: `${item?.tagType?.tagColor}` }}>{item?.tagType?.tagName || "Best Seller"}</p>
+
+                        </div>
+                      </div>
+                    ))}
+                  </div> */} 
+
+                  {/* Buy Now Button */}
+                  {/* <div className="bynowbtns" >
+                    {buttonText === "Add To Cart" ? (
+                      <div className="col-md-12" >
+                        <div onClick={btn ? handleCartSubmit : () => toast.error("Select Price")} className="bynowbtn mt-3 " style={{ cursor: "pointer" }}>
+                          {buttonText}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="col-md-12">
+                        <div onClick={goToCart} className="bynowbtn mt-3" style={{ cursor: "pointer" }}>
+                          {buttonText}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="col-md-12">
+                      <div onClick={btn ? BuyItNow : () => toast.error("Select Price")} className="bynowbtn mt-3" style={{ cursor: "pointer" }}>
+                        BUY IT NOW
+                      </div>
+                    </div>
+                  </div> */}
+
+                  {/* Payment Images */}
+                  {/* <div className="col-md-12">
+                    <div className="payment-images">
+                      {paymentImages?.map((image, index) => (
+                        <Link href="/" key={index}>
+                          <Image src={image?.name} alt="Payment Option" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */} 
 
 
    <section className="manovaidya-kit-section">
@@ -1086,7 +1270,7 @@ const Page = ({ params }) => {
       </p>
       <button
         style={{
-          backgroundColor: "#9b6bff", // purple button same as original
+          backgroundColor: "#722f7f", // purple button same as original
           color: "#fff",
           fontSize: "16px",
           fontWeight: "600",
@@ -1097,10 +1281,10 @@ const Page = ({ params }) => {
           transition: "all 0.3s ease"
         }}
         onMouseEnter={(e) =>
-          (e.target.style.backgroundColor = "#8000ff")
+          (e.target.style.backgroundColor = "#722f7f")
         }
         onMouseLeave={(e) =>
-          (e.target.style.backgroundColor = "#9b6bff")
+          (e.target.style.backgroundColor = "#722f7f")
         }
       >
         Start Your 3-Month Calm Journey

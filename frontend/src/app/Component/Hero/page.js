@@ -306,9 +306,9 @@ const StatItem = ({ icon: Icon, value, label, suffix = "" }) => {
         </div>
 
         {/* CTA */}
-        <button className="guided-btn">
-          Start Your 3-Phase Journey <span>→</span>
-        </button>
+      <Link href="/Pages/products" className="guided-btn">
+  Start Your 3-Phase Journey <span>→</span>
+</Link>
       </div>
     </section>
 

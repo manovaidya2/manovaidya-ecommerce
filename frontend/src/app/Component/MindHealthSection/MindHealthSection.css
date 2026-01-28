@@ -84,6 +84,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .mind-health-btn-primary:hover {
@@ -99,8 +100,100 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .mind-health-btn-secondary:hover {
   background-color: #f0f0f0;
+}
+
+
+
+
+/* =========================
+   RESPONSIVE STYLES
+========================= */
+
+/* Tablets (≤ 992px) */
+@media (max-width: 992px) {
+  .mind-health-section {
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  .mind-health-box {
+    padding: 35px 25px;
+  }
+
+  .mind-health-box h2 {
+    font-size: 24px;
+  }
+
+  .mind-health-journey h2 {
+    font-size: 28px;
+    white-space: normal; /* wrap allowed */
+  }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .mind-health-section {
+    gap: 30px;
+    padding: 30px 15px;
+  }
+
+  .mind-health-box {
+    padding: 30px 20px;
+  }
+
+  .mind-health-icon {
+    font-size: 34px;
+  }
+
+  .mind-health-box h2 {
+    font-size: 22px;
+  }
+
+  .mind-health-box p,
+  .mind-health-journey p {
+    font-size: 15px;
+  }
+
+  .mind-health-journey h2 {
+    font-size: 24px;
+    white-space: normal;
+  }
+
+  .mind-health-journey-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mind-health-btn-primary,
+  .mind-health-btn-secondary,
+  .mind-health-btn {
+    width: 100%;
+  }
+}
+
+/* Small Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .mind-health-box {
+    padding: 25px 15px;
+  }
+
+  .mind-health-box h2 {
+    font-size: 20px;
+  }
+
+  .mind-health-journey h2 {
+    font-size: 22px;
+  }
+
+  .mind-health-btn-primary,
+  .mind-health-btn-secondary,
+  .mind-health-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
 }

@@ -345,6 +345,8 @@
   background: #fff;
   border-radius: 6px;
   cursor: pointer;
+  text-decoration: none;
+  color: #000;
 }
 
 /* RESPONSIVE */

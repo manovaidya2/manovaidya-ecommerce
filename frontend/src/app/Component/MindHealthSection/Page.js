@@ -1,6 +1,7 @@
 "use client"; // Important for Next.js 13+ app directory if using client-side interactions
 import React from "react";
 import "./MindHealthSection.css";
+import Link from "next/link";
 
 const Page = () => {
   return (
@@ -25,10 +26,13 @@ const Page = () => {
           yourself.
         </p>
         <div className="mind-health-journey-buttons">
-          <button className="mind-health-btn-primary">
-            Take the Mind Health Test
-          </button>
-          <button className="mind-health-btn-secondary">Buy Now</button>
+         <Link href="/Pages/mind-health" className="mind-health-btn-primary">
+  Take the Mind Health Test
+</Link>
+
+         <Link href="/Pages/products" className="mind-health-btn-secondary">
+  Buy Now
+</Link>
         </div>
       </div>
     </section>

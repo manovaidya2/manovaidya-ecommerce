@@ -156,6 +156,8 @@
 "use client";
 import React from "react";
 import "./slider.css";
+import Link from "next/link";
+
 
 const Page = () => {
   return (
@@ -182,9 +184,9 @@ const Page = () => {
         </p>
 
         <div className="hero-actions">
-          <button className="btn-primary">
-            Take the Mind Health Test
-          </button>
+         <Link href="/Pages/mind-health" className="btn-primary">
+  Take the Mind Health Test
+</Link>
           <button className="btn-secondary">
             Explore the Experience
           </button>
