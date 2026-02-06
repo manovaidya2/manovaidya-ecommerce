@@ -26,9 +26,13 @@ const BlogPage = () => {
   }, []);
 
   const truncateText = (htmlString, maxLength) => {
-    const div = document.createElement("div");
-    div.innerHTML = htmlString;
-    const text = div.textContent || div.innerText || "";
+    // Safely extract text from HTML without using innerHTML
+    const tempDiv = document.createElement("div");
+    // Use textContent to safely set content without executing scripts
+    tempDiv.textContent = htmlString;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    const text = doc.body.textContent || doc.body.innerText || "";
     return text.length > maxLength
       ? text.substring(0, maxLength) + "..."
       : text;

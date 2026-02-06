@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from 'react';
 import { getData, serverURL } from '@/app/services/FetchNodeServices';
+import DOMPurify from 'isomorphic-dompurify';
 
 const BlogDetail = ({ params }) => {
     const [blog, setBlog] = useState(null);
@@ -24,6 +25,15 @@ const BlogDetail = ({ params }) => {
         };
         fetchBlogData();
     }, [id]);
+
+    // Sanitize HTML content to prevent XSS attacks
+    const sanitizeHTML = (html) => {
+        return DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'code', 'pre'],
+            ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'id', 'target', 'rel'],
+            ALLOW_DATA_ATTR: false
+        });
+    };
 
     if (loading) return <p>Loading...</p>;
     if (!blog) return <p>Blog not found</p>;
@@ -85,7 +95,7 @@ const BlogDetail = ({ params }) => {
                         {blog.name}
                     </h2>
 
-                    {/* Description */}
+                    {/* Description - Sanitized to prevent XSS */}
                     <div
                         className="description"
                         style={{
@@ -96,7 +106,7 @@ const BlogDetail = ({ params }) => {
                             padding: '0 10px',
                             textAlign: 'justify',
                         }}
-                        dangerouslySetInnerHTML={{ __html: blog.description }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeHTML(blog.description) }}
                     />
 
                     {/* Date */}

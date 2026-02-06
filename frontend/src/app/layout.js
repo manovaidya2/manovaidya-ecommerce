@@ -48,7 +48,15 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
 
-        {/* ================= GOOGLE TAG MANAGER ================= */}
+        {/* ================= TRACKING SCRIPTS DISABLED ================= */}
+        {/* SECURITY NOTE: Invalid tracking IDs have been removed to prevent VPS blocking */}
+        {/* To enable tracking, replace with valid IDs from your accounts:
+            - Google Tag Manager: Get ID from https://tagmanager.google.com
+            - Facebook Pixel: Get ID from https://business.facebook.com/events_manager
+            - LinkedIn Insight: Get ID from https://www.linkedin.com/campaignmanager
+        */}
+        
+        {/* Uncomment and add valid GTM ID when ready
         <Script id="gtm-init" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];
@@ -57,51 +65,14 @@ export default function RootLayout({ children }) {
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
             j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
             f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-1234456');
+            })(window,document,'script','dataLayer','YOUR-GTM-ID-HERE');
           `}
         </Script>
-
-        {/* ================= META PIXEL ================= */}
-        <Script id="fb-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '123456789012345');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-
-        {/* ================= LINKEDIN INSIGHT ================= */}
-        <Script id="linkedin" strategy="afterInteractive">
-          {`
-            _linkedin_partner_id = "XXXXXX";
-            window._linkedin_data_partner_ids =
-              window._linkedin_data_partner_ids || [];
-            window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-          `}
-        </Script>
-        <Script
-          strategy="afterInteractive"
-          src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
-        />
+        */}
       </head>
 
       <body>
-        {/* ✅ GTM fallback */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-1234456"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        {/* GTM fallback - Disabled until valid ID is configured */}
 
         <ReduxProvider>
            <ScrollToTop />
