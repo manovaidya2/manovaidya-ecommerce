@@ -219,12 +219,19 @@
 
 
 
-
+/* SECTION */
 .mindkit-grid-section {
-  padding: 20px 0;
+  padding: 60px 0;
   background: #fff;
 }
 
+.container {
+ 
+  margin: auto;
+  padding: 0 16px;
+}
+
+/* TITLE */
 .mindkit-title {
   text-align: center;
   font-size: 34px;
@@ -236,6 +243,7 @@
   text-align: center;
   color: #666;
   margin-bottom: 50px;
+  font-size: 14px;
 }
 
 /* GRID */
@@ -248,55 +256,58 @@
 /* CARD */
 .mindkit-card {
   border: 1px solid #eee;
-  border-radius: 14px;
+  border-radius: 16px;
   background: #fff;
-  overflow: hidden;
-  transition: 0.3s;
+  transition: 0.3s ease;
+
 }
 
 .mindkit-card:hover {
-  box-shadow: 0 10px 30px rgba(155, 109, 243, 0.15);
+  box-shadow: 0 12px 32px rgba(114, 47, 127, 0.15);
 }
 
-/* IMAGE */
+/* IMAGE AREA */
 .mindkit-img {
-  width: 100%;
-  height: 300px; /* keep all cards same height */
-  background: #f7f7f7;
-  overflow: hidden;
+  padding: 25px; /* 🔥 charo side padding */
+}
+
+.mindkit-img-inner {
+ 
+  background: #f6f6f6;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.mindkit-img img {
+.mindkit-img-inner img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* fills the container but may crop slightly */
+  height: 60%;
+  object-fit: cover; /* no crop */
 }
-
 
 /* BODY */
 .mindkit-body {
-  padding: 20px;
+  padding: 18px 20px 22px;
 }
 
 .mindkit-body h4 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .short-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: #777;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .desc {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 /* PRICE */
@@ -308,28 +319,38 @@
 }
 
 .price {
-  color: #722f7f;
+  font-size: 15px;
   font-weight: 700;
+  color: #722f7f;
+}
+
+del {
+  font-size: 12px;
+  color: #999;
 }
 
 .off {
-  font-size: 12px;
+  font-size: 11px;
   color: #722f7f;
+  background: #f3e9f7;
+  padding: 2px 6px;
+  border-radius: 6px;
 }
 
 /* BUTTON */
 .view-btn {
   width: 100%;
-  padding: 10px;
-  background: #722f7f;
+  padding: 9px;
+  background: #9b6df3;
   border: none;
   color: #fff;
   border-radius: 6px;
+  font-size: 13px;
   cursor: pointer;
 }
 
 .view-btn:hover {
-  background: #722f7f;
+  background: #8b5ce9;
 }
 
 /* ASSESSMENT */
@@ -338,15 +359,21 @@
   margin-top: 60px;
 }
 
+.assessment p {
+  font-size: 13px;
+  color: #555;
+}
+
 .assessment-btn {
+  display: inline-block;
   margin-top: 10px;
   padding: 10px 24px;
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 6px;
-  cursor: pointer;
   text-decoration: none;
   color: #000;
+  font-size: 13px;
 }
 
 /* RESPONSIVE */
@@ -365,4 +392,3 @@
     font-size: 28px;
   }
 }
-
