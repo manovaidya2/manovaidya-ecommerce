@@ -15,7 +15,7 @@ const Page = () => {
           concerns, consult our expert Ayurvedic practitioners for customized
           medicines.
         </p>
-        <button className="mind-health-btn">Book Clinic Consultation</button>
+        <button className="mind-health-btn1">Book Clinic Consultation</button>
       </div>
 
       {/* Journey Section */}

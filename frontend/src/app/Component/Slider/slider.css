@@ -84,16 +84,32 @@
 
 /* Heading */
 .hero-title {
-  font-size: 56px;
-  font-weight: 800;
+  font-size: 60px;
+  font-weight: 700;
   line-height: 1.1;
   color: #222;
 }
 
 .hero-title span {
-  color: #722f7f;
+  color: #9b6df3;
 }
 
+
+.hero-title span:first-of-type {
+  display: inline;   /* Daily same line me */
+}
+
+.hero-title span:last-of-type {
+  display: block;    /* Nourishment next line */
+}
+
+.hero-title {
+  white-space: nowrap;
+}
+
+.hero-title span:last-of-type {
+  white-space: normal;
+}
 /* Description */
 .hero-desc {
   margin-top: 20px;
@@ -110,7 +126,7 @@
 }
 
 .btn-primary {
-  background: #722f7f;
+  background: #9b6df3;
   color: #fff;
   padding: 14px 22px;
   border-radius: 8px;

@@ -36,7 +36,7 @@
 /* Positioning */
 .sidebutton a {
   top: 83%;
-  background-color: #800080;
+  background-color: #9b6df3;
 }
 
 .sidewhatsapp a {
@@ -323,7 +323,7 @@
 
 .section-heading {
   font-size: 24px;
-  color: #6d2875;
+  color: #9b6df3;
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
@@ -701,13 +701,13 @@
 
 .stat-icon {
   font-size: 40px;
-  color: #722f7f;
+  color: #9b6df3;
 }
 
 .stat-item h3 {
   font-size: 32px;
   font-weight: 700;
-  color: #722f7f;
+  color: #9b6df3;
   margin: 0;
 }
 
@@ -763,7 +763,7 @@
 /* Badge */
 .guided-badge {
   display: inline-block;
-  background: #722f7f;
+  background: #9b6df3;
   color: #fff;
   padding: 6px 14px;
   border-radius: 20px;
@@ -818,7 +818,7 @@
 
 .step-circle.purple {
   background: #ede7fd;
-  color: #722f7f;
+color: #9b6df3;
 }
 
 .step-circle.yellow {
@@ -852,7 +852,7 @@
 
 /* Button */
 .guided-btn {
-  background: #722f7f;
+  background: #9b6df3;
   color: #fff;
   padding: 16px 28px;
   border-radius: 10px;
@@ -1029,7 +1029,7 @@
 /* Hover (desktop only) */
 @media (hover: hover) {
   .kit-card:hover {
-    border-color: #722f7f;
+    color: #9b6df3;
     box-shadow: 0 8px 24px rgba(155, 109, 243, 0.15);
   }
 }
@@ -1045,8 +1045,7 @@
 /* ================= ICON ================= */
 .kit-icon {
   font-size: 26px;
-  color: #722f7f;
-  flex-shrink: 0;
+color: #9b6df3;  flex-shrink: 0;
   margin-top: 4px;
 }
 
@@ -1111,8 +1110,7 @@
 
 .mindkit-btn:hover {
   border-color: #722f7f;
-  color: #722f7f;
-}
+color: #9b6df3;}
 
 /* Mobile button */
 @media (max-width: 480px) {

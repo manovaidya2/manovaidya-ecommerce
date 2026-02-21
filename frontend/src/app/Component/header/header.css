@@ -342,3 +342,24 @@ font-size: 12px;
 .active {
   opacity: 1;
 }
+
+
+.assessment-btn1 {
+  background-color: #9b6df3;
+  color: #fff !important;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  margin-bottom: 12px; /* 👈 bottom spacing */
+  display: inline-block; /* margin work kare */
+}
+
+.assessment-btn1:hover {
+  background-color: #7f56d9;
+  color: #fff;
+}

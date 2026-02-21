@@ -175,7 +175,7 @@ const Page = () => {
         </span>
 
         <h1 className="hero-title">
-          Your Mind Deserves <span>Daily Nourishment</span>
+          Your Mind Deserves <span>Daily</span> <span> Nourishment</span>
         </h1>
 
         <p className="hero-desc">

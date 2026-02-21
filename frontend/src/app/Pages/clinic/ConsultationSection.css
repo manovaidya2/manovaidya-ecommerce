@@ -1,6 +1,6 @@
 .consultation-section {
   padding: 80px 6%;
-  background: #fdfaff;
+ 
   text-align: center;
   font-family: "Inter", sans-serif;
 }
@@ -23,7 +23,7 @@
 }
 
 .consultation-btn {
-  background-color: #722f7f;
+  background-color: #cb51e3;
   color: #fff;
   padding: 14px 32px;
   font-size: 16px;
@@ -37,7 +37,7 @@
 }
 
 .consultation-btn:hover {
-  background-color: #722f7f;
+  background-color: #9b6df3;
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(155, 107, 255, 0.35);
 }
@@ -101,14 +101,14 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: #722f7f;
+  color: #9b6df3;
   font-weight: bold;
   font-size: 16px;
   line-height: 1.5;
 }
 
 .consultation-card ul li:hover {
-  color: #722f7f;
+  color: #9b6df3;
 }
 
 
@@ -159,7 +159,7 @@
 
 .howitworks-icon {
   font-size: 28px;
-  color: #722f7f; /* purple same as your theme */
+  color: #9b6df3; /* purple same as your theme */
 }
 
 .howitworks-card h3 {
@@ -217,7 +217,7 @@
 
 .cd-icon {
   background-color: #f0e5ff;
-  color: #722f7f;
+  color: #9b6df3;
   font-size: 22px;
   padding: 12px;
   border-radius: 50%;
@@ -351,12 +351,12 @@
 
 /* PRIMARY BUTTON */
 .cta-ready-btn.primary {
-  background: #722f7f;
+  background: #9b6df3;
   color: #fff;
 }
 
 .cta-ready-btn.primary:hover {
-  background: #722f7f;
+  background: #9b6df3;
 }
 
 /* SECONDARY BUTTON */
@@ -367,8 +367,8 @@
 }
 
 .cta-ready-btn.secondary:hover {
-  border-color: #722f7f;
-  color: #722f7f;
+  border-color: #9b6df3;
+  color: #9b6df3;
 }
 
 /* TABLET */
@@ -467,7 +467,7 @@
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background: #722f7f;
+  background: #9b6df3;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -513,7 +513,7 @@
 
 
 .hero-section {
-  background: linear-gradient(135deg, #722f7f 0%, #a04fb2 100%);
+  background: #9b6df3;
   color: #fff;
   padding: 50px 20px 60px;
   text-align: center;
@@ -555,7 +555,7 @@
 
 .hero-btn.primary {
   background: #fff;
-  color: #722f7f;
+  color: #9b6df3;
 }
 
 .hero-btn.primary:hover {

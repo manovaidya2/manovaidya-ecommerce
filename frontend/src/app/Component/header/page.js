@@ -63,12 +63,12 @@ const Page = () => {
   // Navigation menu items
   const navItems = [
     { name: "Home", link: "/" },
-    { name: "About Us", link: "/Pages/aboutUs" },
-     { name: "Clinic", link: "/Pages/clinic" },
     { name: "Products", link: "/Pages/products" },
+    // { name: "About Us", link: "/Pages/aboutUs" },
+    { name: "Take Assessment", link: "/Pages/mind-health" },
+     { name: "Clinic", link: "/Pages/clinic" },
     // { name: "explore-By-concern", link: "#explore-by-diseases" },
    
-    { name: "Take Assessment", link: "/Pages/mind-health" },
     // { name: "Consultation & Customized Solution", link: "/Pages/consultationCustomizedSolution" },
     //  { name: "Blog", link: "/Pages/blog" },
     // { name: "Track Your Order", link: `/Pages/trackOrder/${userId}` },
@@ -375,10 +375,16 @@ const Page = () => {
             );
           }
         })}
+        
       </ul>
-      <div>
+      {/* <div>
         <Image src={logo1} width={130} alt="logo-main" />
-      </div>
+      </div> */}
+       <li className="nav-item ms-3">
+    <Link href="/Pages/mind-health" className="assessment-btn1">
+      Start Free Assessment
+    </Link>
+  </li>
     </div>
   </div>
 </nav>

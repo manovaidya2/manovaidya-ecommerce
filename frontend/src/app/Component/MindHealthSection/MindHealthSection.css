@@ -35,8 +35,8 @@
   margin-bottom: 25px;
 }
 
-.mind-health-btn {
-  background-color: #9b59b6;
+.mind-health-btn1 {
+  background-color: #9b6df3;
   color: #fff;
   border: none;
   padding: 12px 25px;
@@ -47,7 +47,7 @@
 }
 
 .mind-health-btn:hover {
-  background-color: #7d3fbf;
+  background-color: #9b6df3;
 }
 
 .mind-health-journey {
@@ -76,7 +76,7 @@
 }
 
 .mind-health-btn-primary {
-  background-color: #9b59b6;
+  background-color: #9b6df3;
   color: #fff;
   border: none;
   padding: 12px 25px;
