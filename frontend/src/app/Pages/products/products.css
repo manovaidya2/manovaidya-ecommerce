@@ -176,13 +176,11 @@
   transition: 0.3s ease;
 }
 
-.manovaidya-kit-card-active {
-  border: 2px solid #722f7f;
-}
+
 
 .manovaidya-kit-icon {
   font-size: 30px;
-  color: #722f7f;
+  color: #9F6EE5;
   margin-bottom: 14px;
 }
 
@@ -213,7 +211,7 @@
 
 .manovaidya-kit-card ul svg {
   font-size: 8px;
-  color: #722f7f;
+  color: #9F6EE5;
 }
 
 /* Journey */
@@ -252,7 +250,7 @@
   height: 56px;
   border-radius: 50%;
   background: #ede5ff;
-  color: #722f7f;
+  color: #9F6EE5;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -430,17 +428,17 @@
 
 .icon.purple {
   background: #efe9ff;
-  color: #722f7f;
+  color: #9F6EE5;
 }
 
 .icon.pink {
   background: #ffe9f1;
-  color: #722f7f;
+  color: #9F6EE5;
 }
 
 .icon.violet {
   background: #f0ecff;
-  color: #722f7f;
+  color: #9F6EE5;
 }
 
 /* RIGHT IMAGE */
@@ -571,7 +569,7 @@
 .stat-box h3 {
   font-size: 30px;
   font-weight: 700;
-  color: #722f7f;
+  color: #9F6EE5;
   margin-bottom: 6px;
 }
 

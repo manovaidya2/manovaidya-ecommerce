@@ -45,23 +45,34 @@ try {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-container">
-          <h1 className="hero-title1">Consult Our Ayurvedic Experts</h1>
-          <p className="hero-subtitle">
-            Get personalized guidance for chronic conditions, severe symptoms, or complex
-            mental health concerns from certified Ayurvedic practitioners.
-          </p>
-          <div className="hero-actions">
-            <button className="hero-btn primary" onClick={() => setShowModal(true)}>
-              Book Your Consultation
-            </button>
-            <Link href="/Pages/products">
-              <button className="hero-btn secondary">View Product Kits</button>
-            </Link>
-          </div>
-        </div>
-      </section>
+<section className="consult-section">
+  <div className="consult-wrapper">
+    <h1 className="consult-heading">
+      Consult Our Ayurvedic Experts
+    </h1>
+
+    <p className="consult-description">
+      Get personalized guidance for chronic conditions, severe symptoms, or complex
+      mental health concerns from certified Ayurvedic practitioners.
+    </p>
+
+    <div className="consult-buttons">
+      <button
+        className="consult-btn consult-primary"
+        onClick={() => setShowModal(true)}
+      >
+        Book Your Consultation
+      </button>
+
+      {/* <Link
+  href="/Pages/products"
+  className="consult-btn consult-secondary"
+>
+  View Product Kits
+</Link> */}
+    </div>
+  </div>
+</section>
 
       {/* Consultation Section */}
       <section className="consultation-section">

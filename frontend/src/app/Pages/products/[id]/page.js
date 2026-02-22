@@ -974,7 +974,7 @@ const experienceLabel = (index) => {
 </section>
 
 
-
+{/* 
       <section className="ingredients-accordion">
         <div className="container">
           <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -1000,15 +1000,15 @@ const experienceLabel = (index) => {
           </div>
         </div>
       </section>
+ */}
 
 
 
-
-      <section className="product-blog-section">
+      {/* <section className="product-blog-section">
         <ProductBlog product={product} title="Single Product" />
-      </section>
+      </section> */}
 
-      <section className="doctor-advice-videos">
+      {/* <section className="doctor-advice-videos">
         <div className="container">
           <h2>Doctor's Advice</h2>
           <div className="row">
@@ -1030,8 +1030,8 @@ const experienceLabel = (index) => {
             </>))}
           </div>
         </div>
-      </section>
-
+      </section> */}
+{/* 
       {product?.RVUS.length > 0 ? <section className="doctor-advice-videos">
         <div className="container">
           <h2>Review Video </h2>
@@ -1054,10 +1054,10 @@ const experienceLabel = (index) => {
             </>))}
           </div>
         </div>
-      </section> : ""}
+      </section> : ""} */}
 
 
-      <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
+      {/* <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
@@ -1116,7 +1116,10 @@ const experienceLabel = (index) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+
+
       <section className="customer-reviews-advice py-4">
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>

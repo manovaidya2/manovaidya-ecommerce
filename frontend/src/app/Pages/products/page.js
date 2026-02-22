@@ -150,7 +150,7 @@ const Page = () => {
   return (
     <section className="product-page">
       <div className="container">
-        <h2 className="heading">Ayurvedic Products</h2>
+        <h2 className="heading">Choose Your Mind Kit</h2>
         <p className="product-grid-subtitle">
           Explore our range of natural, herbal, and ayurvedic products for a healthier lifestyle.
         </p>

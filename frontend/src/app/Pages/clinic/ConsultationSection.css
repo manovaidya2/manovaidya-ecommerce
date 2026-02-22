@@ -1,5 +1,5 @@
 .consultation-section {
-  padding: 80px 6%;
+  padding: 20px 6%;
  
   text-align: center;
   font-family: "Inter", sans-serif;
@@ -10,6 +10,95 @@
   font-weight: 700;
   margin-bottom: 16px;
   color: #111;
+}
+
+
+
+
+/* Main section */
+.consult-section {
+  width: 100%;
+  padding: 40px 10px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+/* Content container */
+.consult-wrapper {
+
+  text-align: center;
+}
+
+/* Heading */
+.consult-heading {
+  font-size: 48px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+/* Subtitle text */
+.consult-description {
+  font-size: 20px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Button group */
+.consult-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Common button */
+.consult-btn {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* Primary button */
+.consult-primary {
+  background: #9b6ef3;
+  color: #fff;
+}
+
+.consult-primary:hover {
+  background: #8456e0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(155, 110, 243, 0.3);
+}
+
+/* Secondary button */
+.consult-secondary {
+  background: transparent;
+  color: #9b6ef3;
+  border: 2px solid #9b6ef3;
+}
+
+.consult-secondary:hover {
+  background: #f3ecff;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .consult-heading {
+    font-size: 36px;
+  }
+
+  .consult-description {
+    font-size: 18px;
+  }
 }
 
 .consultation-subtitle {
