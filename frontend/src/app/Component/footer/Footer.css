@@ -1,4 +1,4 @@
-.footer {
+/* .footer {
   border-top: 1px solid lightgray;
   padding: 2rem;
   background-color: #f7f5e8;
@@ -116,5 +116,311 @@
   .bi-youtube {
     color: red;
     font-size: 20px;
+  }
+} */
+
+
+.footer {
+  background: #F8F3E9;  /* Light cream background as in image */
+  padding: 3rem 0 2rem;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  color: #4A4A4A;
+  border-top: 1px solid #E0D5C0;
+}
+
+/* Brand Styles */
+.footer-brand {
+  color: #9b6df3;  /* Teal/green color from image */
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.footer-tagline {
+  color: #6B6B6B;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Contact Details */
+.contact-details p {
+  color: #4A4A4A;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.contact-details p i {
+  color: #9b6df3;  /* Teal/green color from image */
+  font-size: 1.1rem;
+  width: 24px;
+}
+
+.contact-details p:hover {
+  color: #9b6df3;
+  transform: translateX(5px);
+}
+
+/* Follow Title */
+.follow-title {
+  color: #9b6df3;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.follow-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #9b6df3;  /* Teal/green color from image */
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-icon i {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(45, 90, 75, 0.2);
+}
+
+.social-icon:hover i {
+  transform: scale(1.1);
+}
+
+.social-icon.facebook {
+  background: #9b6df3;
+}
+
+.social-icon.youtube {
+  background: #ff0000;
+}
+
+.social-icon.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* Footer Titles */
+.footer-title {
+  color: #9b6df3;  /* Teal/green color from image */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #9b6df3;  /* Teal/green color from image */
+}
+
+/* Footer Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links li a {
+  color: #4A4A4A;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links li a i {
+  color: #9b6df3;  /* Teal/green color from image */
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.footer-links li a:hover {
+  color: #9b6df3;
+  transform: translateX(5px);
+}
+
+/* Trust Section */
+.trust-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #E0D5C0;
+}
+
+.trust-badge {
+  text-align: left;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.trust-icon {
+  width: 50px;
+  height: 50px;
+  background: #E8F0EE;  /* Light teal background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-icon i {
+  font-size: 1.8rem;
+  color: #9b6df3;  /* Teal/green color from image */
+  transition: transform 0.3s ease;
+}
+
+.trust-badge:hover .trust-icon i {
+  transform: scale(1.1);
+}
+
+.trust-text h6 {
+  color: #9b6df3;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.trust-text p {
+  color: #6B6B6B;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* Bottom Footer */
+.bottom-footer {
+  background: #9b6df3;  /* Teal/green color from image */
+  padding: 1rem 0;
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.bottom-footer p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.footer-logo img {
+  max-width: 180px;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+
+  .footer-brand {
+    font-size: 1.5rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+  }
+
+  .contact-details p {
+    font-size: 0.85rem;
+  }
+
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .social-icon i {
+    font-size: 1.1rem;
+  }
+
+  .footer-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links li a {
+    font-size: 0.85rem;
+  }
+
+  .trust-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .trust-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .trust-icon i {
+    font-size: 1.4rem;
+  }
+
+  .trust-text h6 {
+    font-size: 0.85rem;
+  }
+
+  .trust-text p {
+    font-size: 0.7rem;
+  }
+
+  .bottom-footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .trust-badge {
+    gap: 10px;
+  }
+
+  .trust-text h6 {
+    font-size: 0.75rem;
+  }
+
+  .trust-text p {
+    font-size: 0.65rem;
   }
 }
