@@ -563,12 +563,12 @@ const sendOrderEmails = async (data) => {
 
 
 const transporter = Nodemailer.createTransport({
-    host: "smtp.hostinger.com", // Replace with your SMTP server host
-    port: 465, // Replace with your SMTP server port
-    secure: true, // true for 465, false for other ports
+    host: process.env.SMTP_HOST || "smtp.hostinger.com",
+    port: parseInt(process.env.SMTP_PORT) || 465,
+    secure: (parseInt(process.env.SMTP_PORT) || 465) === 465, // true for 465, false for 587
     auth: {
-        user: "info@gromedia.co.in", // Replace with your SMTP server username
-        pass: "@Gromedia2024", // Replace with your SMTP server password
+        user: process.env.SMTP_USER || "info@gromedia.co.in",
+        pass: process.env.SMTP_PASS || "@Gromedia2024",
     },
 });
 
