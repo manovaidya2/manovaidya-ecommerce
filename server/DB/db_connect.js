@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDb = async (URL) => {
     try {
-        const connection = await mongoose.connect(URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        const connection = await mongoose.connect(URL);
 
         console.log("manovedya MongoDB connected:", connection.connection.host);
     } catch (error) {
