@@ -563,19 +563,19 @@ const sendOrderEmails = async (data) => {
 
 
 const transporter = Nodemailer.createTransport({
-    host: "sg2plzcpnl505700.prod.sin2.secureserver.net", // Replace with your SMTP server host
+    host: "smtp.hostinger.com", // Replace with your SMTP server host
     port: 465, // Replace with your SMTP server port
     secure: true, // true for 465, false for other ports
     auth: {
-        user: "info@manovaidya.com", // Replace with your SMTP server username
-        pass: "1Q2w3e4r5t@123", // Replace with your SMTP server password
+        user: "info@manovaidya.help", // Replace with your SMTP server username
+        pass: "1Q2w3e4r5t@12345", // Replace with your SMTP server password
     },
 });
 
-const sendMail = ({ to, subject, html, from = "info@manovaidya.com" }) => {
+const sendMail = ({ to, subject, html, from = "info@manovaidya.help" }) => {
     return new Promise((resolve, reject) => {
         const mailOptions = {
-            from: "ManoVaidya <info@manovaidya.com>",
+            from: "ManoVaidya <info@manovaidya.help>",
             to,
             subject,
             html,
