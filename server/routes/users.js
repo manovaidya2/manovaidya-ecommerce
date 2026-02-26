@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
+import Order from '../models/Order.js';
 import Otp from '../models/Otp.js';
 import bcrypt from 'bcryptjs'
 import ShortUniqueId from "short-unique-id"
@@ -588,6 +589,75 @@ router.get('/delete-user/:id', async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to delete user', error: error.message });
   }
 });
+
+///////////////////////////////////////////////////////////////
+// EXTERNAL AUTH API FOR WEBSITE B LOGIN
+///////////////////////////////////////////////////////////////
+
+router.post('/external/verify-paid-user', async (req, res) => {
+
+  try {
+
+    const apiKey = req.headers['x-api-key'];
+
+    console.log("HEADER KEY:", apiKey);
+    console.log("ENV KEY:", process.env.EXTERNAL_AUTH_API_KEY);
+
+    if (!apiKey) {
+      return res.status(403).json({
+        success: false,
+        message: "API key missing"
+      });
+    }
+
+    if (apiKey.trim() !== process.env.EXTERNAL_AUTH_API_KEY.trim()) {
+      return res.status(403).json({
+        success: false,
+        message: "Invalid API key"
+      });
+    }
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user)
+      return res.status(404).json({ success: false, message: "User not found" });
+
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatched)
+      return res.status(401).json({ success: false, message: "Invalid password" });
+
+    const paidOrder = await Order.findOne({
+      user: user._id,
+      isPaid: true
+    });
+
+    if (!paidOrder)
+      return res.status(403).json({ success: false, message: "No paid order found" });
+
+    return res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      }
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
 
 
 export default router;
