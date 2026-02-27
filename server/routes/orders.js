@@ -163,29 +163,43 @@ router.get('/get-order-by-user-id/:id', async (req, res) => {
 // working
 router.post('/change-status/:id', async (req, res) => {
   try {
-    const { orderStatus } = req.body;
+    const { orderStatus, paymentStatus } = req.body;
     const { id } = req.params;
-
-    if (!orderStatus) {
-      return res.status(400).json({ success: false, message: 'Order status is required' });
-    }
 
     const order = await Order.findById(id);
     if (!order) {
       return res.status(404).json({ success: false, message: 'Order not found' });
     }
 
-    order.status = orderStatus;
+    // Order status update
+    if (orderStatus) {
+      order.status = orderStatus;
+    }
+
+    // 🔥 Payment status update
+    if (paymentStatus === "Success") {
+      order.isPaid = true;
+      order.paidAt = new Date();
+    }
+
+    if (paymentStatus === "Pending") {
+      order.isPaid = false;
+      order.paidAt = null;
+    }
 
     await order.save();
 
-    return res.status(200).json({ success: true, message: 'Order status updated successfully', order });
+    res.status(200).json({
+      success: true,
+      message: "Order updated successfully",
+      order
+    });
+
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Change status error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
-
 
 
 export default router;

@@ -156,6 +156,21 @@ const EditOrder = () => {
         }
     };
 
+    const handleChangePaymentStatus = async (status) => {
+  try {
+    const res = await postData(`api/orders/change-status/${id}`, {
+      paymentStatus: status
+    });
+
+    if (res?.success) {
+      toast.success("Payment status updated!");
+      getApiData(); // refresh order
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to update payment status");
+  }
+};
     const isOrderStatusDisabled = orderStatus === "Delivered" || orderStatus === "Cancelled";
     const isPaymentStatusDisabled = paymentStatus === "Success";
     const handleLogin2 = () => {
@@ -303,12 +318,16 @@ const EditOrder = () => {
                                                 <tr>
                                                     <th scope="row">Payment Status</th>
                                                     <td>
-                                                        <select
-                                                            className="form-select"
-                                                            value={paymentStatus}
-                                                            onChange={(e) => setPaymentStatus(e.target.value)}
-                                                            disabled={isPaymentStatusDisabled}
-                                                        >
+                                                       <select
+  className="form-select"
+  value={paymentStatus}
+  onChange={(e) => {
+    const value = e.target.value;
+    setPaymentStatus(value);
+    handleChangePaymentStatus(value);
+  }}
+  disabled={isPaymentStatusDisabled}
+>
                                                             <option value="Pending">Pending</option>
                                                             <option value="Success">Success</option>
                                                         </select>
