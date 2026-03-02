@@ -18,6 +18,9 @@ import {
   RiChatSmile2Line,
 } from "react-icons/ri";
 import img from "../../Images/kit.webp";
+import ProductSlider from "@/app/Component/productSlider/page";
+
+
 
 
 
@@ -249,6 +252,11 @@ const StatItem = ({ icon: Icon, value, label, suffix = "" }) => {
         />
       </div>
     </section>
+
+<ProductSlider />
+
+
+    
     <section className="guided-section">
       <div className="guided-overlay" />
 

@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "../app/Component/Slider/page";
 import Hero from "../app/Component/Hero/page";
 import Newslater from "../app/Component/newslater/page"
-import ProductSlider from "./Component/productSlider/page";
+// import ProductSlider from "./Component/productSlider/page";
 import CommunitySection from "./Component/CommunitySection/Page";
 import ReviewSection from "./Pages/review/page";
 import MindHealthSection from "./Component/MindHealthSection/Page";
@@ -14,7 +14,7 @@ const page = () => {
     <>
       <Slider />
       <Hero title="home" />
-      <ProductSlider />
+      {/* <ProductSlider /> */}
       <CommunitySection />
       <ReviewSection />
       <MindHealthSection />

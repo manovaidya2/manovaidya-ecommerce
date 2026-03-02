@@ -67,6 +67,7 @@ const Page = () => {
     // { name: "About Us", link: "/Pages/aboutUs" },
     { name: "Take Assessment", link: "/Pages/mind-health" },
      { name: "Clinic", link: "/Pages/clinic" },
+     { name: "Community", link: "https://community.manovaidya.com/" },
     // { name: "explore-By-concern", link: "#explore-by-diseases" },
    
     // { name: "Consultation & Customized Solution", link: "/Pages/consultationCustomizedSolution" },
