@@ -19,8 +19,12 @@ import {
 } from "react-icons/ri";
 import img from "../../Images/kit.webp";
 import ProductSlider from "@/app/Component/productSlider/page";
-
-
+import { FaBrain } from "react-icons/fa";
+import { BsChatDots } from "react-icons/bs";
+import { Sparkles } from "lucide-react"; // optional (for ✨ look)
+import HealingSection from "./HealingSection";
+import Programs from "@/app/programs/Programs";
+import {  FaBullseye, FaInfinity, FaHeart } from "react-icons/fa";
 
 
 
@@ -253,6 +257,10 @@ const StatItem = ({ icon: Icon, value, label, suffix = "" }) => {
       </div>
     </section>
 
+
+
+<HealingSection />
+    
 <ProductSlider />
 
 
@@ -442,6 +450,68 @@ const StatItem = ({ icon: Icon, value, label, suffix = "" }) => {
   <button className="mindkit-btn">See How It Works</button>
 </div>
 
+    </section>
+
+    <Programs />
+        <section className="harb-why-section">
+      <p className="harb-why-tag">WHY US</p>
+
+      <h2 className="harb-why-title">What Makes This Different</h2>
+
+      <p className="harb-why-subtitle">
+        This is not a product. This is a system designed for real mental
+        transformation.
+      </p>
+
+      <div className="harb-why-grid">
+        {/* Card 1 */}
+        <div className="harb-why-card">
+          <div className="harb-why-icon">
+            <FaBrain />
+          </div>
+          <h3>Biology + Psychology</h3>
+          <p>
+            The only system that heals your brain chemistry while transforming
+            your thought patterns — together.
+          </p>
+        </div>
+
+        {/* Card 2 */}
+        <div className="harb-why-card">
+          <div className="harb-why-icon">
+            <FaBullseye />
+          </div>
+          <h3>Personalized & Structured</h3>
+          <p>
+            Not a generic course. A coach-led, tracked program tailored to where
+            you are right now.
+          </p>
+        </div>
+
+        {/* Card 3 */}
+        <div className="harb-why-card">
+          <div className="harb-why-icon">
+            <FaInfinity />
+          </div>
+          <h3>Long-Term Change</h3>
+          <p>
+            Not temporary relief. A system designed for sustainable
+            transformation that lasts beyond the program.
+          </p>
+        </div>
+
+        {/* Card 4 */}
+        <div className="harb-why-card">
+          <div className="harb-why-icon">
+            <FaHeart />
+          </div>
+          <h3>Guided, Not Alone</h3>
+          <p>
+            A dedicated mind coach, a supportive community, and daily practices
+            — you're never doing this alone.
+          </p>
+        </div>
+      </div>
     </section>
       {/* <Link href="/Pages/consultationCustomizedSolution" style={{ textDecoration: 'none' }}>
   <section className="product-overview-bg" style={{ cursor: 'pointer' }}>

@@ -1,0 +1,209 @@
+/* =========================
+   SECTION
+========================= */
+.harb-duration-section {
+  background: #f7f7fb;
+  padding: 10px 20px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.harb-duration-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #1e1b2e;
+  margin-bottom: 10px;
+}
+
+.harb-duration-subtitle {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: #6b6b7a;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================
+   CARDS WRAPPER
+========================= */
+.harb-duration-cards {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   CARD
+========================= */
+.harb-duration-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.harb-duration-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ACTIVE CARD */
+.harb-duration-active {
+  border: 2px solid #7c3aed;
+  transform: scale(1.04);
+}
+
+/* BADGE */
+.harb-duration-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7c3aed;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* =========================
+   TEXT
+========================= */
+.harb-duration-card h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #1e1b2e;
+}
+
+.harb-duration-month {
+  font-size: 12px;
+  color: #8b8b9a;
+}
+
+/* PRICE */
+.harb-duration-price {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 12px 0 4px;
+  color: #7c3aed;
+}
+
+.harb-duration-price span {
+  font-size: 12px;
+  color: #aaa;
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+/* SAVE */
+.harb-duration-save {
+  font-size: 12px;
+  color: #6b6b7a;
+  margin-bottom: 8px;
+}
+
+/* DESCRIPTION */
+.harb-duration-desc {
+  font-size: 13px;
+  color: #6b6b7a;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   LIST
+========================= */
+.harb-duration-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 18px;
+}
+
+.harb-duration-card ul li {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #444;
+  position: relative;
+  padding-left: 18px;
+}
+
+.harb-duration-card ul li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: #7c3aed;
+  font-size: 12px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.harb-duration-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #f3f3f3;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.harb-duration-btn:hover {
+  background: #ececec;
+}
+
+/* ACTIVE BUTTON */
+.harb-duration-btn-active {
+  background: linear-gradient(90deg, #7c3aed, #9f67ff);
+  color: white;
+  border: none;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.harb-duration-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 12px;
+  color: #6b6b7a;
+  flex-wrap: wrap;
+}
+
+.harb-duration-footer span svg {
+  color: #7c3aed;
+  margin-right: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .harb-duration-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .harb-duration-active {
+    transform: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .harb-duration-title {
+    font-size: 26px;
+  }
+
+  .harb-duration-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}

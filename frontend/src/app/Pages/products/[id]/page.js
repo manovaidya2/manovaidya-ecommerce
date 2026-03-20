@@ -30,10 +30,12 @@ import {
   FaBookOpen,
   FaPuzzlePiece,
   FaComments,
-  FaCircle,FaCheckCircle 
+  FaCircle,FaCheckCircle ,FaUserCheck,FaCommentDots,FaHeadphones,FaUsers
 } from "react-icons/fa";
 import {  FaHeart, FaBolt } from "react-icons/fa";
 import wimg from "../../../Images/kit-contents-BHiT-Y8U.webp";
+import HealingDuration from "@/app/healingdurationsection/HealingDuration";
+import ChooseKit from "../../ChooseKitsection/ChooseKit";
 
 
 
@@ -396,8 +398,8 @@ const experienceLabel = (index) => {
                 <p className="product-detail-desc">{product?.productSubDescription}</p>
 
                 {/* Price & Rating */}
-                <div className="product-price-rating">
-                  <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                {/* <div className="product-price-rating"> */}
+                  {/* <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                     <Image
                       src={googleImage} // Replace with an actual Google logo image path
                       alt="Google Logo"
@@ -407,15 +409,15 @@ const experienceLabel = (index) => {
                       {product.rating}
                     </span>
                     <span style={{ color: "#FFD700", fontSize: "28px" }}>★★★★★</span>
-                  </div>
+                  </div> */}
 
-                  <p className="m-0">
+                  {/* <p className="m-0">
                     <span style={{ color: "var(--purple)", fontWeight: '600', }}>{product.reviews}10k+ reviews</span>
-                  </p>
-                </div>
+                  </p> */}
+                {/* </div> */}
 
                 {/* Features List */}
-                <p >Helping In</p>
+                {/* <p >Helping In</p> */}
                 {Parser().parse(product?.productDescription)}
 
                 {/* Pricing Options */}
@@ -506,7 +508,7 @@ const experienceLabel = (index) => {
 
 
                   {/* Payment Images */}
-                  <div className="col-md-12">
+                  {/* <div className="col-md-12">
                     <div className="payment-images">
                       {paymentImages?.map((image, index) => (
                         <Link href="/" key={index}>
@@ -514,14 +516,16 @@ const experienceLabel = (index) => {
                         </Link>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
       </section>
-
+<HealingDuration />
+<ChooseKit />
 
 
       {/* <section className="product-details-section">
@@ -671,83 +675,53 @@ const experienceLabel = (index) => {
       </section> */} 
 
 
-   <section className="manovaidya-kit-section">
-      <h2 className="manovaidya-kit-title">What You Get in Your Kit</h2>
+<section className="kit-section">
+  <p className="kit-subtitle">Everything You Get in This Program</p>
+  <h2 className="kit-title">
+    Not just a product — a complete guided system combining biology and psychology.
+  </h2>
 
-      {/* Cards */}
-      <div className="manovaidya-kit-cards">
-        <div className="manovaidya-kit-card">
-          <FaBrain className="manovaidya-kit-icon" />
-          <h3>3 Ayurvedic Formulas</h3>
-          <p>
-            Synergistic blend for mind wellness, emotional balance, and gut detoxification
-          </p>
-          <ul>
-            <li><FaCircle /> Mano Shanti Tablet</li>
-            <li><FaCircle /> Stress Shield Tablet</li>
-            <li><FaCircle /> Digestive Detox Tablet</li>
-          </ul>
-        </div>
+  <div className="kit-grid">
+    <div className="kit-card">
+      <FaBrain className="kit-icon" />
+      <h3>Brain Nourishment Kit</h3>
+      <p>3 Ayurvedic formulas for mind, gut & energy</p>
+    </div>
 
-        <div className="manovaidya-kit-card manovaidya-kit-card-active">
-          <FaBookOpen className="manovaidya-kit-icon" />
-          <h3>Mind Journal</h3>
-          <p>21-day guided reflection workbook (Printed + Digital Access)</p>
-          <ul>
-            <li><FaCircle /> Daily mood tracker</li>
-            <li><FaCircle /> Emotional awareness exercises</li>
-            <li><FaCircle /> Progress milestones</li>
-          </ul>
-        </div>
+    <div className="kit-card">
+      <FaUserCheck className="kit-icon" />
+      <h3>Assigned Mind Coach</h3>
+      <p>Your personal guide for the entire journey</p>
+    </div>
 
-        <div className="manovaidya-kit-card">
-          <FaPuzzlePiece className="manovaidya-kit-icon" />
-          <h3>Lifestyle Map</h3>
-          <p>Complete guide with QR links to video resources</p>
-          <ul>
-            <li><FaCircle /> Yoga sequences</li>
-            <li><FaCircle /> Meditation practices</li>
-            <li><FaCircle /> Mind-nourishing diet plan</li>
-          </ul>
-        </div>
+    <div className="kit-card">
+      <FaCommentDots className="kit-icon" />
+      <h3>Weekly Sessions</h3>
+      <p>Coaching calls, orientation & progress</p>
+    </div>
 
-        <div className="manovaidya-kit-card">
-          <FaComments className="manovaidya-kit-icon" />
-          <h3>Mind Coach Support</h3>
-          <p>Personalized guidance throughout your journey</p>
-          <ul>
-            <li><FaCircle /> Orientation call</li>
-            <li><FaCircle /> Progress tracker calls</li>
-            <li><FaCircle /> Expert coaching sessions</li>
-          </ul>
-        </div>
-      </div>
+    <div className="kit-card">
+      <FaHeadphones className="kit-icon" />
+      <h3>Guided Practices</h3>
+      <p>Breathing, calm, focus & emotional release</p>
+    </div>
 
-      {/* Journey Section */}
-      <div className="manovaidya-journey-section">
-        <h2>The Manovaidya Bio-Journey</h2>
-        <p>Each bottle supports a different phase of your healing journey</p>
+    <div className="kit-card">
+      <FaBookOpen className="kit-icon" />
+      <h3>Journal & Tracker</h3>
+      <p>Morning & evening reflection workbook</p>
+    </div>
 
-        <div className="manovaidya-journey-steps">
-          <div className="manovaidya-step">
-            <span>1</span>
-            <h4>Reset (21 Days)</h4>
-            <p>Calm + Detox phase prepares your system</p>
-          </div>
-          <div className="manovaidya-step">
-            <span>2</span>
-            <h4>Rewire (Next 21 Days)</h4>
-            <p>Focus + resilience building strengthens you</p>
-          </div>
-          <div className="manovaidya-step">
-            <span>3</span>
-            <h4>Reclaim (Next 45 Days)</h4>
-            <p>Emotional Freedom — lasting transformation</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    
+    <div className="kit-card">
+      <FaUsers className="kit-icon" />
+      <h3>Community Access</h3>
+      <p>Like-minded safe sharing space</p>
+    </div>
+  </div>
+</section>    
+
+
+
  <section className="whyworks-section">
       <h2 className="whyworks-title">Why This Works</h2>
 

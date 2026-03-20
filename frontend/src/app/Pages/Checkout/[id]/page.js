@@ -28,12 +28,36 @@ const Page = ({ params }) => {
   const dispatch = useDispatch()
   const [isChecked, setIsChecked] = useState(false);
   const [cart, setCart] = useState(null)
-  const [formData, setFormData] = useState({ email: "", gst: '', firstName: "", lastName: "", country: "", address: "", city: "", state: "", pinCode: "", phone: "", consent: false, saveInfo: false, paymentMethod: "Online", billingAddress: "", });
+  // const [formData, setFormData] = useState({ email: "", gst: '', firstName: "", lastName: "", country: "", address: "", city: "", state: "", pinCode: "", phone: "", consent: false, saveInfo: false, paymentMethod: "Online", billingAddress: "", });
   const [isLoading, setIsLoading] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState('');
   const [user_data, setUser_data] = useState(null)
+const [formData, setFormData] = useState({
+  email: "",
+  gst: "",
+  firstName: "",
+  lastName: "",
+  country: "",
+  address: "",
+  city: "",
+  state: "",
+  pinCode: "",
+  phone: "",
+  consent: false,
+  saveInfo: false,
+  paymentMethod: "Online",
+  billingAddress: "same",
 
+  // ✅ add all missing fields
+  houseNo: "",
+  street: "",
+  billingStreet: "",
+  billingCity: "",
+  billingState: "",
+  billingPinCode: "",
+  billingPhone: ""
+});
 
   useEffect(() => {
     const ct = sessionStorage.getItem("carts");
@@ -81,7 +105,15 @@ const Page = ({ params }) => {
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
-
+const loadRazorpayScript = () => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
   // Handle form changes dynamically
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -91,48 +123,93 @@ const Page = ({ params }) => {
     });
   };
   //////////////////////////////////////////////////////////////////////////////////////////////
-  const handleRzrpPayment = async (payload) => {
-    const options = {
-      // rzp_test_GQ6XaPC6gMPNwH
-      // org =rzp_live_evRmFgAVflHNJ5
-      key: "rzp_live_evRmFgAVflHNJ5",
-      amount: totalWithTax() * 100,
-      currency: "INR",
-      name: "manovaidya",
-      description: "Test Transaction",
-      image: `${logo}`,
-      handler: async (razorpayResponse) => {
-        let body = { ...payload, payment_id: razorpayResponse.razorpay_payment_id };
-        let response = await postData(`api/orders/create-order`, body);
-        // console.log("response", response);
-        if (response?.success === true) {
-          Swal.fire({ title: "Paymant success!", text: "Your Paymant success", icon: "success", confirmButtonText: "Okay", });
-          removedCart()
-          router.push("/");
-        } else {
-          Swal.fire({ title: "Paymant Failed!", text: "Your Paymant Failed", icon: "error", confirmButtonText: "Okay", });
-          setIsLoading(false);
-        }
-      },
-      prefill: { name: formData?.name, email: formData?.email, contact: formData?.phone, },
-      notes: { address: "Razorpay Corporate Office" },
-      theme: { color: "#3399cc", },
-    };
+  // const handleRzrpPayment = async (payload) => {
+  //   const options = {
+  //     // rzp_test_GQ6XaPC6gMPNwH
+  //     // org =rzp_live_evRmFgAVflHNJ5
+  //     key: "rzp_live_evRmFgAVflHNJ5",
+  //     amount: totalWithTax() * 100,
+  //     currency: "INR",
+  //     name: "manovaidya",
+  //     description: "Test Transaction",
+  //     image: `${logo}`,
+  //     handler: async (razorpayResponse) => {
+  //       let body = { ...payload, payment_id: razorpayResponse.razorpay_payment_id };
+  //       let response = await postData(`api/orders/create-order`, body);
+  //       // console.log("response", response);
+  //       if (response?.success === true) {
+  //         Swal.fire({ title: "Paymant success!", text: "Your Paymant success", icon: "success", confirmButtonText: "Okay", });
+  //         removedCart()
+  //         router.push("/");
+  //       } else {
+  //         Swal.fire({ title: "Paymant Failed!", text: "Your Paymant Failed", icon: "error", confirmButtonText: "Okay", });
+  //         setIsLoading(false);
+  //       }
+  //     },
+  //     prefill: { name: formData?.name, email: formData?.email, contact: formData?.phone, },
+  //     notes: { address: "Razorpay Corporate Office" },
+  //     theme: { color: "#3399cc", },
+  //   };
 
-    const rzp1 = new Razorpay(options);
+  //   const rzp1 = new Razorpay(options);
 
-    // rzp1.on("payment.failed", function (response) {
-    //   alert(response.error.code);
-    //   alert(response.error.description);
-    //   alert(response.error.source);
-    //   alert(response.error.step);
-    //   alert(response.error.reason);
-    //   alert(response.error.metadata.payment_id);
-    // });
+  //   // rzp1.on("payment.failed", function (response) {
+  //   //   alert(response.error.code);
+  //   //   alert(response.error.description);
+  //   //   alert(response.error.source);
+  //   //   alert(response.error.step);
+  //   //   alert(response.error.reason);
+  //   //   alert(response.error.metadata.payment_id);
+  //   // });
 
-    rzp1.open();
+  //   rzp1.open();
+  // };
+const handleRzrpPayment = async (payload) => {
+
+  const isLoaded = await loadRazorpayScript();
+
+  if (!isLoaded) {
+    alert("Razorpay SDK failed to load");
+    return;
+  }
+
+  const options = {
+    key: "rzp_live_evRmFgAVflHNJ5",
+    amount: totalWithTax() * 100,
+    currency: "INR",
+    name: "manovaidya",
+    description: "Test Transaction",
+    image: logo,
+    handler: async (response) => {
+      let body = {
+        ...payload,
+        payment_id: response.razorpay_payment_id
+      };
+
+      let res = await postData(`api/orders/create-order`, body);
+
+      if (res?.success) {
+        Swal.fire("Success", "Payment successful", "success");
+        removedCart();
+        router.push("/");
+      } else {
+        Swal.fire("Error", "Payment failed", "error");
+      }
+    },
+    prefill: {
+      name: formData.firstName,
+      email: formData.email,
+      contact: formData.phone,
+    },
+    theme: {
+      color: "#3399cc",
+    },
   };
 
+  const rzp = new window.Razorpay(options); // ✅ IMPORTANT
+
+  rzp.open();
+};
   ////////////////////////////////////////////////////////////////////////////////
   // console.log("cart", cart)
   // Handle form submission
@@ -245,7 +322,7 @@ const Page = ({ params }) => {
             <div className="checkout-sec1">
               <form className="checkout-form" onSubmit={handleSubmit}>
                 <h3 className="section-title">Contact</h3>
-                <input className="form-control" type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email" required />
+                <input className="form-control" type="email" name="email" value={formData.email || ""} onChange={handleInputChange} placeholder="Email" required />
                 <h3 className="section-title">Delivery</h3>
                 <input type="text" name="country" className="form-control" value={formData.country} onChange={handleInputChange} placeholder="Country" required />
                 <div className="name-fields">

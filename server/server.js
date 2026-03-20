@@ -38,6 +38,7 @@ import testRouters from "./routes/test.js"
 import shiprocketRoutes from "./routes/shiprocket.js"
 import tagRoutes from "./routes/tags.js"
 import consultationRoutes from "./routes/consultationRoutes.js";
+import razorpayRoutes from "./routes/razorpay.js";
 
 
 dotenv.config();
@@ -107,6 +108,7 @@ app.use("/api/test", testRouters)
 app.use("/api/shiprocket", shiprocketRoutes)
 app.use("/api/tag", tagRoutes)
 app.use("/api/consultations", consultationRoutes);
+app.use("/api/razorpay", razorpayRoutes);
 
 // Database connection
 // mongoose.connect(process.env.MONGODB_URI)

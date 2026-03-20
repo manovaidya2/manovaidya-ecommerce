@@ -206,8 +206,6 @@
 
 
 
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import "./productSlider.css";
@@ -234,6 +232,7 @@ const MindKitPage = () => {
         <h2 className="mindkit-title">Choose Your Mind Kit</h2>
         <p className="mindkit-subtitle">
           Select your starting point — every journey begins with calm.
+          
         </p>
 
         <div className="mindkit-grid">
