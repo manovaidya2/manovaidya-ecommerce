@@ -257,7 +257,7 @@ export default function HealingDuration() {
 
       // 🔹 Razorpay Options
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key:"rzp_test_RQ69noRiymN9fD",
         amount: data.order.amount,
         currency: "INR",
         name: "Manovaidya",
