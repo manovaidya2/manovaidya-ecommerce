@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "./Program.css";
+import "./program.css";
 import { IoClose, IoCheckmarkCircle } from "react-icons/io5";
 import {
   FaBrain,
