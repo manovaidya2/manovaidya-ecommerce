@@ -51,7 +51,7 @@ const nextConfig = {
               "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
 
               // ✅ Razorpay APIs + tracking
-              "connect-src 'self' https://api.manovaidya.com https://checkout.razorpay.com https://lumberjack.razorpay.com https://api.razorpay.com",
+              "connect-src 'self'  http://localhost:5002 http://localhost:3000 http://localhost:3001 https://api.manovaidya.com https://checkout.razorpay.com https://lumberjack.razorpay.com https://api.razorpay.com",
 
               // ✅ Razorpay popup (VERY IMPORTANT)
               "frame-src 'self' https://checkout.razorpay.com https://api.razorpay.com https://www.youtube.com https://www.googletagmanager.com",

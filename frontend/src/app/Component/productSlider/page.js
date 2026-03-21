@@ -205,7 +205,6 @@
 
 
 
-
 "use client";
 import React, { useEffect, useState } from "react";
 import "./productSlider.css";
@@ -232,7 +231,6 @@ const MindKitPage = () => {
         <h2 className="mindkit-title">Choose Your Mind Kit</h2>
         <p className="mindkit-subtitle">
           Select your starting point — every journey begins with calm.
-          
         </p>
 
         <div className="mindkit-grid">
@@ -260,6 +258,17 @@ const MindKitPage = () => {
                 <p className="desc">
                   {item.productSubDescription?.slice(0, 70)}...
                 </p>
+
+                {/* TAGS SECTION - Displayed above price */}
+                {item.tags && item.tags.length > 0 && (
+                  <div className="product-tags">
+                    {item.tags.map((tag, idx) => (
+                      <span key={idx} className="tag-badge">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <div className="price-row">
                   <span className="price">

@@ -12,13 +12,22 @@ const AddProduct = () => {
   const [herbsList, setHerbsList] = useState([])
   const [tagList, setTagList] = useState([])
   const [formData, setFormData] = useState({
-    productName: "", productDescription: "", productSubDescription: "",
+    productName: "", 
+    productDescription: "", 
+    productSubDescription: "",
     Variant: [{ price: "", discountPrice: "", finalPrice: "" }],
-    herbsId: [], tagType:'', productImage: [], blogImage: [],
-    faqs: [{ question: "", answer: "" }], urls: [{ url: "" }], RVUS: [{ RVU: "" }],
+    herbsId: [], 
+    tagType: '', 
+    productImage: [], 
+    blogImage: [],
+    faqs: [{ question: "", answer: "" }], 
+    urls: [{ url: "" }], 
+    RVUS: [{ RVU: "" }],
+    tags: [] // Added tags field
   });
 
   const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
@@ -31,7 +40,6 @@ const AddProduct = () => {
 
       } catch (error) {
         console.error("Error fetching products:", error);
-        // toast.error("Failed to fetch products!");
       } finally {
         setIsLoading(false);
       }
@@ -80,12 +88,14 @@ const AddProduct = () => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
+  const handleTagsChange = (e) => {
+    const tagsArray = e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
+    setFormData({ ...formData, tags: tagsArray });
+  };
+
   const handleJoditChange = (newValue, name) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: newValue }));
   };
-  // const handleJoditShortChange = (newValue, name) => {
-  //   setFormData((prevFormData) => ({ ...prevFormData, [name]: newValue }));
-  // };
 
   const handleVariantChange = (index, e) => {
     const { name, value } = e.target;
@@ -105,7 +115,6 @@ const AddProduct = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Validation for product images
     if (formData.productImage.length < 3 || formData.productImage.length > 8) {
       alert("Please select between 3 to 8 images before submitting.");
       setIsLoading(false);
@@ -114,19 +123,14 @@ const AddProduct = () => {
 
     const form = new FormData();
 
-    // Loop through formData and append data accordingly
     Object.keys(formData).forEach((key) => {
-      if (key === "Variant" || key === "herbsId" || key === "faqs" || key === "urls" || key === 'RVUS' ) {
-        // For objects or arrays (like Variant, herbsId, etc.), we need to stringify them
+      if (key === "Variant" || key === "herbsId" || key === "faqs" || key === "urls" || key === 'RVUS' || key === "tags") {
         form.append(key, JSON.stringify(formData[key]));
       } else if (key === "productImage") {
-        // For productImage, append each file separately under the 'productImages' field
         formData.productImage.forEach((file) => form.append("productImages", file));
       } else if (key === "blogImage") {
-        // For blogImage, append each file separately under the 'blogImages' field
         formData.blogImage.forEach((file) => form.append("blogImages", file));
       } else {
-        // For other form fields, append them as they are
         form.append(key, formData[key]);
       }
     });
@@ -138,7 +142,7 @@ const AddProduct = () => {
 
       if (response?.success === true) {
         toast.success("Product added successfully!");
-        navigate("/all-products"); // Uncomment if you want to redirect after success
+        navigate("/all-products");
       }
 
     } catch (error) {
@@ -148,7 +152,6 @@ const AddProduct = () => {
       setIsLoading(false);
     }
   };
-
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -188,6 +191,7 @@ const AddProduct = () => {
     const updatedUrls = formData.urls.filter((_, i) => i !== index);
     setFormData({ ...formData, urls: updatedUrls });
   };
+  
   const addRVUSField = () => {
     setFormData({ ...formData, RVUS: [...formData.RVUS, { RVU: "" }] });
   };
@@ -248,6 +252,22 @@ const AddProduct = () => {
             />
           </div>
 
+          {/* Tags Field */}
+          <div className="col-md-4">
+            <label htmlFor="tags" className="form-label">
+              Tags<sup className="text-danger">*</sup>
+            </label>
+            <input
+              type="text"
+              name="tags"
+              className="form-control"
+              id="tags"
+              placeholder="Enter tags separated by commas (e.g., Persistent anxiety, Daily stress, Mood swings, Panic attacks)"
+              onChange={handleTagsChange}
+              required
+            />
+            <small className="text-muted">Enter tags separated by commas</small>
+          </div>
 
           <div className="col-md-4" style={{ marginTop: '40px' }}>
             <Autocomplete
@@ -274,13 +294,6 @@ const AddProduct = () => {
               onChange={handleChange}
               required
             />
-            {/* <JoditEditor
-              className="form-control"
-              placeholder="product Sub Description"
-              name="productSubDescription"
-              value={formData.productSubDescription}
-              onChange={(newValue) => handleJoditShortChange(newValue, 'productSubDescription')}
-            /> */}
           </div>
 
           {/* Product Description (Jodit Editor) */}
@@ -313,12 +326,10 @@ const AddProduct = () => {
             />
           </div>
 
-
           {/* Product Variant */}
           {formData.Variant.map((variant, index) => (
             <div key={index} className="variant-container border p-3 mb-3">
               <div className="row">
-                {/* Price */}
                 <div className="col-md-2">
                   <label className="form-label">
                     Price<sup className="text-danger">*</sup>
@@ -334,7 +345,6 @@ const AddProduct = () => {
                   />
                 </div>
 
-                {/* Discount Percentage */}
                 <div className="col-md-2">
                   <label className="form-label">
                     Discount %<sup className="text-danger">*</sup>
@@ -350,7 +360,6 @@ const AddProduct = () => {
                   />
                 </div>
 
-                {/* Final Price */}
                 <div className="col-md-2">
                   <label className="form-label">
                     Final Price<sup className="text-danger">*</sup>
@@ -365,7 +374,6 @@ const AddProduct = () => {
                   />
                 </div>
 
-                {/* Select Day */}
                 <div className="col-md-2">
                   <label className="form-label">Select Day</label>
                   <select
@@ -383,7 +391,6 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {/* Select Bottle */}
                 <div className="col-md-2">
                   <label className="form-label">Select Bottle</label>
                   <select
@@ -402,7 +409,6 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {/* Taxes */}
                 <div className="col-md-2">
                   <label className="form-label">Taxe's</label>
                   <input type="text" name="tex" className="form-control" value={variant.tex} onChange={(e) => handleVariantChange(index, e)} />
@@ -417,7 +423,6 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              {/* Delete Button */}
               {index > 0 && (
                 <div className="text-end mt-2">
                   <button className="btn btn-danger" onClick={() => removeVariant(index)}>
@@ -428,7 +433,6 @@ const AddProduct = () => {
             </div>
           ))}
 
-          {/* Add More Button */}
           <div>
             <button type="button" className="btn btn-primary" onClick={addVariant}>
               Add More

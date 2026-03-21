@@ -5,13 +5,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getData, postData } from "../../services/FetchNodeServices.js";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Chip, Box } from "@mui/material";
 
 const EditProduct = () => {
-    const { id } = useParams(); // Get product ID from URL
+    const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [herbsList, setHerbsList] = useState([])
     const [tagList, setTagList] = useState([])
+    const [tagInput, setTagInput] = useState(""); // For adding new tags
     const [formData, setFormData] = useState({
         productName: "",
         productDescription: "",
@@ -25,10 +26,10 @@ const EditProduct = () => {
         oldProductImage: [],
         oldBlogImage: [],
         RVUS: [{ RVU: "" }],
+        tags: []
     });
 
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,19 +38,35 @@ const EditProduct = () => {
                 console.log("PRODUCT", productResponse)
                 const productData = productResponse?.product;
                 if (productResponse?.success) {
-                    // console.log("Product Data:", productData);
                     setFormData({
                         ...productData,
                         productName: productData?.productName || "",
                         productSubDescription: productData?.productSubDescription || "",
                         productDescription: productData?.productDescription || "",
-                        Variant: productData?.variant?.length > 0 ? productData?.variant.map(v => ({ ...v, price: v?.price || 0, discountPrice: v?.discountPrice || 0, finalPrice: v?.finalPrice || 0, day: v?.day || "", bottle: v?.bottle || "", tex: v?.tex || "0", tagType: v?.tagType?._id })) : [],
+                        Variant: productData?.variant?.length > 0 ? productData?.variant.map(v => ({ 
+                            ...v, 
+                            price: v?.price || 0, 
+                            discountPrice: v?.discountPrice || 0, 
+                            finalPrice: v?.finalPrice || 0, 
+                            day: v?.day || "", 
+                            bottle: v?.bottle || "", 
+                            tex: v?.tex || "0", 
+                            tagType: v?.tagType?._id 
+                        })) : [],
                         oldProductImage: productData?.productImages?.length > 0 ? productData?.productImages : [],
                         oldBlogImage: productData?.blogImages?.length > 0 ? productData?.blogImages : [],
-                        faqs: productData?.faqs?.length > 0 ? productData?.faqs.map(faq => ({ question: faq?.question || "", answer: faq?.answer || "", })) : [],
-                        urls: productData?.urls?.length > 0 ? productData?.urls.map(url => ({ url: url?.url || "", })) : [],
-                        RVUS: productData?.RVUS?.length > 0 ? productData?.RVUS.map(RVU => ({ RVU: RVU?.RVU || "", })) : [],
-                        herbsId: productData?.herbsId?.length > 0 ? productData?.herbsId.map(h => h?._id) : []
+                        faqs: productData?.faqs?.length > 0 ? productData?.faqs.map(faq => ({ 
+                            question: faq?.question || "", 
+                            answer: faq?.answer || "", 
+                        })) : [],
+                        urls: productData?.urls?.length > 0 ? productData?.urls.map(url => ({ 
+                            url: url?.url || "", 
+                        })) : [],
+                        RVUS: productData?.RVUS?.length > 0 ? productData?.RVUS.map(RVU => ({ 
+                            RVU: RVU?.RVU || "", 
+                        })) : [],
+                        herbsId: productData?.herbsId?.length > 0 ? productData?.herbsId.map(h => h?._id) : [],
+                        tags: productData?.tags || []
                     });
                 } else {
                     toast.error("Error fetching product details.");
@@ -63,8 +80,7 @@ const EditProduct = () => {
         fetchData();
     }, [id]);
 
-
-     useEffect(() => {
+    useEffect(() => {
         const fetchProducts = async () => {
           setIsLoading(true);
           try {
@@ -73,10 +89,8 @@ const EditProduct = () => {
             if (response?.status === true) {
               setHerbsList(response?.data || []);
             }
-    
           } catch (error) {
             console.error("Error fetching products:", error);
-            // toast.error("Failed to fetch products!");
           } finally {
             setIsLoading(false);
           }
@@ -96,9 +110,8 @@ const EditProduct = () => {
         }
         fetchProducts();
         fetchTag()
-      }, []);
+    }, []);
     
-
     const handleInputFaqChange = (index, field, value) => {
         const newfaqs = [...formData?.faqs];
         newfaqs[index][field] = value;
@@ -120,19 +133,45 @@ const EditProduct = () => {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     };
 
+    // Handle adding a new tag
+    const handleAddTag = () => {
+        if (tagInput.trim() !== "" && !formData.tags.includes(tagInput.trim())) {
+            setFormData({
+                ...formData,
+                tags: [...formData.tags, tagInput.trim()]
+            });
+            setTagInput("");
+        }
+    };
+
+    // Handle removing a tag
+    const handleRemoveTag = (tagToRemove) => {
+        setFormData({
+            ...formData,
+            tags: formData.tags.filter(tag => tag !== tagToRemove)
+        });
+    };
+
+    // Handle key press for adding tags
+    const handleTagKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleAddTag();
+        }
+    };
+
     const handleJoditChange = (newValue, name) => {
         setFormData((prevFormData) => ({ ...prevFormData, [name]: newValue }));
     };
+    
     const handleVariantChange = (index, event) => {
         const { name, value } = event.target;
         const updatedVariants = [...formData.Variant];
 
         if (name === "price" || name === "discountPrice") {
-            const price = name === "price" ? value : updatedVariants[index].price;
-            const discountPrice = name === "discountPrice" ? value : updatedVariants[index].discountPrice;
-
+            const price = name === "price" ? parseFloat(value) : parseFloat(updatedVariants[index].price);
+            const discountPrice = name === "discountPrice" ? parseFloat(value) : parseFloat(updatedVariants[index].discountPrice);
             const finalPrice = price - (price * (discountPrice / 100));
-
             updatedVariants[index] = { ...updatedVariants[index], [name]: value, finalPrice: finalPrice.toFixed(2) };
         } else {
             updatedVariants[index] = { ...updatedVariants[index], [name]: value };
@@ -141,60 +180,83 @@ const EditProduct = () => {
         setFormData({ ...formData, Variant: updatedVariants });
     };
 
-    console.log("XXXXXXXXdd", formData.Variant)
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
     
-        // ✅ Validation for product images
-        if (formData?.productImage?.length < 0 || formData?.productImage?.length > 8) {
-            alert("Please select between 3 to 8 images before submitting.");
+        // Validation
+        if (formData?.productImage?.length > 8) {
+            alert("Please select no more than 8 images.");
             setIsLoading(false);
             return;
         }
     
-        // ✅ CLEAN the Variant array
+        // Clean variants
         const cleanedVariants = formData.Variant.map(v => ({
             ...v,
+            price: parseFloat(v.price) || 0,
+            discountPrice: parseFloat(v.discountPrice) || 0,
+            finalPrice: parseFloat(v.finalPrice) || 0,
+            day: v.day || "",
+            bottle: v.bottle || "",
+            tex: v.tex || "0",
             tagType: v.tagType && v.tagType !== '' ? v.tagType : null,
         }));
         
-    
         const cleanedFormData = {
             ...formData,
             Variant: cleanedVariants,
+            tags: formData.tags // Ensure tags are included as array
         };
         
-    
         const form = new FormData();
+        
         Object.keys(cleanedFormData).forEach((key) => {
-            if (key === "Variant" || key === "herbsId" || key === "faqs" || key === "urls" || key === 'RVUS') {
+            if (key === "Variant" || key === "herbsId" || key === "faqs" || key === "urls" || key === 'RVUS' || key === "tags") {
+                // For all these fields, stringify them
                 form.append(key, JSON.stringify(cleanedFormData[key]));
-            }
-            
-       
-         else if (key === "productImage") {
-                cleanedFormData.productImage.forEach((file) => form.append("productImages", file));
+            } else if (key === "productImage") {
+                if (cleanedFormData.productImage && cleanedFormData.productImage.length > 0) {
+                    cleanedFormData.productImage.forEach((file) => form.append("productImages", file));
+                }
             } else if (key === "blogImage") {
-                cleanedFormData.blogImage.forEach((file) => form.append("blogImages", file));
+                if (cleanedFormData.blogImage && cleanedFormData.blogImage.length > 0) {
+                    cleanedFormData.blogImage.forEach((file) => form.append("blogImages", file));
+                }
             } else if (key === "oldBlogImage") {
-                cleanedFormData?.oldBlogImage?.forEach((file) => form?.append("oldBlogImages", file));
+                if (cleanedFormData?.oldBlogImage?.length > 0) {
+                    form.append("oldBlogImages", JSON.stringify(cleanedFormData.oldBlogImage));
+                } else {
+                    form.append("oldBlogImages", JSON.stringify([]));
+                }
             } else if (key === "oldProductImage") {
-                cleanedFormData.oldProductImage.forEach((file) => form.append("oldProductImages", file));
-            } else {
-                form.append(key, cleanedFormData[key]);
+                if (cleanedFormData.oldProductImage && cleanedFormData.oldProductImage.length > 0) {
+                    form.append("oldProductImages", JSON.stringify(cleanedFormData.oldProductImage));
+                } else {
+                    form.append("oldProductImages", JSON.stringify([]));
+                }
+            } else if (key !== "tags" && key !== "Variant" && key !== "herbsId" && key !== "faqs" && key !== "urls" && key !== "RVUS") {
+                // Append other fields
+                if (cleanedFormData[key] !== undefined && cleanedFormData[key] !== null) {
+                    form.append(key, cleanedFormData[key]);
+                }
             }
         });
     
+        // Log FormData contents for debugging
+        for (let pair of form.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+    
         try {
             const response = await postData(`api/products/update-product/${id}`, form);
-            console.log("responseresponse", response);
+            console.log("Update response:", response);
     
             if (response && response.success === true) {
                 toast.success("Product updated successfully!");
-                navigate("/all-products");
+                setTimeout(() => {
+                    navigate("/all-products");
+                }, 1500);
             } else if (response && response.success === false) {
                 toast.error(response.message || "Failed to update product. Please check your input.");
             } else {
@@ -208,9 +270,6 @@ const EditProduct = () => {
         }
     };
     
-   
-
-
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 4) {
@@ -259,13 +318,14 @@ const EditProduct = () => {
         setFormData({ ...formData, RVUS: updatedUrls });
     };
 
-    console.log("XXXXXXXX", formData)
+    console.log("FormData with tags:", formData.tags)
+    
     return (
         <>
             <ToastContainer />
             <div className="bread">
                 <div className="head">
-                    <h4>Add Product</h4>
+                    <h4>Edit Product</h4>
                 </div>
                 <div className="links">
                     <Link to="/all-products" className="add-new">
@@ -282,15 +342,60 @@ const EditProduct = () => {
                             Product Image<sup className="text-danger">*</sup>
                         </label>
                         <input type="file" name="productImage" className="form-control" id="productImage" multiple onChange={handleFileChange} />
+                        {formData.oldProductImage && formData.oldProductImage.length > 0 && (
+                            <small className="text-muted">Current images: {formData.oldProductImage.length} images saved</small>
+                        )}
                     </div>
 
                     {/* Product Name */}
                     <div className="col-md-4">
                         <label htmlFor="productName" className="form-label">
-                            for which disease<sup className="text-danger">*</sup>
+                            For which disease<sup className="text-danger">*</sup>
                         </label>
                         <input type="text" name="productName" className="form-control" id="productName" value={formData.productName} onChange={handleChange} required placeholder="Enter Disease" />
                     </div>
+
+                    {/* Tags Field with Chips */}
+                    <div className="col-md-4">
+                        <label htmlFor="tags" className="form-label">
+                            Tags<sup className="text-danger">*</sup>
+                        </label>
+                        <div className="d-flex">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={tagInput}
+                                onChange={(e) => setTagInput(e.target.value)}
+                                onKeyPress={handleTagKeyPress}
+                                placeholder="Type a tag and press Enter"
+                            />
+                            <button 
+                                type="button" 
+                                className="btn btn-primary ms-2"
+                                onClick={handleAddTag}
+                            >
+                                Add
+                            </button>
+                        </div>
+                        <small className="text-muted">Add multiple tags by typing and pressing Enter or clicking Add</small>
+                        
+                        {/* Display tags as chips */}
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
+                            {formData.tags && formData.tags.map((tag, index) => (
+                                <Chip
+                                    key={index}
+                                    label={tag}
+                                    onDelete={() => handleRemoveTag(tag)}
+                                    color="primary"
+                                    variant="outlined"
+                                />
+                            ))}
+                        </Box>
+                        {formData.tags && formData.tags.length === 0 && (
+                            <small className="text-muted">No tags added yet</small>
+                        )}
+                    </div>
+
                     <div className="col-md-4" style={{ marginTop: '40px' }}>
                         <Autocomplete
                             multiple
@@ -301,6 +406,7 @@ const EditProduct = () => {
                             renderInput={(params) => <TextField {...params} label="Select Herbs" />}
                         />
                     </div>
+
                     {/* Product Sub Description */}
                     <div className="col-md-12">
                         <label htmlFor="productSubDescription" className="form-label">
@@ -308,7 +414,7 @@ const EditProduct = () => {
                         </label>
                         <textarea
                             name="productSubDescription"
-                            rows={1}
+                            rows={3}
                             className="form-control"
                             id="productSubDescription"
                             placeholder="Product Sub Description"
@@ -331,8 +437,9 @@ const EditProduct = () => {
                             onChange={(newValue) => handleJoditChange(newValue, 'productDescription')}
                         />
                     </div>
+
                     <div className="col-md-4">
-                        <label htmlFor="productName" className="form-label">
+                        <label htmlFor="smirini" className="form-label">
                             Product Name<sup className="text-danger">*</sup>
                         </label>
                         <input
@@ -346,11 +453,11 @@ const EditProduct = () => {
                             placeholder="Product Name"
                         />
                     </div>
+
                     {/* Product Variant */}
-                    {formData.Variant.map((variant, index) => (
+                    {formData.Variant && formData.Variant.map((variant, index) => (
                         <div key={index} className="variant-container border p-3 mb-3">
                             <div className="row">
-                                {/* Price */}
                                 <div className="col-md-2">
                                     <label className="form-label">
                                         Price<sup className="text-danger">*</sup>
@@ -358,7 +465,6 @@ const EditProduct = () => {
                                     <input type="number" name="price" className="form-control" value={variant.price} onChange={(e) => handleVariantChange(index, e)} required placeholder="Price" />
                                 </div>
 
-                                {/* Discount Percentage */}
                                 <div className="col-md-2">
                                     <label className="form-label">
                                         Discount %<sup className="text-danger">*</sup>
@@ -366,7 +472,6 @@ const EditProduct = () => {
                                     <input type="number" name="discountPrice" className="form-control" value={variant.discountPrice} onChange={(e) => handleVariantChange(index, e)} required placeholder="Discount %" />
                                 </div>
 
-                                {/* Final Price */}
                                 <div className="col-md-2">
                                     <label className="form-label">
                                         Final Price<sup className="text-danger">*</sup>
@@ -374,13 +479,12 @@ const EditProduct = () => {
                                     <input type="number" name="finalPrice" className="form-control" value={variant?.finalPrice} readOnly placeholder="Final Price" />
                                 </div>
 
-                                {/* Select Day */}
                                 <div className="col-md-2">
                                     <label className="form-label">Select Day</label>
                                     <select
                                         name="day"
                                         className="form-control"
-                                        value={variant.day}
+                                        value={variant.day || ""}
                                         onChange={(e) => handleVariantChange(index, e)}
                                     >
                                         <option value="">Select Day</option>
@@ -392,13 +496,12 @@ const EditProduct = () => {
                                     </select>
                                 </div>
 
-                                {/* Select Bottle */}
                                 <div className="col-md-2">
                                     <label className="form-label">Select Bottle</label>
                                     <select
                                         name="bottle"
                                         className="form-control"
-                                        value={variant.bottle}
+                                        value={variant.bottle || ""}
                                         onChange={(e) => handleVariantChange(index, e)}
                                     >
                                         <option value="">Select Bottle</option>
@@ -411,17 +514,17 @@ const EditProduct = () => {
                                     </select>
                                 </div>
 
-                                {/* Taxes */}
                                 <div className="col-md-2">
                                     <label className="form-label">Taxe's</label>
                                     <input
                                         type="text"
                                         name="tex"
                                         className="form-control"
-                                        value={variant.tex}
+                                        value={variant.tex || ""}
                                         onChange={(e) => handleVariantChange(index, e)}
                                     />
                                 </div>
+
                                 <div className="col-md-2">
                                     <label className="form-label">Select Type</label>
                                     <select name="tagType" className="form-control" value={variant.tagType || ""} onChange={(e) => handleVariantChange(index, e)}>
@@ -429,13 +532,11 @@ const EditProduct = () => {
                                         {tagList?.map((item) => (<option key={item?._id} value={item?._id}>{item?.tagName}</option>))}
                                     </select>
                                 </div>
-
                             </div>
 
-                            {/* Delete Button */}
                             {index > 0 && (
                                 <div className="text-end mt-2">
-                                    <button className="btn btn-danger" onClick={() => removeVariant(index)}>
+                                    <button type="button" className="btn btn-danger" onClick={() => removeVariant(index)}>
                                         Delete
                                     </button>
                                 </div>
@@ -443,7 +544,6 @@ const EditProduct = () => {
                         </div>
                     ))}
 
-                    {/* Add More Button */}
                     <div>
                         <button type="button" className="btn btn-primary" onClick={addVariant}>
                             Add More
@@ -490,6 +590,9 @@ const EditProduct = () => {
                             <div className="col-md-6">
                                 <input type="file" className="form-control" accept="image/*" multiple onChange={handleImageChange} />
                                 <small className="text-muted">Select up to 4 images.</small>
+                                {formData.oldBlogImage && formData.oldBlogImage.length > 0 && (
+                                    <small className="text-muted d-block">Current images: {formData.oldBlogImage.length} images saved</small>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -503,7 +606,7 @@ const EditProduct = () => {
                                     <input
                                         type="url"
                                         className="form-control"
-                                        value={urlItem?.url}
+                                        value={urlItem?.url || ""}
                                         onChange={(e) => {
                                             const updatedUrls = [...formData.urls];
                                             updatedUrls[index].url = e.target.value;
@@ -527,12 +630,13 @@ const EditProduct = () => {
                             </button>
                         </div>
                     </div>
+
                     <div className="mt-4">
                         <h2>Add Reviews Video URLs</h2>
                         {formData?.RVUS?.map((urlItem, index) => (
                             <div className="row mb-2" key={index}>
                                 <div className="col-md-10">
-                                    <input type="url" className="form-control" value={urlItem?.RVU} onChange={(e) => { const updatedUrls = [...formData.RVUS]; updatedUrls[index].RVU = e.target.value; setFormData({ ...formData, RVUS: updatedUrls }); }} placeholder="URL" />
+                                    <input type="url" className="form-control" value={urlItem?.RVU || ""} onChange={(e) => { const updatedUrls = [...formData.RVUS]; updatedUrls[index].RVU = e.target.value; setFormData({ ...formData, RVUS: updatedUrls }); }} placeholder="URL" />
                                 </div>
                                 <div className="col-md-2">
                                     {index > 0 && (
@@ -549,10 +653,11 @@ const EditProduct = () => {
                             </button>
                         </div>
                     </div>
+
                     {/* Submit */}
                     <div className="col-md-12 mt-4 text-center">
                         <button type="submit" className="btn btn-success" disabled={isLoading}>
-                            {isLoading ? "Submitting..." : "Submit"}
+                            {isLoading ? "Updating..." : "Update Product"}
                         </button>
                     </div>
                 </form>
@@ -562,4 +667,3 @@ const EditProduct = () => {
 };
 
 export default EditProduct;
-

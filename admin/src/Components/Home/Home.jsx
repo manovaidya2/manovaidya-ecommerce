@@ -79,6 +79,7 @@ import AllReviews from '../../Pages/Reviews/AllReviews'
 import AllCart from '../../Pages/Cart/AllCart'
 import EditTest from '../../Pages/MindHealthTest/EditTest'
 import ConsultationList from '../../Pages/Counsultation/ConsultationList'
+import AllOrderplan from '../../Pages/Planorder/AllOrderplan'
 
 const Home = () => {
 
@@ -193,6 +194,8 @@ const Home = () => {
                 {/* --- Orders --- */}
                 <Route path={"/all-orders"} element={<AllOrder />} />
                 <Route path={"/order-details/:id"} element={<EditOrder />} />
+
+                <Route path={"/all-orders-plan"} element={<AllOrderplan />} />
 
                 <Route path={"/all-coupen"} element={<AllCoupen />} />
                 <Route path={"/edit-coupon/:id"} element={<EditCoupen />} />

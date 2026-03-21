@@ -138,11 +138,22 @@ router.get('/get_product_by_id/:id', async (req, res) => {
   }
 });
 
+// In create-product route - add tags parsing
 router.post('/create-product', upload.fields([{ name: 'productImages', maxCount: 8 }, { name: 'blogImages', maxCount: 4 }]), async (req, res) => {
   try {
-    const { productName, productSubDescription, productDescription, Variant, herbs, faqs, urls, RVUS, smirini, herbsId, } = req.body;
-    console.log("BODY:-", req.body)
-    // Parse JSON strings if they are provided as strings
+    const { productName, productSubDescription, productDescription, Variant, herbs, faqs, urls, RVUS, smirini, herbsId, tags } = req.body;
+    
+    // Parse tags
+    let parsedTags = [];
+    if (tags) {
+      try {
+        parsedTags = typeof tags === 'string' ? JSON.parse(tags) : tags;
+      } catch (err) {
+        console.error("Error parsing tags:", err);
+      }
+    }
+    
+    // Parse other fields...
     const parsedVariants = typeof Variant === 'string' ? JSON.parse(Variant) : Variant;
     const parsedHerbs = typeof herbs === 'string' ? JSON.parse(herbs) : herbs;
     const parsedFaqs = typeof faqs === 'string' ? JSON.parse(faqs) : faqs;
@@ -152,7 +163,7 @@ router.post('/create-product', upload.fields([{ name: 'productImages', maxCount:
     let parsedHerbsId = [];
     if (herbsId) {
       try {
-        parsedHerbsId = JSON.parse(herbsId); // If it's valid JSON, parse it
+        parsedHerbsId = JSON.parse(herbsId);
       } catch (err) {
         console.error("Error parsing herbsId:", err);
       }
@@ -161,38 +172,49 @@ router.post('/create-product', upload.fields([{ name: 'productImages', maxCount:
     const productImages = req.files['productImages'] ? req.files['productImages'].map(file => file.filename) : [];
     const blogImages = req.files['blogImages'] ? req.files['blogImages'].map(file => file.filename) : [];
 
-    // Construct the Variant array
-    const variants = parsedVariants.map((v) => ({ price: parseFloat(v.price), discountPrice: parseFloat(v.discountPrice), finalPrice: parseFloat(v.finalPrice).toFixed(2), day: v.day, bottle: v.bottle, tex: v.tex, tagType: v.tagType }));
+    const variants = parsedVariants.map((v) => ({ 
+      price: parseFloat(v.price), 
+      discountPrice: parseFloat(v.discountPrice), 
+      finalPrice: parseFloat(v.finalPrice).toFixed(2), 
+      day: v.day, 
+      bottle: v.bottle, 
+      tex: v.tex, 
+      tagType: v.tagType 
+    }));
 
-    // Construct the Herbs array and handle empty images gracefully
-    const herbsArray = parsedHerbs || []; // Default to empty array if undefined
-
-    // Construct the FAQ array
+    const herbsArray = parsedHerbs || [];
     const faqsArray = parsedFaqs.map((faq) => ({ question: faq.question, answer: faq.answer }));
-
-    // Construct the URLs array
     const urlsArray = parsedUrls.map((url) => ({ url: url.url }));
-
     const RVUSArray = parsedRVUS.map((RVU) => ({ RVU: RVU.RVU }));
 
-    // Create a new Product document
-    const product = new Product({ productName, productSubDescription, productDescription, variant: variants, herbs: herbsArray, herbsId: parsedHerbsId, faqs: faqsArray, urls: urlsArray, RVUS: RVUSArray, smirini, productImages, blogImages });
+    const product = new Product({ 
+      productName, 
+      productSubDescription, 
+      productDescription, 
+      variant: variants, 
+      herbs: herbsArray, 
+      herbsId: parsedHerbsId, 
+      faqs: faqsArray, 
+      urls: urlsArray, 
+      RVUS: RVUSArray, 
+      smirini, 
+      productImages, 
+      blogImages,
+      tags: parsedTags // Add tags here
+    });
 
-    // Save the product to the database
     await product.save();
-
-    // Send a success response
-    res.status(201).json({ success: true, message: 'Product created successfully', product, });
+    res.status(201).json({ success: true, message: 'Product created successfully', product });
   } catch (error) {
-    // Log and return error if something fails
     console.error('Create product error:', error);
-    res.status(500).json({ success: false, message: 'Failed to create product', error: error.message, });
+    res.status(500).json({ success: false, message: 'Failed to create product', error: error.message });
   }
 });
 
+// In update-product route - add tags parsing
 router.post('/update-product/:id', upload.fields([{ name: 'productImages', maxCount: 8 }, { name: 'blogImages', maxCount: 4 }]), async (req, res) => {
   try {
-    const { productName, productSubDescription, productDescription, Variant, herbs, faqs, urls, RVUS, oldProductImage, oldBlogImage, herbsId, smirini } = req.body;
+    const { productName, productSubDescription, productDescription, Variant, herbs, faqs, urls, RVUS, oldProductImage, oldBlogImage, herbsId, smirini, tags } = req.body;
 
     const parseJson = (jsonString) => {
       try {
@@ -203,12 +225,27 @@ router.post('/update-product/:id', upload.fields([{ name: 'productImages', maxCo
       }
     };
 
+    // Parse tags
+let parsedTags = [];
+
+if (tags) {
+  if (typeof tags === "string") {
+    try {
+      parsedTags = JSON.parse(tags);
+    } catch (err) {
+      console.error("Tag parse error:", err);
+      parsedTags = [];
+    }
+  } else if (Array.isArray(tags)) {
+    parsedTags = tags;
+  }
+}
+
     const parsedVariants = Variant ? parseJson(Variant) : [];
     const parsedHerbs = herbs ? parseJson(herbs) : [];
     const parsedFaqs = faqs ? parseJson(faqs) : [];
     const parsedUrls = urls ? parseJson(urls) : [];
     const parsedRVUS = RVUS ? parseJson(RVUS) : [];
-    // console.log("parsedHerbs bbbbbbbbbbbb", parsedVariants);
 
     let parsedHerbsId = [];
     if (herbsId) {
@@ -217,10 +254,9 @@ router.post('/update-product/:id', upload.fields([{ name: 'productImages', maxCo
 
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(200).json({ success: false, message: 'Product not found', });
+      return res.status(200).json({ success: false, message: 'Product not found' });
     }
 
-    // Handle uploaded product and blog images
     let productImages = [];
     if (req.files && req.files['productImages'] && req.files['productImages'].length > 0) {
       productImages = req.files['productImages'].map(file => file.filename);
@@ -231,31 +267,24 @@ router.post('/update-product/:id', upload.fields([{ name: 'productImages', maxCo
       blogImages = req.files['blogImages'].map(file => file.filename);
     }
 
-    // Construct the Variant array
-    // Construct the Variant array
-const variants = parsedVariants.map((v) => ({
-  price: parseFloat(v.price) || 0,
-  discountPrice: parseFloat(v.discountPrice) || 0,
-  finalPrice: parseFloat(v.finalPrice).toFixed(2) || '0.00',
-  day: v.day || '',
-  bottle: v.bottle || '',
-  tex: v.tex || '0',
-  tagType: v.tagType && v.tagType !== '' ? v.tagType : null, // FIX HERE: null if empty
-}));
+    const variants = parsedVariants.map((v) => ({
+      price: parseFloat(v.price) || 0,
+      discountPrice: parseFloat(v.discountPrice) || 0,
+      finalPrice: parseFloat(v.finalPrice).toFixed(2) || '0.00',
+      day: v.day || '',
+      bottle: v.bottle || '',
+      tex: v.tex || '0',
+      tagType: v.tagType && v.tagType !== '' ? v.tagType : null,
+    }));
 
+    const herbsArray = parsedHerbs || [];
+    const faqsArray = parsedFaqs.map((faq) => ({ question: faq.question, answer: faq.answer }));
+    const urlsArray = parsedUrls.map((url) => ({ url: url.url }));
+    const RVUSArray = parsedRVUS.map((RVU) => ({ RVU: RVU.RVU }));
 
-    const herbsArray = parsedHerbs || []; 
-
-    const faqsArray = parsedFaqs.map((faq) => ({ question: faq.question, answer: faq.answer, }));
-
-    const urlsArray = parsedUrls.map((url) => ({ url: url.url, }));
-    const RVUSArray = parsedRVUS.map((RVU) => ({ RVU: RVU.RVU, }));
-
-    // Handling product image deletions and updates
     let updatedProductImages = product.productImages || [];
     if (productImages.length > 0) {
       if (oldProductImage && !productImages.some(newImage => oldProductImage.includes(newImage))) {
-        // console.log(`Deleting old product images: ${oldProductImage}`);
         oldProductImage.split(",").forEach(item => {
           const filePath = `uploads/products/${item.trim()}`;
           try {
@@ -270,17 +299,14 @@ const variants = parsedVariants.map((v) => ({
       updatedProductImages = [...productImages];
     }
 
-    // Handling blog image deletions and updates
     let updatedBlogImages = product.blogImages || [];
     if (blogImages.length > 0) {
       if (oldBlogImage && !blogImages.some(newImage => oldBlogImage.includes(newImage))) {
-        // console.log(`Deleting old blog images: ${oldBlogImage}`);
         oldBlogImage.split(",").forEach(item => {
           const filePath = `uploads/products/${item.trim()}`;
           try {
             if (fs.existsSync(filePath)) {
               fs.unlinkSync(filePath);
-              // console.log(`Deleted old blog image: ${item.trim()}`);
             }
           } catch (error) {
             console.error(`Error deleting old blog image ${item.trim()}:`, error);
@@ -288,21 +314,8 @@ const variants = parsedVariants.map((v) => ({
         });
       }
       updatedBlogImages = [...blogImages];
-    } else if (oldBlogImage) {
-      // oldBlogImage.split(",").forEach(item => {
-      //   const filePath = `uploads/products/${item.trim()}`;
-      //   try {
-      //     if (fs.existsSync(filePath)) {
-      //       fs.unlinkSync(filePath);
-      //       // console.log(`Deleted old blog image: ${item.trim()}`);
-      //     }
-      //   } catch (error) {
-      //     console.error(`Error deleting old blog image ${item.trim()}:`, error);
-      //   }
-      // });
     }
 
-    // Update the product object with the new values
     product.productName = productName ? productName : product.productName;
     product.smirini = smirini ? smirini : product.smirini;
     product.productSubDescription = productSubDescription ? productSubDescription : product.productSubDescription;
@@ -314,17 +327,15 @@ const variants = parsedVariants.map((v) => ({
     product.RVUS = RVUSArray.length > 0 ? RVUSArray : product.RVUS;
     product.productImages = updatedProductImages.length > 0 ? updatedProductImages : product.productImages;
     product.blogImages = updatedBlogImages.length > 0 ? updatedBlogImages : product.blogImages;
-
-    // Save the updated product
+product.tags = parsedTags;
     await product.save();
 
-    res.status(200).json({ success: true, message: 'Product updated successfully', product, });
+    res.status(200).json({ success: true, message: 'Product updated successfully', product });
   } catch (error) {
     console.error('Update product error:', error);
-    res.status(500).json({ success: false, message: 'Failed to update product', error: error.message, });
+    res.status(500).json({ success: false, message: 'Failed to update product', error: error.message });
   }
 });
-
 router.get("/delete-product/:id", async (req, res) => {
   try {
     const productId = req.params.id;

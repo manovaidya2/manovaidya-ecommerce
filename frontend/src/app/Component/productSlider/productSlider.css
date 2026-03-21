@@ -515,3 +515,47 @@ del {
     aspect-ratio: 1 / 1;
   }
 }
+
+
+/* Tags styling */
+.product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+ 
+}
+
+.tag-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  color: #2c3e50;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.tag-badge:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional: Different tag colors based on content */
+.tag-badge[data-tag="Bestseller"] {
+  background: linear-gradient(135deg, #ffd89b 0%, #c7e9fb 100%);
+  color: #c4450c;
+}
+
+.tag-badge[data-tag="New"] {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #2c7a4d;
+}
+
+.tag-badge[data-tag="Limited"] {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #c0392b;
+}

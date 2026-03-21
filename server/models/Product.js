@@ -19,6 +19,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+   tags: [{
+    type: String,
+    trim: true
+  }],
   variant: [{
     price: {
       type: Number,
