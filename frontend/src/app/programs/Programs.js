@@ -72,7 +72,7 @@ export default function Program() {
             <p className="harb-program-card-sub">1 Month Program</p>
 
             <p className="harb-program-price">
-              ₹2,550 <span>₹5,100</span>
+              ₹1,680 <span>₹4,200</span>
             </p>
 
             <ul className="harb-program-list">
@@ -104,7 +104,7 @@ export default function Program() {
             <p className="harb-program-card-sub">3 Months Program</p>
 
             <p className="harb-program-price harb-program-price-main">
-              ₹7,650 <span>₹15,300</span>
+              ₹5,040 <span>₹12,600</span>
             </p>
 
             <ul className="harb-program-list">
@@ -137,7 +137,7 @@ export default function Program() {
             <p className="harb-program-card-sub">6 Months Program</p>
 
             <p className="harb-program-price">
-              ₹13,770 <span>₹30,600</span>
+              ₹9,072 <span>₹25,200</span>
             </p>
 
             <ul className="harb-program-list">

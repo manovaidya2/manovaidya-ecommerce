@@ -222,12 +222,12 @@ export default function UserProfile() {
                     >
                         Your Orders
                     </div>
-                     <div
+                     {/* <div
                         className={`${styles.sidebarItem} ${selectedSection === "order" ? styles.active : ""}`}
                         onClick={() => router.push(`/Pages/order-confirmation/${user_data?._id}`)}
                     >
                         plans
-                    </div>
+                    </div> */}
                     <div
                         className={`${styles.sidebarItem} ${selectedSection === "appointment" ? styles.active : ""}`}
                         onClick={() => handleSectionClick("appointment")}
