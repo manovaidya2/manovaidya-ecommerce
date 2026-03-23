@@ -39,6 +39,7 @@ import ChooseKit from "../../ChooseKitsection/ChooseKit";
 
 
 
+
 const paymentImages = [{ name: image1 }, { name: image2 }, { name: image3 }, { name: image4 }, { name: image5 }]
 
 const Page = ({ params }) => {
@@ -65,7 +66,23 @@ const experienceLabel = (index) => {
   if (index === 2) return "Complete Journey + Bonus";
   return "";
 };
+const rightSectionRef = useRef(null);
 
+  const handleScroll = () => {
+    const el = rightSectionRef.current;
+
+    if (el) {
+      const isBottom =
+        el.scrollHeight - el.scrollTop <= el.clientHeight + 5;
+
+      if (isBottom) {
+        const nextSection = document.querySelector("#next-section");
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
   useEffect(() => {
     const user = localStorage.getItem('User_data')
     const User_data = JSON.parse(user)
@@ -435,58 +452,87 @@ const experienceLabel = (index) => {
     </span>
   </h3>
 
-{product?.variant?.map((item, index) => (
-  <label
-    key={index}
-    className={`pricing-card ${
-      selectedIndex === index ? "pricing-card-active" : ""
-    }`}
-    onClick={() => handleSelect(index, item)}
-  >
-    {/* LEFT */}
-    <div className="pricing-left">
+{product?.variant?.map((item, index) => {
+  const features = [
+    [
+      "1-Month Kit Supply",
+      "4 Coaching Sessions",
+      "Orientation Call",
+      "21-Day Journal",
+      "Guided Practices",
+    ],
+    [
+      "3-Month Kit Supply",
+      "12 Weekly Sessions",
+      "Priority Coach Support",
+      "Progress Tracking",
+      "Full Practice Library",
+    ],
+    [
+      "6-Month Kit Supply",
+      "24+ Weekly Sessions",
+      "1-on-1 Priority Sessions",
+      "Advanced Protocols",
+      "Bonus Content Library",
+    ],
+  ];
 
-      {/* EXPERIENCE + SAVE */}
-      <div className="pricing-top-row">
-        <p className="pricing-experience">
-          {experienceLabel(index)}
+  const titles = [
+    "Foundation Calm",
+    "Deep Transformation",
+    "Intensive Recovery",
+  ];
+
+  const subtitles = [
+    "Begin your healing gently",
+    "Most chosen by our community",
+    "Maximum support & best value",
+  ];
+
+  return (
+    <label
+      key={index}
+      className={`pricing-card-horizontal ${
+        selectedIndex === index ? "active" : ""
+      }`}
+      onClick={() => handleSelect(index, item)}
+    >
+      {/* LEFT CONTENT */}
+      <div className="pricing-left-content">
+        <h2>{titles[index]}</h2>
+        <p className="pricing-subtitle">{subtitles[index]}</p>
+
+        <p className="pricing-duration">
+          {item?.duration} {item?.day}
         </p>
 
-        <p className="pricing-save-inline">
-          Save ₹{item?.price - item?.finalPrice} • {item?.tex}% Taxes
+        <div className="pricing-price-row">
+          <span className="final">₹{item?.finalPrice}</span>
+          <span className="original">₹{item?.price}</span>
+        </div>
+
+        <p className="save">
+          Save ₹{item?.price - item?.finalPrice}
         </p>
       </div>
 
-      <p className="pricing-duration">
-        {item?.duration}  {item?.day}
-      </p>
-
-      <p className="pricing-bottle">
-        {item?.bottle}
-      </p>
-
-      <div className="pricing-price-row">
-        <span className="pricing-final">₹{item?.finalPrice}</span>
-        <span className="pricing-original">₹{item?.price}</span>
-        <span className="pricing-off">{item?.discountPrice}% OFF</span>
+      {/* RIGHT FEATURES */}
+      <div className="pricing-right-content">
+        {features[index].map((f, i) => (
+          <p key={i}>✔ {f}</p>
+        ))}
       </div>
 
-      {item?.tagType?.tagName && (
-        <span
-          className="pricing-badge"
-          style={{ background: item?.tagType?.tagColor }}
-        >
-          {item?.tagType?.tagName}
-        </span>
-      )}
-    </div>
+      {/* BADGE */}
+      {index === 1 && <span className="badge">Most Popular</span>}
 
-    {/* RADIO */}
-    <div className="pricing-radio">
-      <span />
-    </div>
-  </label>
-))}
+      {/* RADIO */}
+      <div className="radio">
+        <span />
+      </div>
+    </label>
+  );
+})}
 
 
   {/* CTA */}
@@ -524,6 +570,11 @@ const experienceLabel = (index) => {
         </div>
         
       </section>
+
+
+
+
+      
 <HealingDuration />
 <ChooseKit />
 
@@ -674,53 +725,50 @@ const experienceLabel = (index) => {
         </div>
       </section> */} 
 
-
-<section className="kit-section">
-  <p className="kit-subtitle">Everything You Get in This Program</p>
-  <h2 className="kit-title">
+<section className="details-section">
+  <p className="details-subtitle">Everything You Get in This Program</p>
+  <h2 className="details-title">
     Not just a product — a complete guided system combining biology and psychology.
   </h2>
 
-  <div className="kit-grid">
-    <div className="kit-card">
-      <FaBrain className="kit-icon" />
+  <div className="details-grid">
+    <div className="details-card">
+      <FaBrain className="details-icon" />
       <h3>Brain Nourishment Kit</h3>
       <p>3 Ayurvedic formulas for mind, gut & energy</p>
     </div>
 
-    <div className="kit-card">
-      <FaUserCheck className="kit-icon" />
+    <div className="details-card">
+      <FaUserCheck className="details-icon" />
       <h3>Assigned Mind Coach</h3>
       <p>Your personal guide for the entire journey</p>
     </div>
 
-    <div className="kit-card">
-      <FaCommentDots className="kit-icon" />
+    <div className="details-card">
+      <FaCommentDots className="details-icon" />
       <h3>Weekly Sessions</h3>
       <p>Coaching calls, orientation & progress</p>
     </div>
 
-    <div className="kit-card">
-      <FaHeadphones className="kit-icon" />
+    <div className="details-card">
+      <FaHeadphones className="details-icon" />
       <h3>Guided Practices</h3>
       <p>Breathing, calm, focus & emotional release</p>
     </div>
 
-    <div className="kit-card">
-      <FaBookOpen className="kit-icon" />
+    <div className="details-card">
+      <FaBookOpen className="details-icon" />
       <h3>Journal & Tracker</h3>
       <p>Morning & evening reflection workbook</p>
     </div>
 
-    <div className="kit-card">
-      <FaUsers className="kit-icon" />
+    <div className="details-card">
+      <FaUsers className="details-icon" />
       <h3>Community Access</h3>
       <p>Like-minded safe sharing space</p>
     </div>
   </div>
-</section>    
-
-
+</section>
 
  <section className="whyworks-section">
       <h2 className="whyworks-title">Why This Works</h2>

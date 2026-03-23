@@ -493,6 +493,7 @@ const EditProduct = () => {
                                         <option value="60 Day">60 Day</option>
                                         <option value="90 Day">90 Day</option>
                                         <option value="120 Day">120 Day</option>
+                                        <option value="180 Day">180 Day</option>
                                     </select>
                                 </div>
 
@@ -511,6 +512,8 @@ const EditProduct = () => {
                                         <option value="6 Bottle">6 Bottle</option>
                                         <option value="9 Bottle">9 Bottle</option>
                                         <option value="12 Bottle">12 Bottle</option>
+                                        <option value="15 Bottle">15 Bottle</option>
+                                        <option value="20 Bottle">18 Bottle</option>
                                     </select>
                                 </div>
 

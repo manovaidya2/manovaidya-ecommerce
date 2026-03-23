@@ -146,10 +146,194 @@
 
 
 
+.pricing-card-horizontal {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 2px solid #eee;
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  background: #fff;
+}
+
+.pricing-card-horizontal:hover {
+  border-color: #6c3df4;
+}
+
+.pricing-card-horizontal.active {
+  border-color: #6c3df4;
+  background: #f8f5ff;
+}
+
+/* LEFT */
+.pricing-left-content {
+  width: 40%;
+}
+
+.pricing-left-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pricing-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.pricing-duration {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.pricing-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.final {
+  font-size: 22px;
+  font-weight: 800;
+  color: #000;
+}
+
+.original {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.save {
+  color: green;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* RIGHT */
+.pricing-right-content {
+  width: 50%;
+  font-size: 14px;
+  color: #333;
+}
+
+.pricing-right-content p {
+  margin-bottom: 6px;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: #6c3df4;
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+/* RADIO */
+.radio {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio span {
+  width: 10px;
+  height: 10px;
+  background: #6c3df4;
+  border-radius: 50%;
+  display: none;
+}
+
+.pricing-card-horizontal.active .radio span {
+  display: block;
+}
 
 
+/* ================= MOBILE (<=768px) ================= */
+@media (max-width: 768px) {
+  .pricing-card-horizontal {
+    flex-direction: column;
+    padding: 14px;
+    gap: 12px;
+  }
 
+  /* LEFT & RIGHT FULL WIDTH */
+  .pricing-left-content,
+  .pricing-right-content {
+    width: 100%;
+  }
 
+  /* TEXT ALIGN */
+  .pricing-left-content h2 {
+    font-size: 18px;
+  }
+
+  .pricing-subtitle {
+    font-size: 13px;
+  }
+
+  .pricing-duration {
+    font-size: 14px;
+  }
+
+  .pricing-price-row {
+    justify-content: flex-start;
+  }
+
+  .final {
+    font-size: 20px;
+  }
+
+  .original {
+    font-size: 14px;
+  }
+
+  .save {
+    font-size: 14px;
+  }
+
+  /* FEATURES LIST */
+  .pricing-right-content {
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+  /* BADGE FIX */
+  .badge {
+    top: -8px;
+    left: 12px;
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  /* RADIO BUTTON SMALL */
+  .radio {
+    width: 20px;
+    height: 20px;
+    right: 12px;
+    top: 12px;
+  }
+
+  .radio span {
+    width: 8px;
+    height: 8px;
+  }
+}
 
 
 
@@ -160,9 +344,11 @@
 
 /* =========================
    SECTION
+/* =========================
+   SECTION
 ========================= */
-.kit-section {
-  padding: 80px 5%;
+.details-section {
+  padding: 10px 5%;
   background: #f9f9fb;
   text-align: center;
   font-family: "Inter", sans-serif;
@@ -171,14 +357,14 @@
 /* =========================
    HEADER
 ========================= */
-.kit-subtitle {
+.details-subtitle {
   font-size: 34px;
   font-weight: 700;
   color: #1a1a2e;
   margin-bottom: 12px;
 }
 
-.kit-title {
+.details-title {
   font-size: 16px;
   color: #6b6b7a;
   max-width: 720px;
@@ -189,18 +375,18 @@
 /* =========================
    GRID
 ========================= */
-.kit-grid {
+.details-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-  max-width: 1200px;
-  margin: auto;
+ 
+
 }
 
 /* =========================
    CARD
 ========================= */
-.kit-card {
+.details-card {
   background: #ffffff;
   border-radius: 18px;
   padding: 30px 24px;
@@ -211,8 +397,7 @@
   overflow: hidden;
 }
 
-/* subtle hover glow */
-.kit-card::before {
+.details-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -221,11 +406,11 @@
   transition: 0.3s;
 }
 
-.kit-card:hover::before {
+.details-card:hover::before {
   opacity: 1;
 }
 
-.kit-card:hover {
+.details-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 18px 40px rgba(159, 110, 229, 0.18);
 }
@@ -233,14 +418,13 @@
 /* =========================
    ICON
 ========================= */
-.kit-icon {
+.details-icon {
   font-size: 26px;
   color: #9f6ee5;
   margin-bottom: 14px;
 }
 
-/* optional soft icon circle */
-.kit-icon-wrapper {
+.details-icon-wrapper {
   width: 52px;
   height: 52px;
   margin: 0 auto 16px;
@@ -254,14 +438,14 @@
 /* =========================
    TEXT
 ========================= */
-.kit-card h3 {
+.details-card h3 {
   font-size: 18px;
   font-weight: 600;
   color: #1a1a2e;
   margin-bottom: 8px;
 }
 
-.kit-card p {
+.details-card p {
   font-size: 14px;
   color: #6b6b7a;
   line-height: 1.5;
@@ -271,55 +455,49 @@
    RESPONSIVE
 ========================= */
 
-/* Tablets */
 @media (max-width: 1024px) {
-  .kit-grid {
+  .details-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 22px;
   }
 
-  .kit-subtitle {
+  .details-subtitle {
     font-size: 28px;
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .kit-section {
+  .details-section {
     padding: 60px 20px;
   }
 
-  .kit-grid {
+  .details-grid {
     grid-template-columns: 1fr;
   }
 
-  .kit-title {
+  .details-title {
     font-size: 14px;
     margin-bottom: 40px;
   }
 
-  .kit-card {
+  .details-card {
     padding: 24px 18px;
   }
 }
 
-/* Small Mobile */
 @media (max-width: 480px) {
-  .kit-subtitle {
+  .details-subtitle {
     font-size: 22px;
   }
 
-  .kit-card h3 {
+  .details-card h3 {
     font-size: 16px;
   }
 
-  .kit-card p {
+  .details-card p {
     font-size: 13px;
   }
 }
-
-
-
 
 
 
@@ -333,7 +511,7 @@
 
 /* Kit Section */
 .manovaidya-kit-section {
-  padding: 40px 3%;
+  padding: 20px 3%;
 }
 
 .manovaidya-kit-title {
@@ -791,7 +969,7 @@
 
 
 .kitdetails-section {
-  padding: 30px 6%;
+  padding: 20px 6%;
   background: #fff;
 }
 
