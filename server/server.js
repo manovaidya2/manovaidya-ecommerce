@@ -62,6 +62,7 @@ const allowedOrigins = [
   "https://api.manovaidya.com",
   "https://community.manovaidya.com",
   "https://communityapi.manovaidya.com",
+  "https://communityapi.manovaidya.com/api/auth/login",
 
 
 ];
