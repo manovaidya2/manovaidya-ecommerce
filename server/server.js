@@ -57,6 +57,13 @@ const allowedOrigins = [
   "https://manovaidya.com",
   "https://www.manovaidya.com",
   "https://admin.manovaidya.com",
+  "http://localhost:5004",
+  "http://localhost:5173",
+  "https://api.manovaidya.com",
+  "https://community.manovaidya.com",
+  "https://communityapi.manovaidya.com",
+
+
 ];
 
 const corsOptions = {
