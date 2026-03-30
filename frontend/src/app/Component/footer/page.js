@@ -116,12 +116,12 @@ const Footer = () => {
                     Take Assessment
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/Pages/clinic">
                     <i className="bi bi-calendar-check me-2"></i>
                     Clinic Consultation
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
