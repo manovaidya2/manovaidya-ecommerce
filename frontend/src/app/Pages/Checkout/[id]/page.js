@@ -174,7 +174,7 @@ const handleRzrpPayment = async (payload) => {
   }
 
   const options = {
-    key: "rzp_live_STojf2FS9wqIXQ",
+    key: "rzp_live_SXoKcBm1AzGREw",
     amount: totalWithTax() * 100,
     currency: "INR",
     name: "manovaidya",
