@@ -34,7 +34,7 @@ import {
 } from "react-icons/fa";
 import {  FaHeart, FaBolt } from "react-icons/fa";
 import wimg from "../../../Images/kit-contents-BHiT-Y8U.webp";
-import HealingDuration from "@/app/healingdurationsection/HealingDuration";
+// import HealingDuration from "@/app/healingdurationsection/HealingDuration";
 import ChooseKit from "../../ChooseKitsection/ChooseKit";
 
 
@@ -452,13 +452,14 @@ const rightSectionRef = useRef(null);
     </span>
   </h3>
 
+<div className="pricing-cards-wrapper">
 {product?.variant?.map((item, index) => {
   const features = [
     [
       "1-Month Kit Supply",
       "4 Coaching Sessions",
       "Orientation Call",
-      "21-Day Journal",
+      "30-Day Journal",
       "Guided Practices",
     ],
     [
@@ -533,6 +534,7 @@ const rightSectionRef = useRef(null);
     </label>
   );
 })}
+</div>
 
 
   {/* CTA */}
@@ -575,7 +577,7 @@ const rightSectionRef = useRef(null);
 
 
       
-<HealingDuration />
+{/* <HealingDuration /> */}
 <ChooseKit />
 
 

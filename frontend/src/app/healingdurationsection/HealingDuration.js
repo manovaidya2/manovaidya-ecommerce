@@ -361,7 +361,7 @@ export default function HealingDuration() {
         "1-Month Kit Supply",
         "4 Coaching Sessions",
         "Orientation Call",
-        "21-Day Journal",
+        "30-Day Journal",
         "Guided Practices",
       ],
     },
