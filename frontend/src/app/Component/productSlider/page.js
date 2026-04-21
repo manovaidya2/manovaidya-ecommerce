@@ -205,6 +205,9 @@
 
 
 
+
+
+// MindKitPage.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import "./productSlider.css";
@@ -213,6 +216,7 @@ import Link from "next/link";
 
 const MindKitPage = () => {
   const [products, setProducts] = useState([]);
+  const [expandedTags, setExpandedTags] = useState({});
 
   const fetchProduct = async () => {
     const data = await getData("api/products/all-product");
@@ -225,6 +229,13 @@ const MindKitPage = () => {
     fetchProduct();
   }, []);
 
+  const toggleTags = (productId) => {
+    setExpandedTags(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
+
   return (
     <section className="mindkit-grid-section">
       <div className="container">
@@ -234,58 +245,75 @@ const MindKitPage = () => {
         </p>
 
         <div className="mindkit-grid">
-          {products.map((item) => (
-            <div className="mindkit-card" key={item._id}>
-              {/* IMAGE */}
-              <div className="mindkit-img">
-                <div className="mindkit-img-inner">
-                  <img
-                    src={`${serverURL}/uploads/products/${item.productImages[0]}`}
-                    alt={item.productName}
-                  />
-                </div>
-              </div>
+          {products.map((item) => {
+            const tags = item.tags || [];
+            const isExpanded = expandedTags[item._id];
+            // Show ALL tags when expanded, otherwise show first 4
+            const visibleTags = isExpanded ? tags : tags.slice(0, 4);
+            const hasMoreTags = tags.length > 4;
 
-              {/* BODY */}
-              <div className="mindkit-body">
-                <h4>{item.productName}</h4>
-
-                <p className="short-desc">
-                  {item.productSubTitle ||
-                    "Find peace & balance naturally"}
-                </p>
-
-                <p className="desc">
-                  {item.productSubDescription?.slice(0, 70)}...
-                </p>
-
-                {/* TAGS SECTION - Displayed above price */}
-                {item.tags && item.tags.length > 0 && (
-                  <div className="product-tags">
-                    {item.tags.map((tag, idx) => (
-                      <span key={idx} className="tag-badge">
-                        {tag}
-                      </span>
-                    ))}
+            return (
+              <div className="mindkit-card" key={item._id}>
+                {/* IMAGE */}
+                <div className="mindkit-img">
+                  <div className="mindkit-img-inner">
+                    <img
+                      src={`${serverURL}/uploads/products/${item.productImages[0]}`}
+                      alt={item.productName}
+                    />
                   </div>
-                )}
-
-                <div className="price-row">
-                  <span className="price">
-                    ₹{item.variant[0]?.finalPrice}
-                  </span>
-                  <del>₹{item.variant[0]?.price}</del>
-                  <span className="off">
-                    {item.variant[0]?.discountPrice}% OFF
-                  </span>
                 </div>
 
-                <Link href={`/Pages/products/${item._id}`}>
-                  <button className="view-btn">View Details</button>
-                </Link>
+                {/* BODY */}
+                <div className="mindkit-body">
+                  <h4>{item.productName}</h4>
+
+                  <p className="short-desc">
+                    {item.productSubTitle || "Find peace & balance naturally"}
+                  </p>
+
+                  <p className="desc">
+                    {item.productSubDescription?.slice(0, 70)}...
+                  </p>
+
+                  {/* TAGS SECTION with MORE/LESS */}
+                  {tags.length > 0 && (
+                    <div className="product-tags-wrapper">
+                      <div className="product-tags">
+                        {visibleTags.map((tag, idx) => (
+                          <span key={idx} className="tag-badge">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      {hasMoreTags && (
+                        <button 
+                          className="tags-toggle-btn"
+                          onClick={() => toggleTags(item._id)}
+                        >
+                          {isExpanded ? 'Show less' : `+${tags.length - 4} more`}
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="price-row">
+                    <span className="price">
+                      ₹{item.variant[0]?.finalPrice}
+                    </span>
+                    <del>₹{item.variant[0]?.price}</del>
+                    <span className="off">
+                      {item.variant[0]?.discountPrice}% OFF
+                    </span>
+                  </div>
+
+                  <Link href={`/Pages/products/${item._id}`}>
+                    <button className="view-btn">View Details</button>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ASSESSMENT CTA */}
